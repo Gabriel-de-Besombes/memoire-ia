@@ -1,0 +1,64 @@
+\chapter{Conclusion}
+\section{Résumé des résultats}
+\subsection{Synthèse des principaux résultats obtenus}
+\subsection{Impact des méthodes d'agrégation sur les portefeuilles de passifs}
+
+\section{Perspectives d'amélioration}
+\subsection{Axes d'amélioration pour les générateurs de portefeuilles de passifs}
+\subsection{Évolutions possibles des méthodes d'agrégation et de modélisation ALM}  
+\subsection{Autres domaines d'application des générateurs de portefeuilles de passifs}
+\section{Conclusion Générale et Perspectives}
+
+Ce mémoire, présenté ici dans sa version intermédiaire, dresse le bilan d'une première phase de recherche consacrée à la construction d'un cadre méthodologique et au développement des outils de modélisation. Les résultats quantitatifs finaux ne sont pas encore établis à ce stade, la priorité ayant été donnée à l'élaboration d'un socle technique robuste. Cette conclusion a donc pour double vocation de définir avec précision la feuille de route pour la finalisation des travaux et de présenter un bilan synthétique des compétences clés acquises chez Accenture, qui ont été déterminantes pour ce projet.
+
+\subsection{Perspectives et Finalisation des Travaux de Recherche}
+
+Le modèle ALM sous Python, désormais opérationnel, constitue la pierre angulaire de l'analyse à venir. Les prochaines étapes seront dédiées à son exploitation intensive afin de répondre à la problématique du mémoire. Les axes de travail prioritaires sont les suivants :
+
+\begin{itemize}
+    \item \textbf{Analyse Comparative et Critique des Méthodes d'Agrégation :} Une investigation approfondie de plusieurs méthodes d'agrégation de portefeuilles sera menée. Au-delà d'une simple application mécanique, il s'agira de disséquer les fondements théoriques de chaque approche, leurs hypothèses et leur incidence sur la mesure de la diversification des risques. Une attention particulière sera portée à la \textbf{robustesse} des méthodes, c'est-à-dire leur capacité à produire des indicateurs agrégés stables et convergents, y compris sous des conditions de marché dégradées ou lors de variations des hypothèses de modélisation.
+
+    \item \textbf{Enrichissement du Générateur de Portefeuilles de Passifs :} La crédibilité des résultats repose sur le réalisme des simulations. Le générateur de portefeuilles sera donc affiné pour intégrer des structures de dépendance plus sophistiquées entre les variables clés (âge des assurés, montant des provisions mathématiques, comportement de rachat, etc.). Cette évolution permettra de simuler des portefeuilles plus fidèles à la réalité d'un assureur et de tester la résilience de nos conclusions dans des scénarios adverses.
+
+    \item \textbf{Conduite d'une Campagne d'Analyses de Sensibilité :} Une fois les méthodologies d'agrégation validées, une série de tests de sensibilité sera déployée. En appliquant les chocs réglementaires prévus par Solvabilité 2 (choc taux, actions, mortalité, rachat), nous vérifierons la stabilité des agrégations et quantifierons leur impact sur le Solvency Capital Requirement (SCR). L'objectif final est d'offrir une vision claire de la manière dont l'agrégation modifie et stabilise le profil de risque d'un portefeuille.
+\end{itemize}
+
+La feuille de route pour la finalisation du mémoire est clairement établie et s'inscrit dans la continuité logique des travaux déjà réalisés. Les parties non encore écrites ont un plan clair et détaillé qui montre la robustesse de l'approche. La maîtrise des outils et des concepts acquise jusqu'à présent me permet d'aborder cette dernière phase avec une grande confiance. Une planification rigoureuse et une exécution méthodique assureront l'achèvement des analyses et la rédaction finale dans les délais impartis.
+
+\subsection{Bilan de l'expérience professionnelle chez Accenture : un levier pour le mémoire}
+
+
+
+Mon année en alternance chez Accenture a été une expérience fondatrice, m'offrant un cadre idéal pour développer les compétences techniques indispensables à la réalisation de ce mémoire.
+
+
+
+\subsubsection{Développement et industrialisation d'un modèle ALM en Python}
+
+Au cœur de mes missions se trouvait le développement d'un modèle ALM (Asset-Liability Management) entièrement programmé en Python. Sous la supervision d'un Manager, j'ai pu assimiler les meilleures pratiques de l'ingénierie logicielle appliquée à l'actuariat. Cela inclut la gestion de projet via \textbf{Git}, un système de contrôle de version essentiel pour le travail collaboratif et le suivi rigoureux des modifications du code. J'ai également mis en place des batteries de tests unitaires, notamment via des interfaces avec Excel, pour garantir la fiabilité et la cohérence des résultats du modèle à chaque itération.
+
+
+
+Ce socle technique m'a permis de mener à bien des projets complexes, comme la transformation du modèle ALM développé en un modèle de projection de passifs de retraite. Cette adaptation a exigé une refonte profonde de la logique de modélisation du passif, consolidant ainsi ma compréhension des mécanismes actuariels. J'ai par ailleurs conçu et développé un générateur de portefeuilles de passifs, un outil stratégique pour Accenture afin de réaliser des tests de performance et de résistance sur le modèle.
+
+\subsubsection{Développement d'un modèle de passifs sociaux sous Python}
+
+Dans le cadre de mon alternance chez Accenture, j'ai eu l'opportunité de recréer un logiciel calculant des passifs sociaux en Python. Les passifs sociaux sont des engagements financiers liés aux prestations sociales, tels que les retraites ou les indemnités de départ à la retraite que les entreprises doivent provisionner. Ce projet m'a permis de mettre en pratique mes compétences en programmation tout en approfondissant ma compréhension des enjeux actuels liés à la gestion des ressources humaines et à la prévoyance sociale.
+
+Ce logiciel a été conçu pour être modulable et facilement intégrable dans les systèmes existants des clients d'Accenture, facilitant ainsi son adoption. J'ai également veillé à ce qu'il soit accompagné d'une documentation complète, permettant aux utilisateurs de comprendre rapidement son fonctionnement et de l'utiliser efficacement pour des futures missions sur ce sujet.
+
+\subsubsection{Maîtrise d'un écosystème technique moderne}
+
+Cette immersion professionnelle m'a permis de maîtriser un environnement de développement avancé. J'ai travaillé quotidiennement sous \textbf{Linux}, un système d'exploitation open-source prisé pour sa stabilité et sa sécurité, qui est le standard dans de nombreux environnements de calcul scientifique et de serveurs. J'ai également acquis une compétence sur \textbf{Docker}, une technologie de conteneurisation. Un conteneur est une sorte de "boîte" logicielle qui embarque une application et toutes ses dépendances, garantissant ainsi qu'elle s'exécute de manière identique et fiable, quel que soit l'ordinateur ou le serveur sur lequel elle est déployée.
+
+
+
+\subsubsection{Expertise en gestion de données et en calcul distribué (Cloud)}
+
+La manipulation de grands volumes de données est au cœur des problématiques actuarielles modernes. J'ai pu renforcer mes compétences en utilisant des bibliothèques Python de haute performance comme \textbf{Polars} pour le traitement de données et \textbf{Xlwings} pour automatiser les interactions entre Python et Excel. Mon apprentissage le plus significatif fut la prise en main de \textbf{Snowflake}, une plateforme de données hébergée dans le cloud. Snowflake permet non seulement de stocker et de requêter d'énormes jeux de données via le langage SQL, mais aussi d'exploiter sa puissance de calcul massive pour exécuter des scripts Python, comme le modèle ALM, directement sur la plateforme, optimisant ainsi drastiquement les temps de traitement et les besoins en ressources.
+
+
+
+\subsubsection{Collaboration, autonomie et transmission des savoirs}
+
+Au-delà des aspects purement techniques, j'ai appris à évoluer au sein d'une équipe projet agile, en participant à des réunions de suivi quotidiennes. J'ai également eu la responsabilité de former plusieurs nouveaux collaborateurs, à la fois sur le fonctionnement technique du modèle ALM et sur les bonnes pratiques de développement à adopter. Cette expérience de transmission a été extrêmement formatrice, renforçant mes capacités de communication et de vulgarisation de concepts complexes.

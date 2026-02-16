@@ -1,0 +1,140 @@
+\chapter{Protocole d'Analyse et Résultats de l'Agrégation}
+
+Ce chapitre constitue le cœur expérimental de cette étude. Après avoir exposé les fondements théoriques des méthodes d'agrégation, il s'agit désormais de mettre en œuvre un cadre 
+rigoureux pour comparer leurs performances. L'objectif est double : quantifier précisément le risque de modèle induit par la réduction de dimension sur le passif seul, puis valide
+r la robustesse de la méthode sélectionnée à travers des analyses de sensibilité.
+
+\section{Définition du Protocole de Test Comparatif}
+
+La sélection de la méthode d'agrégation optimale ne peut reposer sur une simple intuition statistique. Elle nécessite un cadre expérimental capable de simuler les conditions réell
+es d'une clôture prudentielle, en mettant en concurrence la simplicité des méthodes déterministes et la puissance des approches par apprentissage.
+
+\subsection{Constitution des portefeuilles de test}
+
+L'étude s'appuie sur un portefeuille de référence, désigné par la suite comme le « Portefeuille Full », composé de \textbf{50 000 contrats individuels}. Ce volume a été choisi pou
+r représenter une taille critique permettant d'observer les phénomènes de compensation statistique tout en restant techniquement projetable en un temps raisonnable pour établir un
+e base de comparaison exacte.
+
+Chaque contrat est défini par un vecteur de caractéristiques multidimensionnel $\mathbf{x}_i \in \mathbb{R}^{12}$, comprenant notamment :
+\begin{itemize}
+    \item \textbf{Variables de risques biométriques :} Âge de l'assuré (de 18 à 95 ans) et Sexe.
+    \item \textbf{Variables de structure fiscale :} Ancienneté du contrat (cruciale pour les lois de rachat et la fiscalité en cas de décès).
+    \item \textbf{Variables financières :} Provision Mathématique (PM), Taux Minimum Garanti (TMG) variant de 0\% à 4,5\%, et taux de chargement.
+\end{itemize}
+
+Le processus de mise en œuvre suit une architecture en trois étapes distinctes :
+\begin{enumerate}
+    \item \textbf{Phase de pré-traitement :} Standardisation (z-score) des variables continues et application du \textit{dithering} pour les méthodes de densité afin de fluidifier
+ l'espace des données discrétisées.
+    \item \textbf{Génération des Model Points :} Application de chaque algorithme cible pour obtenir des portefeuilles compressés. Pour chaque méthode, nous avons fait varier les 
+hyperparamètres afin de générer une famille de portefeuilles allant de 25 à 5 000 lignes.
+    \item \textbf{Projection ALM Massive :} Chaque portefeuille compressé est injecté dans le moteur de projection complet (projection sur 50 ans, scénario central Best Estimate) 
+pour mesurer l'impact réel sur les flux.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\begin{minipage}{0.8\textwidth}
+        \centering
+        \vspace{2cm}
+        \textbf{[GRAPHIQUE : Workflow du Protocole de Test]} \\
+        \textit{Schéma montrant le flux : Portefeuille Initial $\rightarrow$ Clustering $\rightarrow$ Vecteurs de flux $\rightarrow$ Moteur ALM $\rightarrow$ Comparaison BE}      
+        \vspace{2cm}
+    \end{minipage}}
+    \caption{Schéma de mise en œuvre du protocole de test comparatif}
+    \label{fig:workflow_test}
+\end{figure}
+
+\subsection{Définition des critères de sélection}
+
+Le choix final de la méthode repose sur un arbitrage multicritère, principalement axé sur la recherche d'un point optimal sur la « Courbe de Pareto » entre précision et taux de co
+mpression.
+
+\begin{itemize}
+    \item \textbf{La fidélité sur le Best Estimate (BE) :} Mesurée par l'erreur relative $\Delta_{BE} \%$. Une erreur supérieure à $0,05\%$ est considérée comme significative.    
+    $$ \Delta_{BE} \% = \frac{BE_{agr\acute{e}g\acute{e}} - BE_{r\acute{e}f\acute{e}rence}}{BE_{r\acute{e}f\acute{e}rence}} $$
+    \item \textbf{La préservation de la "Pureté Financière" :} Capacité de la méthode à ne pas diluer les taux garantis (TMG) au sein des groupes.
+    \item \textbf{Le taux de compression :} On cherche à descendre en dessous de 1 000 Model Points pour garantir la fluidité des calculs stochastiques futurs.
+    \item \textbf{Le temps de constitution (Overhead) :} Le coût de préparation des données doit rester marginal par rapport au gain de temps de projection.
+\end{itemize}
+
+\section{Analyse Comparative et Choix de la Méthode Optimale}
+
+\subsection{Synthèse des performances sur le passif seul}
+
+L'analyse massive réalisée (plus de 150 simulations individuelles) a permis de dresser une matrice de performance exhaustive permettant d'isoler le comportement de chaque algorith
+me face à la compression.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Méthode} & \textbf{Variante / Paramètres} & \textbf{Nb MP} & \textbf{Erreur BE \%} & \textbf{Écart (M€)} & \textbf{Robustesse} \\
+\midrule
+\textit{Référence} & \textit{Portefeuille 50k lignes} & \textit{50 000} & \textit{0,000 \%} & \textit{0,0} & \textit{Absolue} \\
+\midrule
+\rowcolor{blue!10} \textbf{Biais Zéro} & \textbf{Triplet (TMG, TFG, TAF)} & \textbf{1 105} & \textbf{0,006 \%} & \textbf{0,8} & \textbf{Optimale} \\
+\rowcolor{blue!5} \textbf{Biais Zéro} & \textbf{Compression massive} & \textbf{2 060} & \textbf{-0,005 \%} & \textbf{-0,7} & \textbf{Excellente} \\
+\midrule
+\textbf{Banding} & Smart Fiscal (Anc 8 ans) & 1 253 & 0,0018 \% & 0,2 & Très stable \\
+\textbf{K-Means} & Pondéré PM (n=1000) & 999 & 0,0021 \% & 0,3 & Constante \\
+\textbf{HDBSCAN} & Selection: Leaf (Fin) & 1 013 & 0,0026 \% & 0,3 & Très sensible \\
+\midrule
+\textbf{Banding} & Classique (Age 5, Anc 5) & 483 & 0,0024 \% & 0,3 & Stable \\
+\textbf{CART} & Refined (Target PM/TMG) & 999 & -0,1081 \% & -13,5 & Biaisée \\
+\textbf{CART} & Spread Focus (TMG Only) & 26 & 0,1319 \% & 16,5 & Grossière \\
+\bottomrule
+\end{tabular}
+\caption{Matrice comparative des performances d'agrégation sur le Best Estimate}
+\label{tab:giga_matrice_resultats}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\begin{minipage}{0.8\textwidth}
+        \centering
+        \vspace{2cm}
+        \textbf{[GRAPHIQUE : Courbe de Pareto Précision/Compression]} \\
+        \textit{Axes : X = Nb Model Points (log), Y = Erreur BE \% (log). \\ Courbes pour : Banding, K-Means, Biais Zéro.}
+        \vspace{2cm}
+    \end{minipage}}
+    \caption{Arbitrage Précision vs Nombre de Model Points par méthode}
+    \label{fig:pareto_agreg}
+\end{figure}
+
+Plusieurs enseignements majeurs découlent de ces résultats :
+\begin{enumerate}
+    \item \textbf{La neutralisation du biais par calibration :} La méthode \og Biais Zéro \fg{} surpasse toutes les autres en termes de fidélité pure. En calibrant les probabilités de sortie sur les bases réelles à mi-période, l'agrégation devient quasiment transparente pour le calcul du Best Estimate.
+    \item \textbf{L'importance du triplet financier :} Les tests ont montré que le respect strict des clés $(TMG, TFGSE, TAF)$ est indispensable. Une agrégation ignorant les frais de gestion (TFGSE) génère un biais résiduel de plus de 2\%, quel que soit le protocole de calibration.
+    \item \textbf{L'efficacité du Banding Fiscal :} Le découpage métier autour de l'ancienneté de 8 ans reste une alternative très performante pour les méthodes déterministes.
+    \item \textbf{Le biais des approches CART :} Bien que très compressives, les méthodes par arbres de décision introduisent des ruptures artificielles dans la structure de revalorisation, nuisant Ã  la précision globale.
+\end{enumerate}
+
+\subsection{Justification du choix de la méthode retenue}
+
+Au terme de cette analyse, la méthode \textbf{Calibration a posteriori (Biais Zéro)} est retenue pour la suite de ce mémoire. Elle offre le niveau de précision requis pour des analyses de sensibilité fines, garantissant que les variations de Best Estimate mesurées seront exclusivement dues aux chocs appliqués et non à un bruit de regroupement résiduel.
+
+\section{Analyse de Sensibilité des Indicateurs S2}
+
+Le but de cette section est de tester la robustesse de la méthode d'agrégation sélectionnée face à des variations de l'environnement ou du portefeuille.
+
+\subsection{Définition des Scénarios de Sensibilité}
+    \subsubsection{Création des portefeuilles de test via le générateur}
+    % Votre texte ici...
+    \subsubsection{Description des chocs sur les variables clés (âge, montant de la PM, etc.)}
+    % Votre texte ici...
+    \subsubsection{Scénario d'intégration d'un nouveau produit dans le portefeuille}
+    % Votre texte ici...
+
+\subsection{Analyse de l'Impact de l'Agrégation sur la Mesure des Chocs}
+    \subsubsection{Comparaison des indicateurs S2 sur portefeuilles choqués granulaires et agrégés}
+    % Votre texte ici...
+    \subsubsection{Analyse de la fidélité de la méthode d'agrégation à retranscrire la sensibilité}
+    % Votre texte ici...
+
+\section{Interprétation des Résultats et Validation de l'Approche}
+    \subsection{Validation de la performance de la chaîne de modélisation}
+    % Votre texte ici...
+    \subsection{Enseignements sur la sensibilité des portefeuilles aux modifications du passif}
+    % Votre texte ici...
