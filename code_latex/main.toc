@@ -1,14 +1,25 @@
 \babel@toc {french}{}\relax 
-\contentsline {chapter}{Résumé}{ii}{chapter*.2}%
-\contentsline {chapter}{Abstract}{iii}{chapter*.3}%
-\contentsline {chapter}{Remerciements}{iv}{chapter*.4}%
-\contentsline {chapter}{Synthèse}{v}{chapter*.5}%
-\contentsline {chapter}{Synthesis}{vi}{chapter*.6}%
+\contentsline {chapter}{Résumé}{I}{chapter*.1}%
+\contentsline {chapter}{Abstract}{II}{chapter*.2}%
+\contentsline {chapter}{Synthèse}{III}{chapter*.3}%
+\contentsline {chapter}{Synthesis}{IV}{chapter*.4}%
+\contentsline {chapter}{Remerciements}{V}{chapter*.5}%
 \contentsline {chapter}{Introduction}{1}{chapter*.7}%
-\contentsline {chapter}{\numberline {1}Contexte réglementaire et modélisation en assurance vie}{2}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Construction d'un Générateur de Portefeuilles de Passifs}{4}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Présentation des Méthodes d'Agrégation candidates}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Protocole d'Analyse et Résultats de l'Agrégation}{6}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{7}{chapter.5}%
-\contentsline {chapter}{Annexes}{8}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{10}{chapter*.8}%
+\contentsline {chapter}{\numberline {1}Cadre de l'assurance vie et contexte réglementaire}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}L'assurance vie}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Les différentes normes en vigueur : Solvabilité 2, IFRS 17}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Le contexte de l'évolution des taux directeurs}{5}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Les banques centrales}{6}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}La Banque Centrale Européenne (BCE)}{6}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}La Réserve Fédérale Américaine (Fed)}{6}{subsubsection.1.3.1.2}%
+\contentsline {subsection}{\numberline {1.3.2}Les taux à 0\% et les taux négatifs}{6}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Le Covid 19, la guerre en Ukraine et l'inflation}{6}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}La baisse des taux et sa stabilisation à 2\% en Europe}{6}{subsection.1.3.4}%
+\contentsline {section}{\numberline {1.4}Les conséquences d'une évolution des taux directeurs sur les rentabilités des classes d'actifs d'un portefeuille d'assurance vie}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{7}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Présentation des modèles}{9}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Méthodologie}{10}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Analyse des résultats et proposition de stratégies}{11}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}%
+\contentsline {chapter}{Annexes}{13}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{14}{chapter*.8}%

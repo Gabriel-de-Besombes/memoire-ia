@@ -31,7 +31,7 @@
 \usepackage{multirow}
 \definecolor{accenture}{HTML}{A100FF}
 \usetikzlibrary{positioning, shapes.geometric, arrows.meta, shapes.misc, backgrounds, fit, shadows}
-\usetikzlibrary{shapes, arrows, positioning}
+
 \setlist[itemize]{itemsep=8pt, topsep=2pt} % Applique ces réglages à toutes les listes itemize
 \setcounter{secnumdepth}{3} %pour que le niveau 3 (subsubsection soit numeroté)
 \setcounter{tocdepth}{2} %pour que le niveau 2 (subsection apparaisse dans la table des matieres)
@@ -98,6 +98,7 @@
 
 
 \begin{document}
+
 \include{0_page_de_garde/page_de_garde.tex}
 \restoregeometry % Restaurer la géométrie précédente avant de la redéfinir pour le reste du document.
 
@@ -132,17 +133,21 @@
 }
 
 
-% Contenu principal en une seule colonne
-\tableofcontents
+\pagenumbering{Roman} % Numérotation en chiffres romains majuscules pour les pages liminaires
 
 % IMPORTANT: Ensure all included .tex files exist in the specified paths
 % and do not contain LaTeX errors themselves!
 \include{1_preambule/0_resume}
 \include{1_preambule/1_abstract}
-\include{1_preambule/2_remerciements}
+
 \include{1_preambule/3_synthese}
 \include{1_preambule/4_synthesis}
+\include{1_preambule/2_remerciements}
 
+\clearpage
+
+% Contenu principal en une seule colonne
+\tableofcontents
 
 \clearpage
 \pagenumbering{arabic}
