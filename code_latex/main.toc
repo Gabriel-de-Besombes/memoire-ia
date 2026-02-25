@@ -6,20 +6,47 @@
 \contentsline {chapter}{Remerciements}{V}{chapter*.5}%
 \contentsline {chapter}{Introduction}{1}{chapter*.7}%
 \contentsline {chapter}{\numberline {1}Cadre de l'assurance vie et contexte réglementaire}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}L'assurance vie}{3}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Les différentes normes en vigueur : Solvabilité 2, IFRS 17}{4}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Le contexte de l'évolution des taux directeurs}{5}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Les banques centrales}{6}{subsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.1}La Banque Centrale Européenne (BCE)}{6}{subsubsection.1.3.1.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.2}La Réserve Fédérale Américaine (Fed)}{6}{subsubsection.1.3.1.2}%
-\contentsline {subsection}{\numberline {1.3.2}Les taux à 0\% et les taux négatifs}{6}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Le Covid 19, la guerre en Ukraine et l'inflation}{6}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}La baisse des taux et sa stabilisation à 2\% en Europe}{6}{subsection.1.3.4}%
-\contentsline {section}{\numberline {1.4}Les conséquences d'une évolution des taux directeurs sur les rentabilités des classes d'actifs d'un portefeuille d'assurance vie}{6}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{7}{section.1.5}%
-\contentsline {chapter}{\numberline {2}Présentation des modèles}{9}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Méthodologie}{10}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Analyse des résultats et proposition de stratégies}{11}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}%
-\contentsline {chapter}{Annexes}{13}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{14}{chapter*.8}%
+\contentsline {section}{\numberline {1.1}L'évolution récente des taux directeurs}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Les banques centrales et leurs politiques monétaires}{3}{subsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.1}Les taux d'intérêt}{3}{subsubsection.1.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.2}Les banques et le marché interbancaire}{3}{subsubsection.1.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.2}La phase de taux nuls post crise financière}{5}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Le Covid 19, la guerre en Ukraine et l'inflation}{5}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}La baisse des taux et sa stabilisation à 2\% en Europe}{6}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2}L'assurance vie}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Les spécificités de l'assurance vie}{7}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}L'assurance vie en France}{7}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}L'impact théorique des taux sur l'assurance vie}{7}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}La transmission des taux aux bilans d'assureurs}{8}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}Les effets sur le passif}{8}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}Les effets sur l'actif}{8}{subsubsection.1.3.1.2}%
+\contentsline {subsection}{\numberline {1.3.2}Les scénarios de variation de taux}{8}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{8}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Les contraintes réglementaires}{9}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Le cadre réglementaire de Solvabilité II}{10}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Le cadre réglementaire de IFRS 17}{10}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}Présentation des modèles}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{12}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Le Générateur de Scénario Economique (GSE)}{12}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}quid du gse}{13}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Vasicek}{13}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}un deuxième modèle}{13}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}le troisième modèle qui est le meilleur}{13}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{13}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{14}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}La structure du modèle développé}{14}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}La modélisation du passif}{14}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}La modélisation de l'actif}{14}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Le mécanisme d'allocation}{14}{subsubsection.2.3.2.3}%
+\contentsline {chapter}{\numberline {3}Méthodologie??}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Le portefeuille de données}{16}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Sélection des indicateurs clés}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}scénario central}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}chocs sur les taux d'intérêt}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}sensibilités}{20}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Analyse des résultats et proposition de stratégies}{22}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Analyse et interprétation}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Proposition de stratégies d'allocation d'actifs}{23}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{25}{chapter.5}%
+\contentsline {chapter}{Annexes}{26}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{27}{chapter*.8}%
