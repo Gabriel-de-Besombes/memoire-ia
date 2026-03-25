@@ -5,15 +5,122 @@
 % Présentation des modèles de taux
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Présentation des modèles de taux}
-Modèles à facteur court
-Modèles de structure par terme
-Modèles de taux stochastiques multi-facteurs
+% Modèles à facteur court
+% Modèles de structure par terme
+% Modèles de taux stochastiques multi-facteurs
+
+Dans cette partie, nous allons présenter les différents modèles qui peuvent être utilisés pour modéliser l'évolution des taux d'intérêt. Contrairement aux actions, les taux ne sont pas décrits par une seule variable observable, mais par une courbe des taux dépendant de l'échéance. Cette spécificité a conduit au développement de plusieurs familles de modèles parmi lesquelles on retrouve les modèles de taux court, les modèles multifactoriels et le modèle de Heath-Jarrow-Morton (HJM). 
+
+\subsection{Les modèles de taux court}
+
+Les modèles de taux court, ou short-rate models, reposent sur l'idée que toute la dynamique de la courbe des taux peut être expliquée à partir de l'évolution d'un seul taux instantané de court terme, noté en général $r_t$. Ce taux court est supposé suivre un processus stochastique, et les prix des obligations zéro-coupon sont ensuite obtenus par actualisation sous une probabilité risque-neutre.
+
+La forme générale d'un modèle à facteur court s'écrit :
+\begin{equation}
+dr_t = \mu(r_t, t) dt + \sigma(r_t, t) dW_t
+\end{equation}
+où $\mu$ est la dérive, $\sigma$ la volatilité, et $W_t$ un mouvement brownien standard.
+
+Parmi les modèles à facteur court les plus connus, on peut citer :
+\begin{itemize}
+    \item Le modèle de Vasicek (1977) : modèle à retour à la moyenne avec une dynamique gaussienne.
+    \item Le modèle de Cox-Ingersoll-Ross (CIR) : modèle proche de Vasicek mais avec une volatilité proportionnelle à la racine carrée du taux, ce qui garantit que les taux restent positifs.
+    \item Le modèle de Hull-White (1990) : extension du modèle de Vasicek avec des paramètres dépendant du temps, permettant de mieux ajuster la courbe des taux initiale.
+\end{itemize}
+
+Ces modèles ont plusieurs avantages. Ils sont généralement simples et bien adaptés à la valorisation de nombreux produits dérivés de taux d'intérêt. En particulier, certains modèles permettent d'obtenir des formules fermées pour les prix des obligations zéro-coupon, ce qui facilite les calculs.
+Cependant, leur principale limite tient au fait  qu'un seul facteur est souvent insuffisant pour reproduire fidèlement les mouvements de la courbe des taux observés sur les marchés. En effet, la courbe des taux se déforme selon plusieurs dimensions (niveau, pente, courbure), et un modèle à facteur court ne peut pas capturer ces différentes sources de variation de manière satisfaisante.
+
+\subsection{Les modèles multifactoriels}
+
+Les modèles monofactoriels sont souvent très vite limités lorsque l'on s'intéresse à des produits de taux faisant intervenir plusieurs maturités. En effet, les variations de taux zéro-coupon de différentes maturités ne sont pas parfaitement corrélées et la corrélation diminue très fortement plus les maturités sont éloignées. 
+
+Afin de pallier à cette limite, les premiers modèles multifactoriels ont proposé d'ajouter un taux long terme $l(t)$ au modèle de taux court. Ce type de modèle bifactoriel a été développé notamment par Brennan et Schwartz (1982) et par Schaefer et Schwartz (1984). Cependant, ces modèles on été abandonnés pour plusieurs raisons. Tout d'abord, ils ne permettent pas d'obtenir d'évaluation simple des obligations zéro-coupon, sauf au prix d'approximations analytiques. De plus, ils sont en contradiction avec un résultat de 1996, montrant qu'en l'absence d'opportunité d'arbitrage, le taux long terme ne peut pas diminuer.
+
+Ainsi, les modèles factoriels utilisés aujourd'hui ont plutôt recours à des dynamiques de taux court à plusieurs facteurs stochastiques. Le modèle le plus utilisé dans cette catégorie est le modèle gaussien à deux facteurs présenté par Brigo et Mercurio (2005). Il est aussi couramment appelé G2++. 
+On suppose que sous la mesure risque neutre, le taux court $r_t$ s'écrit :
+\begin{equation}
+r_t = x(t) + y(t) + \phi(t),    r(0) = r_0
+\end{equation}
+où les deux facteurs $x(t)$ et $y(t)$ sont solutions des équations différentielles stochastiques suivantes :
+\begin{equation}
+\begin{cases}
+dx(t) = -a x(t) dt + \sigma dW_1(t),    x(0) = x_0 \\
+dy(t) = -b y(t) dt + \eta dW_2(t),    y(0) = y_0
+\end{cases}
+\end{equation}
+avec $a$, $b$, $\sigma$ et $\eta$ des paramètres positifs, $W_1(t)$ et $W_2(t)$ deux mouvements browniens corrélés de coefficient de corrélation $\rho$, et $\phi(t)$ une fonction déterministe permettant d'ajuster la courbe des taux initiale.
+
+Ainsi, les modèles multifactoriels, et en particulier le modèle G2++, peuvent être vus comme un prolongement utile des approches monofactorielles. Cette approche permet généralement de mieux rendre compte des variations de la courbe des taux. 
+Toutefois, leur construction à partir du taux court peut encore présenter certaines limites, notamment lorsque l'on cherche à décrire de manière directe la dynamique de l'ensemble de la structure par terme. Dans cette perspective, il peut être pertinent de s'intéresser au cadre de Heath-Jarrow-Morton (HJM), qui propose une modélisation fondée directement sur les taux forwards.
+
+\subsection{Le modèle de Heath-Jarrow-Morton (HJM)}
+
+Le modèle de Heath, Jarrow et Morton (HJM), introduit en 1992, propose un cadre de travail plus large que les modèles précédents. Son idée centrale est de prendre comme donnée la courbe initiale des taux forwards instantanés $f(0,T)$, puis de modéliser directement l'évolution de la courbe $f(t,T)$ pour l'ensemble des maturités $T$, plutôt que de partir uniquement du taux court. 
+
+Pour chaque échéance T, le taux forward est donné par : 
+\begin{equation}
+    f(t,T) = f(0,T) + \int_0^t \alpha(s,T) ds + \int_0^t \sigma(s,T) dW_s \; avec \; 0\leq t \leq T
+\end{equation}
+Et sous la mesure risque neutre, la dynamique de $f(t,T)$ est donnée par l'équation différentielle suivante :
+\begin{equation}
+\begin{cases}
+df(t,T) = \alpha(t,T) dt + \sigma(t,T) dW_t \\
+f(0,T) = f^M(0,T)
+\end{cases}
+\end{equation}
+où $\alpha(t,T)$ est la dérive, $\sigma(t,T)$ la volatilité, $W_t$ un mouvement brownien standard et $f^M(0,T)$ la courbe des taux forwards de maturité $T$ observée sur le marché.
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Le Générateur de Scénario Economique (GSE)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Le Générateur de Scénario Economique (GSE)}
+
+Dans le cadre de Solvabilité II, les assureurs doivent évaluer leurs engagements à leur juste valeur, notamment à travers le calcul du Best Estimate, qui repose sur la projection et l'actualisation des flux futurs au taux sans risque. En assurance vie, cette évaluation est particulièrement délicate, car les contrats comportent souvent des garanties financières et des options implicites dont la valeur dépend fortement de l'évolution des marchés. Or cette valeur n'est pas directement observable. Le \textbf{Générateur de Scénarios Économiques} devient alors indispensable. Il permet, en effet, de simuler des trajectoires cohérentes de variables financières telles que les taux d'intérêt, les actions, les spreads ou l'inflation.
+
+Concrètement, le GSE génère un grand nombre de scénarios économiques futurs, qui servent d'entrée au modèle actif-passif (ALM) pour projeter les flux de trésorerie des contrats. En agrégeant les résultats obtenus sur l'ensemble des scénarios, l'assureur peut estimer la valeur moyenne de ses engagements. Le GSE constitue donc un outil essentiel à la fois pour le respect des exigences réglementaires et pour une évaluation réaliste des passifs en assurance vie.
+
 \subsection{quid du gse}
+
+Un Générateur de scénarios économiques (GSE) est un dispositif de modélisation stochastique qui simule l'évolution conjointe des principaux facteurs financiers et macroéconomiques. Il ne s'agit pas d'un seul modèle isolé, mais plutôt d'un ensemble cohérent de modèles permettant de produire un grand nombre de trajectoires futures, afin d'alimenter les modèles actif-passif, les calculs de provisions techniques, les exercices de gestion des risques et les projections de solvabilité. En assurance vie, le GSE est particulièrement important car la valeur des engagements dépend fortement de variables de marché de long terme et de garanties optionnelles sensibles à ces variables.
+
+Dans le cadre de Solvabilité II, le recours à un GSE est directement lié à la valorisation stochastique des options et garanties financières. L'article 22 du règlement délégué exige que, lorsqu'un modèle projette des paramètres financiers futurs, il génère des prix d'actifs cohérents avec les prix observés sur les marchés, respecte l'absence d'arbitrage et soit calibré de manière cohérente avec la courbe des taux sans risque utilisée pour le Best Estimate. L'article 32 précise en outre que toutes les garanties financières et options contractuelles doivent être prises en compte dans le calcul de la meilleure estimation. EIOPA rappelle également que, pour la valorisation stochastique sous Solvabilité II, les variables de marché utilisées doivent être risque neutre et validées comme telles.
+
+\subsubsection{Le GSE risque neutre}
+
+Le GSE risque neutre est construit sous une probabilité dite risque neutre, souvent notée $Q$. Son objectif n'est pas de décrire le futur le plus probable au sens économique, mais de valoriser correctement des flux contingents à partir des informations contenues dans les prix de marché. Dans cet univers, les primes de risque sont neutralisées : l'idée centrale est que les prix actualisés des actifs sont cohérents avec une logique d'absence d'arbitrage, ce qui permet de valoriser des produits complexes par espérance actualisée. L'ACPR rappelle ainsi que, sous cette probabilité, les actifs rapportent en moyenne le taux sans risque et que les primes de risque sont neutralisées.
+
+En pratique, un GSE risque neutre est calibré sur les données de marché : courbe des taux sans risque, prix ou volatilités implicites de swaptions, caps, floors, options actions, etc. Le calibrage cherche à reproduire le plus fidèlement possible les prix observés d'instruments liquides, afin que la valorisation d'engagements non cotés, comme les garanties incluses dans les contrats d'assurance vie, soit market consistent. Ce type de GSE est donc celui qui sert au calcul du Best Estimate stochastique, de la TVOG et plus généralement à la valorisation des passifs dépendant de facteurs financiers.
+
+Il faut insister sur un point méthodologique important : un scénario risque neutre n'est pas nécessairement « réaliste » au sens historique. La Society of Actuaries souligne qu'un jeu de scénarios risque neutre peut paraître peu plausible si on le compare directement aux rendements historiques, précisément parce qu'il incorpore les ajustements nécessaires pour retrouver les prix de marché. Autrement dit, un GSE risque neutre sert d'abord à pricer, pas à prédire.
+
+\subsubsection{Le GSE monde réel}
+
+Le GSE monde réel, ou real-world, est construit sous la probabilité historique ou physique, souvent notée $P$. Ici, l'objectif n'est plus la valorisation arbitrage-free, mais la représentation plausible de l'évolution future de l'économie et des marchés. On cherche donc à reproduire les propriétés empiriques observées : niveaux moyens de rendement, volatilités, corrélations, cycles économiques, retour à la moyenne éventuel, queues de distribution, voire certaines vues prospectives de long terme. Les modèles monde réel sont ainsi généralement calibrés sur des données historiques et sur des hypothèses économiques, et non sur des prix d'options ou des volatilités implicites.
+
+Dans une perspective actuarielle, le GSE monde réel est surtout utilisé pour la gestion des risques, les études ALM, l'allocation stratégique d'actifs, les projections de solvabilité, l'ORSA et, plus largement, les dispositifs où l'on cherche à mesurer des distributions futures de résultats ou de ratios prudentiels. L'ACPR distingue d'ailleurs explicitement la probabilité risque neutre utilisée pour le Best Estimate de la probabilité « monde réel » utilisée, par exemple, dans le cadre de modèles internes.
+
+\subsubsection{Les principaux points de différence entre les deux approches}
+
+La distinction essentielle entre GSE monde réel et GSE risque neutre n'est pas d'abord une différence de forme des scénarios, mais une différence de mesure de probabilité et donc de pondération des états futurs. La Society of Actuaries rappelle que la différence entre scénarios risque neutre et monde réel ne réside pas tant dans les trajectoires elles-mêmes que dans la probabilité qu'on leur attribue. En risque neutre, les scénarios défavorables sont davantage pondérés car les prix de marché incorporent l'aversion au risque des investisseurs ; en monde réel, les probabilités visent à représenter la fréquence ou la plausibilité économique des événements.
+
+On peut résumer les différences de la manière suivante :
+\begin{itemize}
+    \item Finalité : le GSE risque neutre sert à la valorisation ; le GSE monde réel sert à la projection économique et à la mesure du risque.
+    \item Mesure de probabilité : le risque neutre travaille sous $Q$, la mesure compatible avec les prix de marché ; le monde réel travaille sous $P$, la mesure historique ou physique.
+    \item Calibrage : le risque neutre est calibré sur les prix de marché et volatilités implicites ; le monde réel est calibré sur les séries historiques et éventuellement sur des vues expertes.
+    \item Contraintes de modélisation : le risque neutre doit respecter la cohérence de marché, l'absence d'arbitrage et la cohérence avec la courbe sans risque ; le monde réel cherche surtout à reproduire des faits stylisés et une dynamique économiquement plausible.
+    \item Sorties attendues : un GSE risque neutre peut produire des trajectoires peu intuitives historiquement mais correctes pour le pricing ; un GSE monde réel doit produire des scénarios crédibles pour l'analyse prospective.
+    \item Usages en assurance vie : le risque neutre est utilisé pour le Best Estimate, la TVOG et la valorisation des garanties ; le monde réel est mobilisé pour l'ORSA, l'ALM, les projections de solvabilité et certains modèles internes.
+\end{itemize}
+
+En pratique actuarielle, les deux approches sont souvent complémentaires. Dans certains dispositifs de type nested simulations, on simule d'abord l'économie future sous monde réel pour projeter la situation de l'assureur à un horizon donné ; puis, à chaque nœud de projection, on valorise les passifs complexes sous risque neutre. Cette articulation est classique pour l'analyse du risque de portefeuilles d'assurance vie comportant des garanties optionnelles, car elle permet de concilier une vision économique prospective et une valorisation market consistent des engagements.
+
+
 \subsection{Vasicek}
 \subsection{un deuxième modèle}
 \subsection{le troisième modèle qui est le meilleur}
