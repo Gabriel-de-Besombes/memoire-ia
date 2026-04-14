@@ -17,43 +17,45 @@
 \contentsline {section}{\numberline {1.2}L'assurance vie}{6}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Les spécificités de l'assurance vie}{7}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}L'assurance vie en France}{8}{subsection.1.2.2}%
-\contentsline {section}{\numberline {1.3}L'impact théorique/stratégique des taux sur l'assurance vie}{8}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}La transmission des taux aux bilans d'assureurs}{9}{subsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.1}Les effets sur le passif}{9}{subsubsection.1.3.1.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.2}Les effets sur l'actif}{9}{subsubsection.1.3.1.2}%
-\contentsline {subsection}{\numberline {1.3.2}Les scénarios de variation de taux}{9}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{9}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Les contraintes réglementaires}{10}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Le cadre réglementaire de Solvabilité II}{11}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Le cadre réglementaire de IFRS 17}{11}{subsection.1.5.2}%
-\contentsline {chapter}{\numberline {2}Présentation des modèles}{12}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{13}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Les modèles de taux court}{13}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{13}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Le modèle de Heath-Jarrow-Morton (HJM)}{14}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Le Générateur de Scénario Economique (GSE)}{15}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}quid du gse}{16}{subsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.1}Le GSE risque neutre}{16}{subsubsection.2.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.2}Le GSE monde réel}{17}{subsubsection.2.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.2.1.3}Les principaux points de différence entre les deux approches}{17}{subsubsection.2.2.1.3}%
-\contentsline {subsection}{\numberline {2.2.2}Vasicek}{18}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}un deuxième modèle}{18}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}le troisième modèle qui est le meilleur}{18}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{18}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{19}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}La structure du modèle développé}{19}{subsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.1}La modélisation du passif}{19}{subsubsection.2.3.2.1}%
-\contentsline {subsubsection}{\numberline {2.3.2.2}La modélisation de l'actif}{19}{subsubsection.2.3.2.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.3}Le mécanisme d'allocation}{19}{subsubsection.2.3.2.3}%
-\contentsline {chapter}{\numberline {3}Méthodologie??}{20}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Le portefeuille de données}{21}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Sélection des indicateurs clés}{22}{section.3.2}%
-\contentsline {section}{\numberline {3.3}scénario central}{23}{section.3.3}%
-\contentsline {section}{\numberline {3.4}chocs sur les taux d'intérêt}{24}{section.3.4}%
-\contentsline {section}{\numberline {3.5}sensibilités}{25}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Analyse des résultats et proposition de stratégies}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Analyse et interprétation}{28}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Proposition de stratégies d'allocation d'actifs}{28}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{30}{chapter.5}%
-\contentsline {chapter}{Annexes}{31}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{32}{chapter*.8}%
+\contentsline {section}{\numberline {1.3}L'impact stratégique des taux sur l'assurance vie pour les assureurs}{8}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Les effets des taux bas}{9}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}L'impact sur le passif}{9}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}L'utilisation de la Provision pour Participation aux Bénéfices (PPB)}{9}{subsubsection.1.3.1.2}%
+\contentsline {subsubsection}{\numberline {1.3.1.3}La réorientation de la collecte}{10}{subsubsection.1.3.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1.4}La stratégie sur l'actif}{10}{subsubsection.1.3.1.4}%
+\contentsline {subsection}{\numberline {1.3.2}Les effets de la remontée des taux}{11}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{12}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Les contraintes réglementaires}{13}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Le cadre réglementaire de Solvabilité II}{14}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Le cadre réglementaire de IFRS 17}{14}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}Présentation des modèles}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{16}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Les modèles de taux court}{16}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{16}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Le modèle de Heath-Jarrow-Morton (HJM)}{17}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Le Générateur de Scénario Economique (GSE)}{18}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}quid du gse}{19}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Le GSE risque neutre}{19}{subsubsection.2.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Le GSE monde réel}{20}{subsubsection.2.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.2.1.3}Les principaux points de différence entre les deux approches}{20}{subsubsection.2.2.1.3}%
+\contentsline {subsection}{\numberline {2.2.2}Vasicek}{21}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}un deuxième modèle}{21}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}le troisième modèle qui est le meilleur pour rendre compte de l'évolution des taux d'intérêt }{21}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{21}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{22}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}La structure du modèle développé}{22}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}La modélisation du passif}{22}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}La modélisation de l'actif}{22}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Le mécanisme d'allocation}{22}{subsubsection.2.3.2.3}%
+\contentsline {chapter}{\numberline {3}Méthodologie??}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Le portefeuille de données}{24}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Sélection des indicateurs clés}{25}{section.3.2}%
+\contentsline {section}{\numberline {3.3}scénario central}{26}{section.3.3}%
+\contentsline {section}{\numberline {3.4}chocs sur les taux d'intérêt}{27}{section.3.4}%
+\contentsline {section}{\numberline {3.5}sensibilités}{28}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Analyse des résultats et proposition de stratégies}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Analyse et interprétation}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Proposition de stratégies d'allocation d'actifs}{31}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{33}{chapter.5}%
+\contentsline {chapter}{Annexes}{34}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{35}{chapter*.8}%
