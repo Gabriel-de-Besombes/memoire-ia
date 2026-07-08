@@ -250,18 +250,43 @@ L'ensemble de ces fonctionnalités est piloté au travers d'une interface web, q
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Le modèle de gestion actif-passif}
 \subsection{Les principes de l'ALM en assurance vie}
-La gestion actif-passif ou Asset-Liability Management (ALM) est une approche stratégique utilisée par les institutions financières, notamment les compagnies d'assurance vie, pour gérer de manière intégrée leurs actifs et leurs passifs. L'objectif principal de l'ALM est d'assurer la solvabilité de l'institution tout en optimisant la rentabilité de son portefeuille d'investissement.
+
+La gestion actif-passif, ou \textit{Asset-Liability Management} (ALM), désigne l'ensemble des méthodes et outils permettant à une institution financière de gérer de manière coordonnée et prospective ses actifs et ses passifs. En assurance vie, cette démarche revêt une importance particulière en raison des spécificités du métier : les engagements sont de long terme, souvent assortis de garanties financières implicites ou explicites, et leur valeur dépend étroitement de l'évolution des variables de marché, notamment des taux d'intérêt.
+
+L'enjeu central de l'ALM en assurance vie est de s'assurer que les actifs détenus en portefeuille permettront, dans un large éventail de scénarios économiques, de faire face aux engagements contractuels envers les assurés. Cela suppose de projeter conjointement les flux de trésorerie générés par le portefeuille d'actifs et ceux correspondant aux sorties du passif, en tenant compte des interactions entre les deux : rendements servis aux assurés, participations aux bénéfices, comportements de rachat, clauses de revalorisation minimale garantie, etc.
+
+Dans le cadre de Solvabilité II, l'ALM occupe une place centrale. Il constitue l'outil à partir duquel est calculé le \textit{Best Estimate}, valeur actuelle des flux futurs estimée sous une mesure risque neutre, ainsi que les exigences de capital au titre du risque de taux (\textit{Solvency Capital Requirement}, SCR). Plus largement, il permet d'évaluer la solidité financière de l'assureur face à différents chocs et de piloter les décisions d'allocation stratégique des actifs.
+
+Du point de vue opérationnel, un modèle ALM prend en entrée les scénarios économiques générés par le GSE, puis projette sur un horizon pluriannuel l'ensemble des flux associés aux contrats en portefeuille et aux investissements. C'est donc l'articulation entre le GSE et le modèle ALM qui constitue le cœur du dispositif de modélisation stochastique en assurance vie.
+
+\subsection{Les deux familles de modèles ALM : risque neutre et monde réel}
+
+De même que pour les Générateurs de Scénarios Économiques, on distingue deux grandes familles de modèles ALM selon la mesure de probabilité sous laquelle ils sont construits. Ce choix conditionne profondément la nature des calculs effectués, les grandeurs produites et les usages auxquels le modèle est destiné.
+
+\subsubsection{Le modèle ALM risque neutre}
+
+Le modèle ALM risque neutre est défini sous la mesure $Q$ et s'inscrit dans le cadre de la valorisation \textit{market consistent}. Il est conçu pour évaluer les engagements de l'assureur en cohérence avec les prix de marché observés à la date de calcul. Son usage principal est le calcul du \textit{Best Estimate} des provisions techniques, qui correspond à la valeur actuelle des flux futurs projetés sous un grand nombre de scénarios économiques risque neutre, puis actualisés à la courbe des taux sans risque.
+
+Dans ce cadre réglementaire, le modèle ALM risque neutre est également utilisé pour le calcul du Capital de Solvabilité Requis (SCR) au titre du risque de taux. Le SCR désigne le montant de capital qu'un assureur doit détenir pour absorber les pertes susceptibles de survenir avec un niveau de confiance de 99,5\,\% sur un horizon d'un an. Pour le risque de taux, il est calculé en appliquant des chocs réglementaires à la courbe des taux, tels que définis par la formule standard de Solvabilité II. Pour chacun de ces chocs, le modèle ALM est ré-exécuté avec la courbe des taux choquée, et le SCR correspond à la variation de fonds propres induite par le scénario le plus défavorable.
+
+La valeur temps des options et garanties (TVOG) est également évaluée dans ce cadre. Elle mesure le coût additionnel lié au caractère asymétrique des garanties financières intégrées aux contrats d'assurance vie : dans les scénarios défavorables, l'assureur supporte intégralement les pertes, tandis que dans les scénarios favorables, les assurés peuvent ne pas bénéficier pleinement des gains, notamment du fait des contraintes de revalorisation minimale garantie. La TVOG correspond ainsi à l'écart entre le \textit{Best Estimate} stochastique, obtenu par simulation Monte-Carlo sous risque neutre, et le \textit{Best Estimate} déterministe, calculé sur le seul scénario central. Elle ne peut être correctement évaluée que dans un cadre stochastique, car elle disparaît mécaniquement dans un calcul déterministe qui ne capture pas cette asymétrie.
+
+Le modèle ALM risque neutre suppose donc un couplage fort avec le GSE risque neutre, dont les scénarios doivent satisfaire des conditions strictes de cohérence avec les prix de marché observés (absence d'arbitrage, propriétés de martingalité).
+
+\subsubsection{Le modèle ALM monde réel}
+
+Le modèle ALM monde réel est construit sous la mesure historique $P$. Contrairement au modèle risque neutre, il ne vise pas à reproduire les prix de marché ni à soumettre les engagements à des chocs réglementaires. Son objectif est de projeter de manière réaliste la trajectoire future de l'assureur — bilan, compte de résultat, ratio de solvabilité, rendements servis — dans un ensemble de scénarios économiques plausibles.
+
+Ce modèle n'intègre pas de chocs SCR. L'évaluation des engagements n'y est pas market-consistent : les actifs peuvent y être comptabilisés en valeur bilancielle et les flux projetés correspondent à des flux économiques réalistes sous la mesure $P$. Il est particulièrement adapté à l'analyse de la distribution des résultats futurs, à l'étude de la sensibilité du bilan aux différents régimes de taux, ainsi qu'à la gestion du risque de duration gap entre actifs et passifs.
+
+Dans une perspective réglementaire, c'est ce type de modèle qui est mobilisé dans le cadre de l'ORSA (\textit{Own Risk and Solvency Assessment}), qui exige de l'assureur une vision prospective de sa solvabilité sur un horizon de plusieurs années. Plus généralement, le modèle ALM monde réel constitue l'outil naturel de pilotage stratégique : il permet de tester des politiques d'investissement, d'évaluer l'impact de différentes hypothèses de taux et de vérifier la robustesse du modèle d'affaires face à des environnements de marché contrastés.
+
 \subsection{La structure du modèle développé}
+
+Le modèle ALM développé dans ce mémoire est un modèle monde réel, construit sous la mesure historique $P$ et alimenté par les scénarios du GSE monde réel présenté en section \ref{sec:gse_choix}. Il ne comporte pas de chocs SCR et ne vise pas une valorisation market-consistent des engagements : son objectif est de projeter de manière réaliste la trajectoire future de l'assureur en réponse à différents environnements de taux, afin d'analyser la distribution des résultats et de mesurer le risque de taux sur le bilan.
 \subsubsection{La modélisation du passif}
 \subsubsection{La modélisation de l'actif}
 
-% \subsubsubsection{Les obligations}
 
 
-
-
-
-
-% \subsubsubsection{Les actions}
-% \subsubsubsection{L'immobilier}
 \subsubsection{Le mécanisme d'allocation}
