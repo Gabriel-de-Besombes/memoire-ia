@@ -4,7 +4,137 @@
 
 \section{Choix des données historiques}
 
+Dans un GSE monde réel, le calibrage des modèles repose entièrement sur les séries historiques fournies en entrée : ce sont elles qui déterminent les paramètres de retour à la moyenne, les niveaux de long terme et les volatilités estimés. Le choix des données est donc une étape structurante, qui conditionne à la fois la qualité du calibrage et la plausibilité des scénarios projetés. Les critères retenus pour la sélection sont la cohérence géographique avec le périmètre de l'assureur modélisé (zone France / Eurozone), la disponibilité d'historiques suffisamment longs pour estimer des paramètres de long terme, et la pertinence de chaque série par rapport au modèle qui en fait usage dans le GSE.
+
+L'ensemble des données couvre la période allant de 2004 à 2025, à pas de temps mensuel. Cette fenêtre temporelle constitue la plage la plus large rendue disponible par la conjonction des différentes sources mobilisées. Elle présente l'avantage d'englober plusieurs régimes de taux contrastés : une période de taux modérés avant la crise financière de 2008, une longue phase de taux bas et négatifs en zone euro de 2015 à 2021, puis un cycle de remontée rapide des taux amorcé en 2022. Cette diversité de régimes est précieuse pour l'estimation des paramètres d'un modèle de Vasicek, dont la robustesse dépend de la capacité des données à couvrir plusieurs cycles autour du niveau d'équilibre de long terme.
+
+Les séries historiques retenues pour le calibrage et les projections du GSE sont les suivantes :
+\begin{itemize}
+    \item \textbf{Les taux d'intérêt :} \\[0.3em]
+    Trois points de la courbe des taux souverains français ont été retenus : le taux 1 an, le taux 10 ans et le taux 30 ans. Ces trois taux sont issus du site "investing.com". Ces trois maturités correspondent directement aux variables modélisées dans le GSE : le taux 10 ans sert de taux long $l_t$, le taux 1 an permet de reconstituer le spread $s_t = l_t - r_t$ qui, soustrait au taux long, donne le taux court, et le taux 30 ans constitue le point d'ancrage de très long terme de la courbe des taux zéro-coupon projetée. Le recours aux taux souverains français est cohérent avec la nature du portefeuille obligataire modélisé, composé principalement d'obligations d'État françaises.
+    \item \textbf{L'inflation :} \\[0.3em]
+    L'inflation retenue est l'inflation française mesurée par l'indice des prix à la consommation (IPC), publiée par l'INSEE. Elle est modélisée dans le GSE par un processus d'Ornstein-Uhlenbeck, dont les paramètres sont estimés sur cette série. La période 2004-2025 est particulièrement riche pour ce calibrage, car elle couvre aussi bien les années de faible inflation proche de zéro (2014-2021) que le pic inflationniste post-Covid de 2022-2023, offrant ainsi une bonne représentation de la dispersion historique de cette variable.
+    \item \textbf{Les actions :} \\[0.3em]
+    L'indice retenu pour la composante actions est le STOXX Europe 600 Net Return, issu de Bloomberg. Il s'agit d'un indice large représentant les 600 plus grandes capitalisations européennes, calculé en performance totale nette (dividendes réinvestis nets de retenue à la source). Le réinvestissement des dividendes directement intégré dans les données a son importance pour mesurer le rendement global de l'investissement car le modèle ALM ne gère pas le réinvestissement des dividendes. Son utilisation est cohérente avec un portefeuille d'un assureur européen exposé aux marchés actions de la zone. Dans le GSE, cet indice alimente le mouvement brownien géométrique modélisant les actions, dont la dérive et la volatilité sont estimées à partir des log-rendements annuels observés sur la période.
+    \item \textbf{L'immobilier :} \\[0.3em]
+    La composante immobilière est représentée par l'indice IEIF Eurozone en valeur brute (loyers inclus), publié par l'Institut de l'Épargne Immobilière et Foncière (IEIF). Cet indice mesure la performance totale de l'immobilier d'investissement coté en zone euro et constitue le proxy de référence pour cette classe d'actifs dans les modèles d'assurance vie. Comme pour les actions, les revenus locatifs sont intégrés dans les données pour simplification du refinancement et il est utilisé pour calibrer un mouvement brownien géométrique dans le GSE. Sa valorisation annuelle alimente directement la poche immobilier du portefeuille ALM.
+\end{itemize}
+
+
 \section{Détermination des paramètres du modèle}
 
+La mise en œuvre du GSE monde réel requiert de fixer, pour chacune des variables modélisées, les paramètres qui gouvernent leur dynamique stochastique. Deux scénarios témoins sont construits à cet effet. Le premier repose sur un calibrage purement statistique, obtenu par estimation des paramètres à partir des séries historiques présentées en section~3.1, à l'aide de la méthode des moindres carrés ordinaires (MCO). Le second s'en écarte volontairement : plutôt que de refléter la moyenne des observations passées, il fixe certains paramètres à dire d'expert, de manière à représenter un environnement de taux cohérent avec les objectifs de politique monétaire affichés par la Banque Centrale Européenne. La comparaison de ces deux scénarios témoins permet d'apprécier dans quelle mesure un calibrage purement historique peut diverger d'une trajectoire jugée cohérente avec le cadre macroéconomique actuel. C'est à partir de ces deux paramétrages de référence que le chapitre suivant construira des scénarios choqués, en faisant varier volatilités, niveaux de long terme et vitesses de retour à la moyenne.
+
+\subsection{Calibrage des paramètres par moindres carrés ordinaires}
+
+\subsubsection{Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}
+
+Pour les variables modélisées par un processus de Vasicek ou d'Ornstein-Uhlenbeck — taux long, spread de taux, taux très long et inflation —, l'estimation repose sur la forme discrétisée du processus. En posant un pas de temps $\Delta t = 1$ an, la solution exacte de l'équation différentielle stochastique implique que le processus suit une régression autorégressive d'ordre 1 :
+\begin{equation}
+    X_{t+1} = a + b \, X_t + \varepsilon_t, \qquad \varepsilon_t \sim \mathcal{N}(0, s^2)
+\end{equation}
+Cette équation est estimée par MCO sur la série historique de chaque variable, ce qui fournit les coefficients $\hat{a}$, $\hat{b}$ et $\hat{s}$. Les paramètres du processus continu sont ensuite récupérés par les relations suivantes :
+\begin{equation}
+    \hat{\kappa} = -\ln(\hat{b}), \qquad
+    \hat{\theta} = \frac{\hat{a}}{1 - \hat{b}}, \qquad
+    \hat{\sigma} = \hat{s} \sqrt{\frac{2\hat{\kappa}}{1 - e^{-2\hat{\kappa}}}}
+\end{equation}
+où $\hat{\kappa}$ est la vitesse de retour à la moyenne, $\hat{\theta}$ le niveau de long terme et $\hat{\sigma}$ la volatilité instantanée.
+
+\subsubsection{Estimation des paramètres des mouvements browniens géométriques}
+
+Pour les variables modélisées par un mouvement brownien géométrique — actions et immobilier —, l'estimation repose sur les log-rendements annuels observés. Si $S_t$ désigne la valeur de l'indice à la date $t$, le log-rendement est défini par $y_t = \ln(S_t / S_{t-1})$. Sous l'hypothèse d'un mouvement brownien géométrique, ces log-rendements sont i.i.d. selon une loi normale de moyenne $\mu - \sigma^2/2$ et d'écart type $\sigma$. La dérive $\mu$ et la volatilité $\sigma$ sont estimées par :
+\begin{equation}
+    \hat{\sigma} = \text{std}(y_t), \qquad \hat{\mu} = \bar{y} + \frac{\hat{\sigma}^2}{2}
+\end{equation}
+
+\subsubsection{Matrice de corrélation}
+
+Les corrélations entre variables sont estimées à partir des résidus $\hat{\varepsilon}_t$ de chacun des modèles après calibrage. Pour les processus de Vasicek, les résidus sont les termes d'erreur de la régression AR(1) ; pour les mouvements browniens géométriques, ce sont les log-rendements recentrés. La matrice de corrélation empirique est calculée sur ces résidus et rendue définie positive avant d'être utilisée pour générer des chocs corrélés dans la simulation Monte-Carlo.
+
+\subsubsection{Paramètres estimés}
+
+Le tableau~\ref{tab:parametres_gse_MCO} regroupe l'ensemble des paramètres estimés par MCO sur la période 2004-2025.
+
+\begin{table}[H]
+\centering
+\caption{Paramètres du GSE monde réel estimés par MCO (2004–2025)}
+\label{tab:parametres_gse_MCO}
+\begin{tabular}{llccc}
+\hline
+\textbf{Variable} & \textbf{Modèle} & $\hat{\kappa}$ \textit{ou} $\hat{\mu}$ & $\hat{\theta}$ & $\hat{\sigma}$ \\
+\hline
+Taux 10 ans (France)   & Vasicek & 0,146 & 0,0202 & 0,00737 \\
+Spread 1/10 ans   & Vasicek & 0,336 & 0,0107 & 0,006986 \\
+Taux 30 ans (France)   & Vasicek & 0,176 & 0,0279 & 0,00737 \\
+Inflation (France)     & Ornstein-Uhlenbeck & 0,198 & 0,0223 & 0,0123 \\
+Actions (STOXX 600 NR) & GBM & 0,0776 & — & 0,139 \\
+Immobilier (IEIF EZ)   & GBM & 0,0657 & — & 0,200 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Les trois points de la courbe des taux souverains français présentent des vitesses de retour à la moyenne $\hat{\kappa}$ nettement différenciées. Le spread 1 an / 10 ans revient le plus rapidement vers son niveau d'équilibre, avec $\hat{\kappa} = 0{,}336$, soit une demi-vie $\ln(2)/\hat{\kappa}$ d'environ deux ans. La demi-vie étant le temps nécessaire pour que la variable parcours la moitié de la distance qui la sépare de sa valeur moyenne de long terme. L'écart entre taux court et taux long se résorbe donc relativement vite, ce qui traduit la sensibilité de la partie courte de la courbe aux décisions de politique monétaire. À l'inverse, le taux 10 ans ($\hat{\kappa} = 0{,}146$) et le taux 30 ans ($\hat{\kappa} = 0{,}176$) affichent des demi-vies plus longues, respectivement proches de 4{,}7 et 3{,}9 ans, cohérentes avec l'inertie usuellement observée sur les segments longs de la courbe des taux.
+
+Les niveaux de long terme estimés dessinent une structure par terme croissante et économiquement cohérente : $\hat{\theta}$ vaut 2{,}02\,\% pour le taux 10 ans et 2{,}79\,\% pour le taux 30 ans, soit une pente positive d'environ 77 points de base entre ces deux maturités à l'équilibre. Le niveau de long terme du taux court peut être retrouvé par différence entre le taux long et le spread, soit $\hat{\theta}_{10y} - \hat{\theta}_{spread} = 2{,}02\,\% - 1{,}07\,\% = 0{,}95\,\%$ : le modèle projette ainsi, à très long terme, une courbe des taux nettement pentue, avec un taux court proche de 1\,\% et un taux 30 ans proche de 2{,}8\,\%. Les volatilités instantanées $\hat{\sigma}$ du taux 10 ans et du taux 30 ans sont identiques (0{,}737\,\%), tandis que celle du spread est légèrement inférieure (0{,}699\,\%), ce qui reflète la corrélation élevée entre les mouvements des différents points de la courbe.
+
+L'inflation française est estimée avec une vitesse de retour à la moyenne $\hat{\kappa} = 0{,}198$, proche de celle des taux longs, correspondant à une demi-vie d'environ 3{,}5 ans. Son niveau de long terme, $\hat{\theta} = 2{,}23\,\%$, est très proche de la cible de 2\,\% visée par la Banque Centrale Européenne, ce qui constitue un point de cohérence notable entre le calibrage purement statistique et l'objectif affiché de politique monétaire. Sa volatilité ($\hat{\sigma} = 1{,}23\,\%$) est en revanche sensiblement supérieure à celle des taux d'intérêt, ce qui s'explique par l'amplitude des variations d'inflation observées sur la période 2004-2025, et en particulier par l'épisode inflationniste de 2022/2023.
+
+Pour les actions et l'immobilier, modélisés par un mouvement brownien géométrique, les paramètres estimés sont la dérive annuelle $\hat{\mu}$ et la volatilité annuelle $\hat{\sigma}$ des log-rendements. Le STOXX Europe 600 Net Return affiche une dérive de 7{,}76\,\% par an, cohérente avec le rendement total (dividendes réinvestis) attendu d'un indice actions large sur longue période, et une volatilité de 13{,}9\,\%, sensiblement inférieure à la volatilité usuellement constatée sur données plus fréquentes (mensuelles ou journalières), en raison de l'effet de lissage induit par l'estimation sur rendements annuels. L'indice IEIF Eurozone présente une dérive de 6{,}57\,\% par an, du même ordre de grandeur que celle des actions, mais avec une volatilité de 20\,\%, supérieure à celle des actions. Ce résultat, à première vue contre-intuitif au regard du profil de risque habituellement prêté à l'immobilier, s'explique par la nature de l'indice retenu et par la sensibilité de l'immobilier coté aux chocs de taux sur la période récente, notamment lors de la remontée des taux amorcée en 2022 ; il constitue un point à garder à l'esprit dans l'interprétation des scénarios simulés pour cette classe d'actifs.
+
+\subsubsection{Projection des scénarios}
+
+Grâce aux paramètres estimés, le GSE monde réel est capable de générer des trajectoires simulées pour chacune des variables modélisées. Pour chaque scénario, un millier de trajectoires est simulé sur l'horizon de projection de 40 ans, en utilisant la matrice de corrélation estimée pour introduire les dépendances entre variables. Ces trajectoires vont ensuite alimenter le modèle ALM.
+
+Voici la visualisation de la projection de l'inflation française sur 5 ans, à partir des 1000 scénarios simulés grâce à la calibration par MCO.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/inflation_france_MCO.png}
+    \caption{Projection de l'inflation française sur 5 ans (MCO)}
+    \label{fig:inflation_france_MCO}
+\end{figure}
+
+Cette figure illustre avec la moyenne projetée (en orange), la politique monétaire de la BCE visant un ancrage de l'inflation autour de 2\,\% à long terme. On remarque cependant que cette moyenne reste supérieur au seuil de 2\,\% sur l'horizon de projection. Cela est surement dû à la période de forte inflation post-Covid (2022-2023) qui a influencé le calibrage par MCO. Les quantiles 25\,\% et 75\,\% montrent la dispersion des scénarios simulés, qui s'élargit avec l'horizon de projection, traduisant l'incertitude croissante sur l'évolution future de l'inflation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/actions_stoxx600NR_MCO.png}
+    \caption{Projection du prix du STOXX 600 NR sur 5 ans (MCO)}
+    \label{fig:actions_stoxx600NR_MCO}
+\end{figure}
+
+Ici, on voit que la moyenne projetée du prix du STOXX 600 NR (en orange) suit une tendance fortement haussière, reflétant la dérive positive estimée à partir des données historiques. On observe que la tendance haussière est très marquée, avec une dispersion des scénarios qui s'élargit plus que pour l'inflation, ce qui est cohérent avec les paramètres estimés : les actions présentent une volatilité 10 fois plus élevée que l'inflation.
+
+\subsection{Calibrage selon les objectifs de la Banque Centrale Européenne}
+
+Le calibrage par MCO présenté ci-dessus reflète la moyenne des dynamiques observées sur la période 2004-2025. Or cette période inclut une phase prolongée de taux bas, voire négatifs, qui n'est pas nécessairement représentative de l'environnement de taux que la BCE cherche à ancrer durablement à travers sa politique monétaire. Le second scénario témoin vise ainsi à corriger ce biais potentiel, en fixant à dire d'expert les paramètres jugés les plus sensibles à cet écueil, sur la base des objectifs et anticipations communiqués par la BCE, plutôt que de la seule moyenne historique.
+
+\medskip
+\noindent\textit{[Paramètres à compléter : préciser ici lesquels, parmi $\kappa$, $\theta$ et $\sigma$, sont fixés à dire d'expert pour chaque variable (taux et inflation), ainsi que les valeurs retenues et leur justification au regard de la communication de la BCE.]}
+
+\begin{table}[H]
+\centering
+\caption{Paramètres du GSE calibrés selon les objectifs de la BCE}
+\label{tab:parametres_gse_bce}
+\begin{tabular}{llccc}
+\hline
+\textbf{Variable} & \textbf{Modèle} & $\hat{\kappa}$ \textit{ou} $\hat{\mu}$ & $\hat{\theta}$ & $\hat{\sigma}$ \\
+\hline
+Taux 10 ans (France)   & Vasicek & \ldots & \ldots & \ldots \\
+Spread 1/10 ans   & Vasicek & \ldots & \ldots & \ldots \\
+Taux 30 ans (France)   & Vasicek & \ldots & \ldots & \ldots \\
+Inflation (France)     & Ornstein-Uhlenbeck & \ldots & \ldots & \ldots \\
+Actions (STOXX 600 NR) & GBM & \ldots & — & \ldots \\
+Immobilier (IEIF EZ)   & GBM & \ldots & — & \ldots \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Analyse des résultats des scénarios témoins}
+
+\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM — taux de rendement de l'actif, taux servi, marge financière, niveau de PPE, taux de rachat — obtenues sous le scénario témoin MCO et sous le scénario témoin BCE.]}
 
 \section{Conclusions et limites de l'étude}
+\label{sec:limites}

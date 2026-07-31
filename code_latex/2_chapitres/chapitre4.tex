@@ -1,3 +1,26 @@
-\chapter{Détermination de l'allocation optimale par la frontière efficiente}
-\label{chap:dedetermination_de_lallocation_optimale_par_la_frontiere_efficiente}
-    
+\chapter{Impact des scénarios de taux choqués sur le bilan de l'assureur}
+\label{chap:impact_des_scenarios_de_taux_choques}
+
+Le chapitre précédent a permis de construire deux scénarios témoins, l'un calibré par moindres carrés ordinaires sur les données historiques, l'autre fixé à dire d'expert selon les objectifs de politique monétaire de la Banque Centrale Européenne. Ces deux paramétrages de référence servent à présent de point de départ à la construction de scénarios choqués, obtenus en faisant varier certains paramètres du GSE de manière contrôlée, afin d'observer les conséquences de ces modifications sur le bilan du fonds en euros projeté par le modèle ALM.
+
+\section{Construction des scénarios choqués}
+
+L'objectif est d'explorer la sensibilité des résultats du modèle ALM à des modifications ciblées de ces paramètres, afin de mesurer l'impact d'environnements de taux différents sur le bilan du fonds en euros. Trois types de modifications sont envisagés.
+
+\subsection{Modification de la volatilité}
+
+Une hausse de la volatilité des taux traduit un environnement d'incertitude accrue sur l'évolution future des taux d'intérêt. Elle se manifeste par un élargissement de l'éventail des scénarios simulés et par une augmentation de la dispersion des indicateurs de sortie du modèle ALM — taux de rendement de l'actif, taux servi, niveau de PPE. L'analyse de sensibilité à ce paramètre permet d'évaluer la robustesse du fonds face à des régimes de forte instabilité des taux.
+
+\subsection{Modification du niveau de long terme}
+
+Le paramètre $\theta$ représente le niveau vers lequel les taux convergent à long terme. Le modifier revient à simuler des environnements structurellement différents : un $\theta$ élevé correspond à un scénario de normalisation durable des taux, tandis qu'un $\theta$ faible traduit une persistance des taux bas. Cet axe de sensibilité est particulièrement pertinent au regard de l'incertitude actuelle sur le niveau d'équilibre des taux en zone euro, que les scénarios témoins présentés au chapitre précédent ne permettent pas de trancher avec certitude.
+
+\subsection{Modification de la vitesse de retour à la moyenne}
+
+Le paramètre $\kappa$ contrôle la rapidité avec laquelle les taux reviennent vers $\theta$ après un choc. Un $\kappa$ faible génère des scénarios avec une persistance élevée des chocs — les taux peuvent s'éloigner durablement de leur niveau d'équilibre — tandis qu'un $\kappa$ élevé produit des trajectoires plus stables et rapidement rappelées vers la moyenne. Faire varier ce paramètre permet de tester l'impact de la durée des cycles de taux sur la situation bilancielle du fonds.
+
+Ces scénarios choqués sont construits en modifiant manuellement les paramètres du GSE à partir de chacun des deux scénarios témoins, les autres paramètres étant maintenus à leur valeur de référence. Pour chaque scénario, le GSE simule un millier de trajectoires, qui alimentent le modèle ALM et produisent la distribution des indicateurs de sortie.
+
+\section{Analyse des résultats}
+
+\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM entre le scénario témoin et chacun des scénarios choqués ($\sigma$, $\theta$, $\kappa$), pour les deux paramétrages de référence (MCO et BCE).]}

@@ -31,7 +31,7 @@
 \contentsline {chapter}{\numberline {2}Présentation des modèles}{22}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{23}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Les modèles de taux court}{23}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{23}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{24}{subsection.2.1.2}%
 \contentsline {subsection}{\numberline {2.1.3}Le modèle de Heath-Jarrow-Morton (HJM)}{24}{subsection.2.1.3}%
 \contentsline {section}{\numberline {2.2}Le Générateur de Scénarios Économiques (GSE)}{25}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Présentation générale du GSE}{26}{subsection.2.2.1}%
@@ -56,14 +56,36 @@
 \contentsline {subsubsection}{\numberline {2.3.2.1}Le modèle ALM risque neutre}{35}{subsubsection.2.3.2.1}%
 \contentsline {subsubsection}{\numberline {2.3.2.2}Le modèle ALM monde réel}{36}{subsubsection.2.3.2.2}%
 \contentsline {subsection}{\numberline {2.3.3}La structure du modèle développé}{37}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}La modélisation du passif}{37}{subsubsection.2.3.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation de l'actif}{37}{subsubsection.2.3.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3.3}Le mécanisme d'allocation}{37}{subsubsection.2.3.3.3}%
-\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{38}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Choix des données historiques}{39}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Détermination des paramètres du modèle}{39}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Conclusions et limites de l'étude}{40}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Détermination de l'allocation optimale par la frontière efficiente}{42}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{43}{chapter.5}%
-\contentsline {chapter}{Annexes}{44}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{45}{chapter*.8}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}Le moteur de projection}{37}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation du passif}{37}{subsubsection.2.3.3.2}%
+\contentsline {paragraph}{\textit {Modélisation des rachats}}{38}{subsubsection.2.3.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}La modélisation de l'actif}{38}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les obligations.}}{38}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les actions et l'immobilier.}}{38}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Le cash.}}{39}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les unités de compte.}}{39}{subsubsection.2.3.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.4}Le mécanisme d'allocation}{39}{subsubsection.2.3.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.3.5}Le mécanisme de participation aux bénéfices}{39}{subsubsection.2.3.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.3.6}Les indicateurs de sortie}{40}{subsubsection.2.3.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.3.7}Implémentation}{40}{subsubsection.2.3.3.7}%
+\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{42}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Choix des données historiques}{43}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Détermination des paramètres du modèle}{44}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Calibrage des paramètres par moindres carrés ordinaires}{45}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}{45}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Estimation des paramètres des mouvements browniens géométriques}{45}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}Matrice de corrélation}{46}{subsubsection.3.2.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.1.4}Paramètres estimés}{46}{subsubsection.3.2.1.4}%
+\contentsline {subsubsection}{\numberline {3.2.1.5}Projection des scénarios}{47}{subsubsection.3.2.1.5}%
+\contentsline {subsection}{\numberline {3.2.2}Calibrage selon les objectifs de la Banque Centrale Européenne}{48}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Analyse des résultats des scénarios témoins}{49}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Conclusions et limites de l'étude}{50}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Impact des scénarios de taux choqués sur le bilan de l'assureur}{52}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Construction des scénarios choqués}{53}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Modification de la volatilité}{54}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Modification du niveau de long terme}{54}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Modification de la vitesse de retour à la moyenne}{54}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Analyse des résultats}{54}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{56}{chapter.5}%
+\contentsline {chapter}{Annexes}{57}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{58}{chapter*.8}%
