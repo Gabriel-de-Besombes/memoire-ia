@@ -52,6 +52,7 @@ Pour les variables modélisées par un mouvement brownien géométrique — acti
 
 Les corrélations entre variables sont estimées à partir des résidus $\hat{\varepsilon}_t$ de chacun des modèles après calibrage. Pour les processus de Vasicek, les résidus sont les termes d'erreur de la régression AR(1) ; pour les mouvements browniens géométriques, ce sont les log-rendements recentrés. La matrice de corrélation empirique est calculée sur ces résidus et rendue définie positive avant d'être utilisée pour générer des chocs corrélés dans la simulation Monte-Carlo.
 
+
 \subsubsection{Paramètres estimés}
 
 Le tableau~\ref{tab:parametres_gse_MCO} regroupe l'ensemble des paramètres estimés par MCO sur la période 2004-2025.
@@ -107,6 +108,60 @@ Cette figure illustre avec la moyenne projetée (en orange), la politique monét
 
 Ici, on voit que la moyenne projetée du prix du STOXX 600 NR (en orange) suit une tendance fortement haussière, reflétant la dérive positive estimée à partir des données historiques. On observe que la tendance haussière est très marquée, avec une dispersion des scénarios qui s'élargit plus que pour l'inflation, ce qui est cohérent avec les paramètres estimés : les actions présentent une volatilité 10 fois plus élevée que l'inflation.
 
+\subsection{Résultats du modèle ALM par scénario de calibrage MCO}
+
+Cette sous-section présente les résultats du premier run ALM, alimenté par les 1\,000 trajectoires issues du GSE calibré par MCO sur la période 2004-2025. Les indicateurs analysés successivement sont le taux de rendement des actifs (TRA), le taux servi et le mécanisme de participation aux bénéfices, les rachats, ainsi que les marges financière et d'acquisition.
+
+\subsubsection{Présentation du portefeuille initial}
+
+Le portefeuille servant de base au run ALM est un fonds en euros stylisé dont les conditions initiales sont présentées dans cette section. L'actif total s'élève à 73,5 M€ en valeur nette comptable (VNC), équilibré au passif par une provision mathématique (PM) de 70 M€, une provision pour participation aux excédents (PPE) de 2,8 M€ (soit 4\,\% de la PM) et une réserve de capitalisation (RC) de 0,7 M€ (soit 1\,\% de la PM).
+
+Au bilan d'un fonds en euros, les actifs coexistent sous deux valeurs. La valeur nette comptable (VNC) est la valeur d'entrée inscrite au bilan comptable, nette des amortissements et des provisions pour dépréciation ; elle détermine notamment les revenus obligataires courus et les dotations à la réserve de capitalisation lors des cessions. La valeur de marché (VM) reflète quant à elle la valeur de liquidation courante aux prix de marché ; c'est elle qui conditionne l'allocation réelle du portefeuille au regard des cibles d'investissement. L'écart entre ces deux valeurs, rapporté à la VNC, constitue le taux de plus ou moins-values latentes (PMVL), notion centrale dans la gestion ALM.
+
+La poche obligataire domine largement le bilan, représentant 72\,\% de l'actif en VNC et 66\,\% en valeur de marché (VM). Elle est répartie à parts presque égales entre obligations souveraines françaises (Govies, 26,46 M€ VNC) et obligations corporate (26,46 M€ VNC), avec un spread de 200 points de base appliqué aux secondes. Les actifs risqués représentent 25\,\% de l'actif en VNC, répartis entre deux poches actions (type 1 : 8,27 M€, représentant 75\,\% de la poche actions, et type 2 : 2,76 M€, soit les 25\,\% restants) et une poche immobilier (7,35 M€, soit 10\,\% de l'actif). Le solde, 2,21 M€ (3\,\%), est investi en cash.
+
+L'allocation cible, exprimée en valeur de marché, est la suivante : obligations 66,1\,\% (dont 48,5\,\% de souverains et 51,5\,\% de corporate au sein de la poche), actions 18,8\,\% (type 1 : 14,1\,\%, type 2 : 4,7\,\%), immobilier 12,1\,\% et cash 3,0\,\%. Le portefeuille initial est très proche de cette cible en VM ; le léger écart entre VNC et VM sur les différentes poches s'explique par la situation des plus ou moins-values latentes.
+
+
+La situation des PMVL au démarrage de la projection est contrastée. Les obligations sont en moins-values latentes significatives : $-$11,5\,\% pour les souverains et $-$5,9\,\% pour le corporate, traduisant le fait que les obligations acquises à des taux bas sont désormais dépréciées par la remontée des taux directeurs de la BCE amorcée en 2022. À l'inverse, les actifs risqués présentent des plus-values latentes notables : 25\,\% sur les actions et 20\,\% sur l'immobilier. Le taux global de PMVL s'établit à $-$0,5\,\%, traduisant une quasi-neutralité de la position latente d'ensemble, les moins-values obligataires étant largement compensées par les plus-values sur actifs risqués. Cette configuration n'est pas sans conséquence pour la gestion ALM : toute cession obligataire en cours de projection réalisera une moins-value absorbée par la réserve de capitalisation, tandis que les cessions d'actifs risqués alimenteront le mécanisme de \textit{turnover} décrit en section~\ref{sec:structure_alm}.
+
+La PPE de 2,8 M€ place le fonds dans une position intermédiaire : elle est loin de la limite réglementaire de 10\,\% des PM comme de l'épuisement total, ce qui lui confère une capacité de dotation et de reprise significative au cours de la projection. La RC de 0,7 M€ reste relativement mince et pourrait constituer une contrainte en cas de cessions obligataires importantes en début de projection. Le taux servi en N$-$1 est de 2,64\,\%, légèrement supérieur au taux cible de 2,50\,\% constaté la même année ; ce point de départ conditionne le mécanisme de PB dès la première année de projection via la composante 80\,\% du taux servi précédent dans la formule du taux cible.
+
+\subsubsection{Taux de rendement des actifs (TRA)}
+
+Le taux de rendement des actifs (TRA) agrège l'ensemble des revenus financiers du portefeuille (coupons obligataires, dividendes et revenus locatifs capitalisés, plus-values réalisées), rapportés à la valeur nette comptable de l'actif. C'est lui qui alimente le mécanisme de participation aux bénéfices décrit en section~\ref{sec:alm_model} : il constitue donc la variable de transmission centrale entre la performance du portefeuille et le taux servi aux assurés. La figure~\ref{fig:tra_mco} représente la distribution du TRA sur les 40 années de projection sous le calibrage MCO, à travers les quantiles P5, P25, P75 et P95 ainsi que la moyenne.
+
+Plusieurs observations se dégagent de cette figure.
+
+Le TRA moyen reste remarquablement stable sur l'ensemble de l'horizon, oscillant entre 4,0\,\% et 4,9\,\% selon les années de projection. Sa valeur en début de projection (4,06\,\% en an~1) est cohérente avec la composition initiale du portefeuille : les obligations (72\,\% de l'actif en VNC) contribuent à hauteur d'environ 2,2\,\% au TRA à travers leurs coupons, tandis que les actifs risqués, notamment les actions (15\,\% VNC, dérive simulée à 7,76\,\%) et l'immobilier (10\,\% VNC, dérive à 6,57\,\%), apportent le complément pour amener le rendement global aux alentours de 4\,\%. La légère hausse de la moyenne en fin d'horizon (4,85\,\% en an~40) traduit le renouvellement progressif du portefeuille obligataire vers les niveaux de long terme estimés par le GSE ($\hat{\theta}_{10y} = 2{,}02\,\%$ contre des taux initiaux inférieurs), ainsi que la capitalisation des plus-values sur actifs risqués dans les scénarios médians.
+
+L'intervalle interquartile P25--P75 s'élargit progressivement, passant de 1,2 point de pourcentage en an~1 à 4,1 points en an~40. La fourchette totale P5--P95 suit la même tendance, de 3,1 points en an~1 à 12,4 points en an~40. Cet élargissement reflète l'accumulation de l'incertitude sur les trajectoires de taux d'intérêt et la volatilité des actifs risqués : plus l'horizon s'éloigne, plus les écarts entre scénarios favorables et défavorables se creusent.
+
+Le percentile 5 (P5), initialement à 2,94\,\%, se dégrade régulièrement pour devenir négatif à partir de l'an~33 et atteindre $-$1,71\,\% en an~40. Ces scénarios défavorables correspondent à une combinaison de taux bas persistants, réduisant le rendement des obligations nouvellement émises lors des renouvellements successifs, et de corrections des actifs risqués, qui compriment le TRA global jusqu'à le rendre négatif. Un TRA négatif signifie que les pertes réalisées sur cessions d'actifs excèdent les revenus courants du portefeuille ; c'est une situation extrême qui met en tension les mécanismes de redistribution du modèle ALM, en particulier la PPE et la réserve de capitalisation.
+
+La distribution présente une asymétrie positive marquée à long terme : le P95 gagne environ 4,6 points de pourcentage entre l'an~1 et l'an~40 (de 6,1\,\% à 10,6\,\%), tandis que le P5 se dégrade d'un montant comparable dans l'autre sens. Cette asymétrie est structurelle et reflète la nature des mouvements browniens géométriques sous-jacents aux actifs risqués : leur dérive positive génère, dans les bons scénarios, une accumulation croissante de plus-values sans borne supérieure, tandis que les pertes en valeur de marché demeurent bornées par la valeur plancher des actifs.
+
+\subsubsection{Taux servi et participation aux bénéfices}
+
+Le taux servi résulte du mécanisme de participation aux bénéfices : lorsque le TRA excède le taux cible ($0{,}8 \times \text{taux servi}(t-1) + 0{,}2 \times (\text{TME} + \text{spread})$), l'excédent peut être distribué aux assurés ou doté à la PPE ; en deçà, la PPE est reprise pour soutenir la rémunération servie. La figure~\ref{fig:taux_servi_mco} représente la distribution du taux servi sur 40 ans, avec le taux cible moyen en superposition.
+
+En première année, le taux servi moyen s'établit à 3,01\,\%, au-dessus du taux cible moyen de 2,73\,\%, permettant une dotation initiale à la PPE. Le taux servi moyen progresse ensuite régulièrement avec la performance de l'actif pour atteindre 5,6\,\% en an~40, tandis que le taux cible moyen converge vers 1,7\,\% sous l'effet de la baisse des TME projetés par le GSE. La dispersion s'élargit fortement sur l'horizon : le P5 reste proche de 0,5\,\% tout au long de la projection, les scénarios défavorables étant contraints par l'épuisement de la PPE, tandis que le P95 atteint 10,6\,\% en an~40 dans les scénarios de forte performance des actifs risqués.
+
+La figure~\ref{fig:ppe_mco} présente l'évolution du niveau de PPE sur l'horizon de projection.
+
+La PPE croît de 2,8 M€ en début de projection jusqu'à un pic moyen de 3,8 M€ autour de l'an~17, portée par les dotations issues des excédents de TRA sur le taux cible. Elle décline ensuite sous l'effet de reprises nettes dans les scénarios médians, pour s'établir à environ 1 M€ en an~40. Dans les scénarios favorables (P95), la PPE atteint rapidement le plafond réglementaire de 10\,\% de la PM et y demeure jusqu'à l'an~20 avant de refluer ; dans les scénarios défavorables (P5), elle est intégralement consommée dès l'an~5, exposant le fonds à une absence de coussin pour le reste de la projection.
+
+\subsubsection{TRA versus taux servis et interprétations}
+
+
+\subsubsection{Rachats}
+
+\textit{[À compléter : taux de rachat structurel et conjoncturel, impact de l'écart taux servi / TME sur les rachats.]}
+
+\subsubsection{Marges}
+
+\textit{[À compléter : marge financière et marge d'acquisition sur l'horizon de projection.]}
+
 \subsection{Calibrage selon les objectifs de la Banque Centrale Européenne}
 
 Le calibrage par MCO présenté ci-dessus reflète la moyenne des dynamiques observées sur la période 2004-2025. Or cette période inclut une phase prolongée de taux bas, voire négatifs, qui n'est pas nécessairement représentative de l'environnement de taux que la BCE cherche à ancrer durablement à travers sa politique monétaire. Le second scénario témoin vise ainsi à corriger ce biais potentiel, en fixant à dire d'expert les paramètres jugés les plus sensibles à cet écueil, sur la base des objectifs et anticipations communiqués par la BCE, plutôt que de la seule moyenne historique.
@@ -134,7 +189,7 @@ Immobilier (IEIF EZ)   & GBM & \ldots & — & \ldots \\
 
 \section{Analyse des résultats des scénarios témoins}
 
-\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM — taux de rendement de l'actif, taux servi, marge financière, niveau de PPE, taux de rachat — obtenues sous le scénario témoin MCO et sous le scénario témoin BCE.]}
+\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM ; taux de rendement de l'actif, taux servi, marge financière, niveau de PPE, taux de rachat ; obtenues sous le scénario témoin MCO et sous le scénario témoin BCE.]}
 
 \section{Conclusions et limites de l'étude}
 \label{sec:limites}

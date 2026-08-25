@@ -5,87 +5,94 @@
 \contentsline {chapter}{Synthesis}{IV}{chapter*.4}%
 \contentsline {chapter}{Remerciements}{V}{chapter*.5}%
 \contentsline {chapter}{Introduction}{1}{chapter*.7}%
-\contentsline {chapter}{\numberline {1}Cadre de l'assurance vie et contexte réglementaire}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}L'évolution récente des taux directeurs}{3}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Les banques centrales et leurs politiques monétaires}{3}{subsection.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1.1}Qu'est-ce qu'un taux d'intérêt ?}{3}{subsubsection.1.1.1.1}%
-\contentsline {subsubsection}{\numberline {1.1.1.2}Les banques et le marché interbancaire}{3}{subsubsection.1.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.2}Le contexte historique de l'influence des banques centrales}{5}{subsection.1.1.2}%
-\contentsline {subsubsection}{\numberline {1.1.2.1}L'environnement de taux nuls après la crise financière}{6}{subsubsection.1.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.1.2.2}La succession des chocs récents : pandémie, guerre en Ukraine et retour de l'inflation}{7}{subsubsection.1.1.2.2}%
-\contentsline {subsubsection}{\numberline {1.1.2.3}La baisse des taux et sa stabilisation à 2\% en Europe}{8}{subsubsection.1.1.2.3}%
-\contentsline {section}{\numberline {1.2}L'assurance vie}{9}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Les spécificités de l'assurance vie}{10}{subsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.1.1}L'assurance vie en France : poids économique et dynamiques récentes}{11}{subsubsection.1.2.1.1}%
-\contentsline {section}{\numberline {1.3}L'impact stratégique des taux sur l'assurance vie pour les assureurs}{13}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}L'effet d'un environnement de taux bas}{14}{subsection.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.1}L'impact sur le passif}{15}{subsubsection.1.3.1.1}%
-\contentsline {subsubsection}{\numberline {1.3.1.2}L'utilisation de la Provision pour Participation aux Bénéfices (PPB)}{15}{subsubsection.1.3.1.2}%
-\contentsline {subsubsection}{\numberline {1.3.1.3}La réorientation de la collecte}{16}{subsubsection.1.3.1.3}%
-\contentsline {subsubsection}{\numberline {1.3.1.4}La stratégie sur l'actif}{17}{subsubsection.1.3.1.4}%
-\contentsline {subsection}{\numberline {1.3.2}Les effets de la remontée des taux}{17}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{18}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Les contraintes réglementaires}{21}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Le cadre réglementaire de Solvabilité II}{21}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Le cadre réglementaire de IFRS 17}{21}{subsection.1.5.2}%
-\contentsline {chapter}{\numberline {2}Présentation des modèles}{22}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{23}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Les modèles de taux court}{23}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{24}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Le modèle de Heath-Jarrow-Morton (HJM)}{24}{subsection.2.1.3}%
-\contentsline {section}{\numberline {2.2}Le Générateur de Scénarios Économiques (GSE)}{25}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Présentation générale du GSE}{26}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Les deux familles de GSE : risque neutre et monde réel}{26}{subsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.1}Le GSE risque neutre}{26}{subsubsection.2.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2.2}Le GSE monde réel}{27}{subsubsection.2.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.3}Les principaux points de différence entre les deux approches}{28}{subsubsection.2.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.3}Le choix d'un GSE en monde réel}{29}{subsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.2.4}Le processus d'Ornstein-Uhlenbeck et le modèle de Vasicek}{29}{subsection.2.2.4}%
-\contentsline {subsubsection}{\numberline {2.2.4.1}Le processus d'Ornstein-Uhlenbeck}{29}{subsubsection.2.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.2.4.2}Du processus d'Ornstein-Uhlenbeck au modèle de Vasicek}{31}{subsubsection.2.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.2.4.3}Les avantages du modèle de Vasicek}{31}{subsubsection.2.2.4.3}%
-\contentsline {subsubsection}{\numberline {2.2.4.4}Les limites du modèle de Vasicek}{32}{subsubsection.2.2.4.4}%
-\contentsline {subsection}{\numberline {2.2.5}Le GSE monde réel développé}{32}{subsection.2.2.5}%
-\contentsline {subsubsection}{\numberline {2.2.5.1}Les variables modélisées et leurs dynamiques}{32}{subsubsection.2.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.2.5.2}Le calibrage en monde réel}{33}{subsubsection.2.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.2.5.3}La simulation et les sorties produites}{33}{subsubsection.2.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.2.5.4}L'interface de paramétrage}{34}{subsubsection.2.2.5.4}%
-\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{34}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{35}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Les deux familles de modèles ALM : risque neutre et monde réel}{35}{subsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.1}Le modèle ALM risque neutre}{35}{subsubsection.2.3.2.1}%
-\contentsline {subsubsection}{\numberline {2.3.2.2}Le modèle ALM monde réel}{36}{subsubsection.2.3.2.2}%
-\contentsline {subsection}{\numberline {2.3.3}La structure du modèle développé}{37}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}Le moteur de projection}{37}{subsubsection.2.3.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation du passif}{37}{subsubsection.2.3.3.2}%
-\contentsline {paragraph}{\textit {Modélisation des rachats}}{38}{subsubsection.2.3.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3.3}La modélisation de l'actif}{38}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les obligations.}}{38}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les actions et l'immobilier.}}{38}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Le cash.}}{39}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les unités de compte.}}{39}{subsubsection.2.3.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.4}Le mécanisme d'allocation}{39}{subsubsection.2.3.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.3.5}Le mécanisme de participation aux bénéfices}{39}{subsubsection.2.3.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.3.6}Les indicateurs de sortie}{40}{subsubsection.2.3.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.3.7}Implémentation}{40}{subsubsection.2.3.3.7}%
-\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{42}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Choix des données historiques}{43}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Détermination des paramètres du modèle}{44}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Calibrage des paramètres par moindres carrés ordinaires}{45}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}{45}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Estimation des paramètres des mouvements browniens géométriques}{45}{subsubsection.3.2.1.2}%
-\contentsline {subsubsection}{\numberline {3.2.1.3}Matrice de corrélation}{46}{subsubsection.3.2.1.3}%
-\contentsline {subsubsection}{\numberline {3.2.1.4}Paramètres estimés}{46}{subsubsection.3.2.1.4}%
-\contentsline {subsubsection}{\numberline {3.2.1.5}Projection des scénarios}{47}{subsubsection.3.2.1.5}%
-\contentsline {subsection}{\numberline {3.2.2}Calibrage selon les objectifs de la Banque Centrale Européenne}{48}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Analyse des résultats des scénarios témoins}{49}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Conclusions et limites de l'étude}{50}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Impact des scénarios de taux choqués sur le bilan de l'assureur}{52}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Construction des scénarios choqués}{53}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Modification de la volatilité}{54}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Modification du niveau de long terme}{54}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Modification de la vitesse de retour à la moyenne}{54}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Analyse des résultats}{54}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{56}{chapter.5}%
-\contentsline {chapter}{Annexes}{57}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{58}{chapter*.8}%
+\contentsline {chapter}{\numberline {1}Cadre de l'assurance vie et contexte réglementaire}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}L'évolution récente des taux directeurs}{4}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Les banques centrales et leurs politiques monétaires}{4}{subsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.1}Qu'est-ce qu'un taux d'intérêt ?}{4}{subsubsection.1.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1.2}Les banques et le marché interbancaire}{4}{subsubsection.1.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.2}Le contexte historique de l'influence des banques centrales}{6}{subsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.2.1}L'environnement de taux nuls après la crise financière}{7}{subsubsection.1.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.1.2.2}La succession des chocs récents : pandémie, guerre en Ukraine et retour de l'inflation}{8}{subsubsection.1.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.1.2.3}La baisse des taux et sa stabilisation à 2\% en Europe}{9}{subsubsection.1.1.2.3}%
+\contentsline {section}{\numberline {1.2}L'assurance vie}{10}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Les spécificités de l'assurance vie}{11}{subsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.1.1}L'assurance vie en France : poids économique et dynamiques récentes}{12}{subsubsection.1.2.1.1}%
+\contentsline {section}{\numberline {1.3}L'impact stratégique des taux sur l'assurance vie pour les assureurs}{14}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}L'effet d'un environnement de taux bas}{15}{subsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.1}L'impact sur le passif}{16}{subsubsection.1.3.1.1}%
+\contentsline {subsubsection}{\numberline {1.3.1.2}L'utilisation de la Provision pour Participation aux Bénéfices (PPB)}{16}{subsubsection.1.3.1.2}%
+\contentsline {subsubsection}{\numberline {1.3.1.3}La réorientation de la collecte}{17}{subsubsection.1.3.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1.4}La stratégie sur l'actif}{18}{subsubsection.1.3.1.4}%
+\contentsline {subsection}{\numberline {1.3.2}Les effets de la remontée des taux}{18}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Le contexte géopolitique actuel et son implication sur l'incertitude des taux}{19}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Les contraintes réglementaires}{22}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Le cadre réglementaire de Solvabilité II}{22}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Le cadre réglementaire de IFRS 17}{22}{subsection.1.5.2}%
+\contentsline {chapter}{\numberline {2}Présentation des modèles}{23}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Présentation des modèles de taux}{24}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Les modèles de taux court}{24}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Les modèles multifactoriels}{25}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Le modèle de Heath-Jarrow-Morton (HJM)}{25}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Le Générateur de Scénarios Économiques (GSE)}{26}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Présentation générale du GSE}{27}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Les deux familles de GSE : risque neutre et monde réel}{27}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Le GSE risque neutre}{27}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Le GSE monde réel}{28}{subsubsection.2.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}Les principaux points de différence entre les deux approches}{29}{subsubsection.2.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.3}Le choix d'un GSE en monde réel}{30}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Le processus d'Ornstein-Uhlenbeck et le modèle de Vasicek}{30}{subsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.4.1}Le processus d'Ornstein-Uhlenbeck}{30}{subsubsection.2.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.2.4.2}Du processus d'Ornstein-Uhlenbeck au modèle de Vasicek}{32}{subsubsection.2.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.2.4.3}Les avantages du modèle de Vasicek}{32}{subsubsection.2.2.4.3}%
+\contentsline {subsubsection}{\numberline {2.2.4.4}Les limites du modèle de Vasicek}{33}{subsubsection.2.2.4.4}%
+\contentsline {subsection}{\numberline {2.2.5}Le GSE monde réel développé}{33}{subsection.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.5.1}Les variables modélisées et leurs dynamiques}{33}{subsubsection.2.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.2.5.2}Le calibrage en monde réel}{34}{subsubsection.2.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.2.5.3}La simulation et les sorties produites}{34}{subsubsection.2.2.5.3}%
+\contentsline {subsubsection}{\numberline {2.2.5.4}L'interface de paramétrage}{35}{subsubsection.2.2.5.4}%
+\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{35}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{36}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Les deux familles de modèles ALM : risque neutre et monde réel}{36}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Le modèle ALM risque neutre}{36}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Le modèle ALM monde réel}{37}{subsubsection.2.3.2.2}%
+\contentsline {subsection}{\numberline {2.3.3}La structure du modèle développé}{38}{subsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}Le moteur de projection}{38}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation du passif}{38}{subsubsection.2.3.3.2}%
+\contentsline {paragraph}{\textit {Modélisation des rachats}}{39}{subsubsection.2.3.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}La modélisation de l'actif}{39}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les obligations.}}{39}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les actions et l'immobilier.}}{39}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Le cash.}}{40}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les unités de compte.}}{40}{subsubsection.2.3.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.4}Le mécanisme d'allocation}{40}{subsubsection.2.3.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.3.5}Le mécanisme de participation aux bénéfices}{40}{subsubsection.2.3.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.3.6}Les indicateurs de sortie}{41}{subsubsection.2.3.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.3.7}Implémentation}{41}{subsubsection.2.3.3.7}%
+\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{43}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Choix des données historiques}{44}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Détermination des paramètres du modèle}{45}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Calibrage des paramètres par moindres carrés ordinaires}{46}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}{46}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Estimation des paramètres des mouvements browniens géométriques}{46}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}Matrice de corrélation}{47}{subsubsection.3.2.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.1.4}Paramètres estimés}{47}{subsubsection.3.2.1.4}%
+\contentsline {subsubsection}{\numberline {3.2.1.5}Projection des scénarios}{48}{subsubsection.3.2.1.5}%
+\contentsline {subsection}{\numberline {3.2.2}Résultats du modèle ALM par scénario de calibrage MCO}{49}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Présentation du portefeuille initial}{50}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}Taux de rendement des actifs (TRA)}{51}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}Taux servi et participation aux bénéfices}{51}{subsubsection.3.2.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.2.4}TRA versus taux servis et interprétations}{52}{subsubsection.3.2.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.2.5}Rachats}{52}{subsubsection.3.2.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.2.6}Marges}{52}{subsubsection.3.2.2.6}%
+\contentsline {subsection}{\numberline {3.2.3}Calibrage selon les objectifs de la Banque Centrale Européenne}{52}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Analyse des résultats des scénarios témoins}{53}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Conclusions et limites de l'étude}{54}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Impact des scénarios de taux choqués sur le bilan de l'assureur}{56}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Construction des scénarios choqués}{57}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Modification de la volatilité}{58}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Modification du niveau de long terme}{58}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Modification de la vitesse de retour à la moyenne}{58}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Analyse des résultats}{58}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{60}{chapter.5}%
+\contentsline {chapter}{Annexes}{61}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{62}{chapter*.8}%
