@@ -129,11 +129,17 @@ La PPE de 2,8 M€ place le fonds dans une position intermédiaire : elle est lo
 
 \subsubsection{Taux de rendement des actifs (TRA)}
 
-Le taux de rendement des actifs (TRA) agrège l'ensemble des revenus financiers du portefeuille (coupons obligataires, dividendes et revenus locatifs capitalisés, plus-values réalisées), rapportés à la valeur nette comptable de l'actif. C'est lui qui alimente le mécanisme de participation aux bénéfices décrit en section~\ref{sec:alm_model} : il constitue donc la variable de transmission centrale entre la performance du portefeuille et le taux servi aux assurés. La figure~\ref{fig:tra_mco} représente la distribution du TRA sur les 40 années de projection sous le calibrage MCO, à travers les quantiles P5, P25, P75 et P95 ainsi que la moyenne.
+Le taux de rendement des actifs (TRA) agrège l'ensemble des revenus financiers du portefeuille que sont les coupons obligataires, les dividendes et les revenus locatifs capitalisés ainsi que les plus-values réalisées. Cet ensemble est rapporté à la valeur nette comptable de l'actif. C'est le TRA qui alimente le mécanisme de participation aux bénéfices décrit en section~\ref{sec:structure_alm} : il constitue donc la variable de transmission centrale entre la performance du portefeuille et le taux servi aux assurés. La figure~\ref{fig:TRA_MCO} représente la distribution du TRA sur les 40 années de projection sous le calibrage MCO, à travers les quantiles P5, P25, P75 et P95 ainsi que la moyenne.
 
-Plusieurs observations se dégagent de cette figure.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/TRA_MCO.png}
+    \caption{Distribution du TRA sur 40 ans}
+    \label{fig:TRA_MCO}
+\end{figure}
 
-Le TRA moyen reste remarquablement stable sur l'ensemble de l'horizon, oscillant entre 4,0\,\% et 4,9\,\% selon les années de projection. Sa valeur en début de projection (4,06\,\% en an~1) est cohérente avec la composition initiale du portefeuille : les obligations (72\,\% de l'actif en VNC) contribuent à hauteur d'environ 2,2\,\% au TRA à travers leurs coupons, tandis que les actifs risqués, notamment les actions (15\,\% VNC, dérive simulée à 7,76\,\%) et l'immobilier (10\,\% VNC, dérive à 6,57\,\%), apportent le complément pour amener le rendement global aux alentours de 4\,\%. La légère hausse de la moyenne en fin d'horizon (4,85\,\% en an~40) traduit le renouvellement progressif du portefeuille obligataire vers les niveaux de long terme estimés par le GSE ($\hat{\theta}_{10y} = 2{,}02\,\%$ contre des taux initiaux inférieurs), ainsi que la capitalisation des plus-values sur actifs risqués dans les scénarios médians.
+
+Le TRA moyen reste remarquablement stable sur l'ensemble de l'horizon, oscillant entre 4,0\,\% et 4,9\,\% selon les années de projection. La légère hausse de la moyenne en fin d'horizon (4,85\,\% en an 40) traduit le renouvellement progressif du portefeuille obligataire vers les niveaux de long terme estimés par le GSE ($\hat{\theta}_{10y} = 2{,}02\,\%$ contre des taux initiaux inférieurs), ainsi que la capitalisation des plus-values sur actifs risqués dans les scénarios médians.
 
 L'intervalle interquartile P25--P75 s'élargit progressivement, passant de 1,2 point de pourcentage en an~1 à 4,1 points en an~40. La fourchette totale P5--P95 suit la même tendance, de 3,1 points en an~1 à 12,4 points en an~40. Cet élargissement reflète l'accumulation de l'incertitude sur les trajectoires de taux d'intérêt et la volatilité des actifs risqués : plus l'horizon s'éloigne, plus les écarts entre scénarios favorables et défavorables se creusent.
 
@@ -141,26 +147,74 @@ Le percentile 5 (P5), initialement à 2,94\,\%, se dégrade régulièrement pour
 
 La distribution présente une asymétrie positive marquée à long terme : le P95 gagne environ 4,6 points de pourcentage entre l'an~1 et l'an~40 (de 6,1\,\% à 10,6\,\%), tandis que le P5 se dégrade d'un montant comparable dans l'autre sens. Cette asymétrie est structurelle et reflète la nature des mouvements browniens géométriques sous-jacents aux actifs risqués : leur dérive positive génère, dans les bons scénarios, une accumulation croissante de plus-values sans borne supérieure, tandis que les pertes en valeur de marché demeurent bornées par la valeur plancher des actifs.
 
-\subsubsection{Taux servi et participation aux bénéfices}
+\subsubsection{Comparaison entre le TRA et le taux servi}
 
-Le taux servi résulte du mécanisme de participation aux bénéfices : lorsque le TRA excède le taux cible ($0{,}8 \times \text{taux servi}(t-1) + 0{,}2 \times (\text{TME} + \text{spread})$), l'excédent peut être distribué aux assurés ou doté à la PPE ; en deçà, la PPE est reprise pour soutenir la rémunération servie. La figure~\ref{fig:taux_servi_mco} représente la distribution du taux servi sur 40 ans, avec le taux cible moyen en superposition.
+On s'attend à avoir un taux servi moyen inférieur au TRA moyen. En effet, le TRA mesure ce que l'actif rapporte et le taux servi mesure ce qui en est effectivement restitué à l'assuré après marge de l'assureur, frais et politique de lissage. La figure \ref{fig:tra_vs_tx_servi_mco} compare les distributions du TRA et du taux servi sur l'horizon de projection.
 
-En première année, le taux servi moyen s'établit à 3,01\,\%, au-dessus du taux cible moyen de 2,73\,\%, permettant une dotation initiale à la PPE. Le taux servi moyen progresse ensuite régulièrement avec la performance de l'actif pour atteindre 5,6\,\% en an~40, tandis que le taux cible moyen converge vers 1,7\,\% sous l'effet de la baisse des TME projetés par le GSE. La dispersion s'élargit fortement sur l'horizon : le P5 reste proche de 0,5\,\% tout au long de la projection, les scénarios défavorables étant contraints par l'épuisement de la PPE, tandis que le P95 atteint 10,6\,\% en an~40 dans les scénarios de forte performance des actifs risqués.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/tra_vs_tx_servi_mco.png}
+    \caption{Comparaison entre le TRA et le taux servi sur 40 ans}
+    \label{fig:tra_vs_tx_servi_mco}
+\end{figure}
 
-La figure~\ref{fig:ppe_mco} présente l'évolution du niveau de PPE sur l'horizon de projection.
+On remarque que notre attente est vérifiée sur les 15 / 20 premières années, avec un taux servi moyen inférieur au TRA moyen. Les deux courbes suivent globalement une trajectoire similaire. Cependant, à partir de l'an 20, le taux servi moyen ammorce une hausse plus rapide que le TRA moyen, jusqu'à dépasser ce dernier vers 33 ans. On peut expliquer cette hausse progressive du taux servi par l'effet de la PPE, qui doit être reprise des millésimes anciens. On a aussi le phénomène de plafond de la PPE, qui ne peut pas dépasser 10\% de la PM. La PM diminue chaque année car les sorties dépassent les entrées. En effet, on ne considère pas de flux entrant dans le portefeuille (pas de New Business ni de cotisation) et les flux sortants sont les prestations de rachats et de décès. Ainsi, comme le montre la figure \ref{fig:PPE_MCO}, la PPE est reprise progressivement et massivement à partir de l'an 20, ce qui permet d'augmenter le taux servi.
 
-La PPE croît de 2,8 M€ en début de projection jusqu'à un pic moyen de 3,8 M€ autour de l'an~17, portée par les dotations issues des excédents de TRA sur le taux cible. Elle décline ensuite sous l'effet de reprises nettes dans les scénarios médians, pour s'établir à environ 1 M€ en an~40. Dans les scénarios favorables (P95), la PPE atteint rapidement le plafond réglementaire de 10\,\% de la PM et y demeure jusqu'à l'an~20 avant de refluer ; dans les scénarios défavorables (P5), elle est intégralement consommée dès l'an~5, exposant le fonds à une absence de coussin pour le reste de la projection.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/variations_PPE_MCO.png}
+    \caption{Flux moyens de dotation et reprise de PPE}
+    \label{fig:PPE_MCO}
+\end{figure}
 
-\subsubsection{TRA versus taux servis et interprétations}
-
+En définitive, la comparaison confirme l'intuition initiale sur l'essentiel de l'horizon de projection : le taux servi reste inférieur au TRA tant que la PPE se constitue, matérialisant la part du rendement financier volontairement mise en réserve plutôt que distribuée aux assurés. Le croisement observé à partir de l'an 33 ne contredit pas ce résultat, il en révèle la limite : l'écart entre le TRA et le taux servi n'est pas stable dans le temps, il dépend de la phase du cycle de la PPE. Ce cycle est provoqué par un mécanisme qui absorbe l'écart pendant la phase de constitution, puis le restitue avec retard lors de sa reprise (règle des 8 ans, plafond des 10\% de la PM). Le taux servi observé sur un exercice donné ne peut donc pas s'interpréter isolément comme le reflet du rendement de l'actif de cette même année : il porte, via la PPE, la mémoire des écarts cumulés des exercices précédents. Cela explique que la hiérarchie attendue entre TRA et taux servi finisse par s'inverser sur le long terme. 
+Une autre conséquence de la hausse progressive du taux servi est la création d'un décalage inter-générationnel entre assurés. La PPE constituée au profit d'une cohorte de contrats peut n'être reversée que des années plus tard, au bénéfice des seuls assurés encore présents à cette date donc ceux qui rachètent ou décèdent entre-temps ne perçoivent jamais leur part de la richesse qu'ils ont pourtant contribué à générer.
 
 \subsubsection{Rachats}
 
-\textit{[À compléter : taux de rachat structurel et conjoncturel, impact de l'écart taux servi / TME sur les rachats.]}
+Le montant des rachats reste élevé sur les 5-6 premières années avant de diminuer progressivement jusqu'à devenir quasi nul en fin de projection. Cette baisse de long terme s'explique par la fonte de la PM : le portefeuille est fermé, sans new business ni cotisation, donc l'assiette sur laquelle s'applique le taux de rachat se réduit chaque année, entraînant mécaniquement celle des montants rachetés.
+
+Le plateau initial (figure \ref{fig:prestations_rachat_euro_mco}), lui, s'explique par la composante conjoncturelle du rachat : au taux de rachat structurel s'ajoute un ajustement dynamique fonction de l'écart entre le taux servi de l'année précédente et le TME, qui joue le rôle de taux concurrent. Quand l'assureur sert moins que le marché, les assurés rachètent davantage ; quand il sert plus, les rachats diminuent. Or on a montré que le taux servi reste en retrait du TRA (et donc du TME) sur les premières années, le temps que le mécanisme de lissage rattrape son retard : cet écart défavorable alimente des rachats conjoncturels supplémentaires, ce qui maintient les montants rachetés à un niveau élevé avant que l'effet de base, la décroissance continue de la PM, ne devienne dominant à partir de l'année 6-7.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/prestations_rachat_euro_mco.png}
+    \caption{Projection des prestations de rachats sur 40 ans, partie EURO}
+    \label{fig:prestations_rachat_euro_mco}
+\end{figure}
 
 \subsubsection{Marges}
 
-\textit{[À compléter : marge financière et marge d'acquisition sur l'horizon de projection.]}
+Le run étant en run-off, les marges d'acquisition sont nulles sur l'ensemble de l'horizon : aucune cotisation ni aucun new business n'entre dans le portefeuille, il n'y a donc ni chargement sur prime perçu ni frais d'acquisition à financer. Nous concentrons donc l'analyse sur la marge financière, représentée par le solde financier.
+
+On observe sur la figure \ref{fig:solde_financier_mco} une baisse progressive et quasi continue du solde financier sur la quasi-totalité de l'horizon, avant un rebond brutal en toute dernière année. Cette décroissance suit directement celle de la PM : le portefeuille étant fermé, l'actif sous gestion diminue chaque année, ce qui réduit d'autant les produits financiers générés et, par ricochet, le solde financier qui en découle.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/solde_financier_mco.png}
+    \caption{Projection du solde financier sur 40 ans}
+    \label{fig:solde_financier_mco}
+\end{figure}
+
+En année 1 (figure \ref{fig:compo_solde_financier_annee_1_mco}), le solde financier se compose presque exclusivement de deux postes de sens opposé : les produits financiers (2 869 684 €), dont l'essentiel est reversé aux assurés sous forme de PB (-2 154 563 €). Les intérêts techniques (-10 947 €) et les variations de PPE et de RC restent marginaux à ce stade. Le solde financier net qui en résulte (702 886 €) représente ainsi la part des produits financiers conservée par l'assureur après distribution de la participation aux bénéfices, soit environ un quart des produits financiers de l'année.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/compo_solde_financier_annee_1_mco.png}
+    \caption{Composition du solde financier en année 1}
+    \label{fig:compo_solde_financier_annee_1_mco}
+\end{figure}
+
+En année 40 (figure \ref{fig:compo_solde_financier_annee_40_mco}), la structure est très différente. Les produits financiers récurrents (642 629 €) et la PB qui en découle (-660 379 €) sont mécaniquement plus faibles, à l'image de la PM résiduelle en fin de portefeuille. Mais le solde financier de cette dernière année est en réalité dominé par les ajustements de fin de projection (+1 101 934 €) : la réserve de capitalisation restante, les plus-values latentes sur les obligations, actions et immobilier encore en portefeuille, ainsi qu'une fraction de la PPE non distribuée, sont intégralement reconnues en résultat lors de la liquidation du portefeuille. C'est cet effet ponctuel, sans lien avec la rentabilité récurrente du contrat, qui explique le rebond observé en toute fin de la figure \ref{fig:solde_financier_mco} : il traduit une convention de clôture de la projection, et non une amélioration de la performance financière du portefeuille.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/compo_solde_financier_annee_40_mco.png}
+    \caption{Composition du solde financier en année 40}
+    \label{fig:compo_solde_financier_annee_40_mco}
+\end{figure}
+
+Les différents indicateurs analysés dans cette section racontent en réalité la même histoire sous plusieurs angles. Le portefeuille étant fermé (run-off, sans new business ni cotisation), la PM se réduit continûment. Cela tire mécaniquement à la baisse les rachats, les produits financiers et donc la marge financière. Par-dessus cette tendance structurelle, le mécanisme de pilotage de la PB introduit un décalage temporel : le taux servi reste en retrait du TRA tant que la PPE se constitue, ce qui alimente en retour des rachats conjoncturels plus élevés en début de projection, avant que la reprise progressive de la PPE n'inverse la tendance en fin d'horizon. La dernière année de projection doit enfin être interprétée avec prudence, c'est l'année de liquidation du portefeuille.
 
 \subsection{Calibrage selon les objectifs de la Banque Centrale Européenne}
 
