@@ -129,7 +129,7 @@ En pratique actuarielle, les deux approches sont souvent complémentaires. Dans 
 
 \subsection{Le choix d'un GSE en monde réel}
 
-Au regard de cette comparaison, c'est le cadre du \textbf{GSE monde réel} qui est retenu dans la suite de ce mémoire. Ce choix découle directement de la nature de la problématique étudiée. L'objectif n'est en effet pas de valoriser des garanties optionnelles en cohérence avec les prix de marché à une date donnée, ce qui relèverait du cadre risque neutre, mais d'analyser la distribution des trajectoires futures des taux d'intérêt et leur incidence sur la situation de l'assureur à long terme. Or, c'est précisément la mesure historique $P$ qui permet de produire des scénarios crédibles d'un point de vue économique et donc d'apprécier la vraisemblance des évolutions simulées.
+Au regard de cette comparaison, c'est le cadre du GSE monde réel qui est retenu dans la suite de ce mémoire. Ce choix découle directement de la nature de la problématique étudiée. L'objectif n'est en effet pas de valoriser des garanties optionnelles en cohérence avec les prix de marché à une date donnée, ce qui relèverait du cadre risque neutre, mais d'analyser la distribution des trajectoires futures des taux d'intérêt et leur incidence sur la situation de l'assureur à long terme. Or, c'est précisément la mesure historique $P$ qui permet de produire des scénarios crédibles d'un point de vue économique et donc d'apprécier la vraisemblance des évolutions simulées.
 
 Un GSE monde réel offre ainsi une représentation réaliste des dynamiques de taux observées historiquement (retour à la moyenne, persistance des régimes de taux bas ou élevés, ampleur des variations), conditions indispensables pour que les scénarios générés puissent servir de support fiable à l'analyse du risque de taux.
 
@@ -206,6 +206,34 @@ Le modèle présente toutefois des limites qu'il convient de garder à l'esprit.
 Le modèle suppose par ailleurs une volatilité constante, $\sigma$ ne dépendant pas du niveau du taux (homoscédasticité), alors que sur les marchés la volatilité tend généralement à varier avec le niveau des taux. Son caractère monofactoriel constitue une autre limite : reposant sur un unique facteur, il ne peut reproduire fidèlement l'ensemble des déformations de la courbe des taux (niveau, pente, courbure), les mouvements des différentes maturités y étant parfaitement corrélés. S'ajoute un ajustement imparfait à la courbe initiale, le retour vers un niveau de long terme constant ne permettant pas de reproduire exactement la structure par terme observée à la date initiale, limite que des extensions comme le modèle de Hull-White corrigent en rendant les paramètres dépendants du temps. Enfin, les queues de distribution fines de la loi normale sous-jacente attribuent une faible probabilité aux variations extrêmes, ce qui peut conduire à sous-estimer l'ampleur des chocs de taux les plus sévères.
 
 Dans le cadre de ce mémoire, ces limites sont jugées acceptables au regard des avantages du modèle. L'interprétabilité des paramètres et la possibilité de représenter un environnement de taux négatifs, comme celui observé récemment, en font un choix particulièrement adapté à une modélisation monde réel des taux d'intérêt.
+
+\subsection{Le modèle de Black \& Scholes pour les actions et l'immobilier}
+
+\subsubsection{Spécification du modèle}
+
+Dans ce GSE monde réel, les rendements des actifs actions et immobiliers sont modélisés par un mouvement brownien géométrique (MBG) sous la mesure historique $P$, conformément à la spécification de Black et Scholes (1973) :
+\begin{equation}
+    \frac{dS_t}{S_t} = \mu\,dt + \sigma\,dW_t
+\end{equation}
+où $S_t$ désigne le niveau de l'indice (actions ou immobilier), $\mu$ le rendement moyen annualisé incluant la prime de risque historique de l'actif, $\sigma$ la volatilité instantanée annualisée et $W_t$ un mouvement brownien standard. La solution analytique de cette équation différentielle stochastique est log-normale :
+\begin{equation}
+    S_{t+dt} = S_t \cdot \exp\!\left[\left(\mu - \tfrac{1}{2}\sigma^2\right)dt + \sigma\sqrt{dt}\;Z_t\right], \qquad Z_t \sim \mathcal{N}(0,1)
+\end{equation}
+Cette forme exacte, et non une approximation d'Euler, est directement implémentée dans le simulateur, ce qui garantit l'absence de biais numérique de discrétisation quel que soit le pas de projection retenu.
+
+\subsubsection{Calibrage}
+
+Les paramètres $\mu$ et $\sigma$ sont estimés par MCO sur les log-rendements historiques $r_t = \ln(S_t/S_{t-1})$, dont la loi théorique sous MBG est $r_t \sim \mathcal{N}\!\left((\mu - \tfrac{1}{2}\sigma^2)\,dt,\;\sigma^2\,dt\right)$. La moyenne empirique $\hat{c}$ et l'écart-type empirique $\hat{s}$ des log-rendements permettent de retrouver les paramètres continus annualisés par inversion :
+\begin{equation}
+    \hat{\sigma} = \frac{\hat{s}}{\sqrt{dt}}, \qquad \hat{\mu} = \frac{\hat{c}}{dt} + \frac{1}{2}\hat{\sigma}^2
+\end{equation}
+Ce calibrage en univers réel se distingue fondamentalement de l'approche risque neutre, où la dérive serait imposée égale au taux sans risque par construction de non-arbitrage : ici $\mu$ reflète la prime de risque historiquement observée sur la classe d'actifs, condition nécessaire pour produire des scénarios économiques réalistes destinés au pilotage ALM et non à la valorisation de marché. La dépendance entre actions, immobilier et les autres facteurs du GSE est introduite par une décomposition de Cholesky appliquée aux chocs gaussiens corrélés $Z_t$, estimée sur les innovations historiques de chaque facteur.
+
+\subsubsection{Avantages et limites}
+
+Le modèle présente plusieurs atouts. Sa parcimonie, deux paramètres seulement, limite le risque de surparamétrisation et facilite l'interprétation actuarielle. La solution analytique exacte évite toute accumulation d'erreur numérique, même à des pas de temps annuels. La log-normalité garantit par construction la positivité de $S_t$ à tout horizon. Et l'estimation par MCO sur les log-rendements est directe, stable numériquement et ne requiert pas d'algorithme d'optimisation itératif.
+
+Ces avantages s'accompagnent de limites théoriques à garder à l'esprit. L'hypothèse de log-normalité des rendements est régulièrement mise en défaut par les données de marché, qui présentent des queues épaisses et une asymétrie négative que la loi normale sous-estime structurellement. La volatilité constante ne capture aucun phénomène de \textit{volatility clustering} (alternance de régimes calmes et de régimes de forte turbulence, documentée par les modèles GARCH). L'indépendance temporelle des chocs exclut par construction toute autocorrélation ou retour à la moyenne à moyen terme, parfois observé sur l'immobilier. Enfin, en l'absence de borne sur les trajectoires simulées, des valeurs extrêmes non bornées peuvent apparaître sur un grand nombre de simulations. Ces limites sont jugées acceptables dans le cadre d'une modélisation monde réel destinée à l'analyse de sensibilité.
 
 \subsection{Le GSE monde réel développé}
 

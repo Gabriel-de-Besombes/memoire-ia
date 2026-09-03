@@ -45,53 +45,58 @@
 \contentsline {subsubsection}{\numberline {2.2.4.2}Du processus d'Ornstein-Uhlenbeck au modèle de Vasicek}{32}{subsubsection.2.2.4.2}%
 \contentsline {subsubsection}{\numberline {2.2.4.3}Les avantages du modèle de Vasicek}{32}{subsubsection.2.2.4.3}%
 \contentsline {subsubsection}{\numberline {2.2.4.4}Les limites du modèle de Vasicek}{33}{subsubsection.2.2.4.4}%
-\contentsline {subsection}{\numberline {2.2.5}Le GSE monde réel développé}{33}{subsection.2.2.5}%
-\contentsline {subsubsection}{\numberline {2.2.5.1}Les variables modélisées et leurs dynamiques}{33}{subsubsection.2.2.5.1}%
-\contentsline {subsubsection}{\numberline {2.2.5.2}Le calibrage en monde réel}{34}{subsubsection.2.2.5.2}%
-\contentsline {subsubsection}{\numberline {2.2.5.3}La simulation et les sorties produites}{34}{subsubsection.2.2.5.3}%
-\contentsline {subsubsection}{\numberline {2.2.5.4}L'interface de paramétrage}{35}{subsubsection.2.2.5.4}%
-\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{35}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{36}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Les deux familles de modèles ALM : risque neutre et monde réel}{36}{subsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.2.1}Le modèle ALM risque neutre}{36}{subsubsection.2.3.2.1}%
-\contentsline {subsubsection}{\numberline {2.3.2.2}Le modèle ALM monde réel}{37}{subsubsection.2.3.2.2}%
-\contentsline {subsection}{\numberline {2.3.3}La structure du modèle développé}{38}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}Le moteur de projection}{38}{subsubsection.2.3.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation du passif}{38}{subsubsection.2.3.3.2}%
-\contentsline {paragraph}{\textit {Modélisation des rachats}}{39}{subsubsection.2.3.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3.3}La modélisation de l'actif}{39}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les obligations.}}{39}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les actions et l'immobilier.}}{39}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Le cash.}}{40}{subsubsection.2.3.3.3}%
-\contentsline {paragraph}{\textit {Les unités de compte.}}{40}{subsubsection.2.3.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.4}Le mécanisme d'allocation}{40}{subsubsection.2.3.3.4}%
-\contentsline {subsubsection}{\numberline {2.3.3.5}Le mécanisme de participation aux bénéfices}{40}{subsubsection.2.3.3.5}%
-\contentsline {subsubsection}{\numberline {2.3.3.6}Les indicateurs de sortie}{42}{subsubsection.2.3.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.3.7}Implémentation}{42}{subsubsection.2.3.3.7}%
-\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{43}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Choix des données historiques}{44}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Détermination des paramètres du modèle}{45}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Calibrage des paramètres par moindres carrés ordinaires}{46}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}{46}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Estimation des paramètres des mouvements browniens géométriques}{46}{subsubsection.3.2.1.2}%
-\contentsline {subsubsection}{\numberline {3.2.1.3}Matrice de corrélation}{47}{subsubsection.3.2.1.3}%
-\contentsline {subsubsection}{\numberline {3.2.1.4}Paramètres estimés}{47}{subsubsection.3.2.1.4}%
-\contentsline {subsubsection}{\numberline {3.2.1.5}Projection des scénarios}{48}{subsubsection.3.2.1.5}%
-\contentsline {subsection}{\numberline {3.2.2}Résultats du modèle ALM par scénario de calibrage MCO}{49}{subsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.1}Présentation du portefeuille initial}{50}{subsubsection.3.2.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2.2}Taux de rendement des actifs (TRA)}{51}{subsubsection.3.2.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.3}Comparaison entre le TRA et le taux servi}{52}{subsubsection.3.2.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.2.4}Rachats}{54}{subsubsection.3.2.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.2.5}Marges}{54}{subsubsection.3.2.2.5}%
-\contentsline {subsection}{\numberline {3.2.3}Calibrage selon les objectifs de la Banque Centrale Européenne}{56}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Analyse des résultats des scénarios témoins}{58}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Conclusions et limites de l'étude}{58}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Impact des scénarios de taux choqués sur le bilan de l'assureur}{60}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Construction des scénarios choqués}{61}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Modification de la volatilité}{62}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Modification du niveau de long terme}{62}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Modification de la vitesse de retour à la moyenne}{62}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Analyse des résultats}{62}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{64}{chapter.5}%
-\contentsline {chapter}{Annexes}{65}{chapter*.8}%
-\contentsline {chapter}{Bibliographie}{66}{chapter*.8}%
+\contentsline {subsection}{\numberline {2.2.5}Le modèle de Black \& Scholes pour les actions et l'immobilier}{33}{subsection.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.5.1}Spécification du modèle}{33}{subsubsection.2.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.2.5.2}Calibrage}{34}{subsubsection.2.2.5.2}%
+\contentsline {subsubsection}{\numberline {2.2.5.3}Avantages et limites}{34}{subsubsection.2.2.5.3}%
+\contentsline {subsection}{\numberline {2.2.6}Le GSE monde réel développé}{34}{subsection.2.2.6}%
+\contentsline {subsubsection}{\numberline {2.2.6.1}Les variables modélisées et leurs dynamiques}{35}{subsubsection.2.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.2.6.2}Le calibrage en monde réel}{35}{subsubsection.2.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.2.6.3}La simulation et les sorties produites}{35}{subsubsection.2.2.6.3}%
+\contentsline {subsubsection}{\numberline {2.2.6.4}L'interface de paramétrage}{36}{subsubsection.2.2.6.4}%
+\contentsline {section}{\numberline {2.3}Le modèle de gestion actif-passif}{36}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Les principes de l'ALM en assurance vie}{37}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Les deux familles de modèles ALM : risque neutre et monde réel}{37}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Le modèle ALM risque neutre}{37}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Le modèle ALM monde réel}{38}{subsubsection.2.3.2.2}%
+\contentsline {subsection}{\numberline {2.3.3}La structure du modèle développé}{39}{subsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}Le moteur de projection}{39}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}La modélisation du passif}{39}{subsubsection.2.3.3.2}%
+\contentsline {paragraph}{\textit {Modélisation des rachats}}{40}{subsubsection.2.3.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}La modélisation de l'actif}{40}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les obligations.}}{40}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les actions et l'immobilier.}}{40}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Le cash.}}{41}{subsubsection.2.3.3.3}%
+\contentsline {paragraph}{\textit {Les unités de compte.}}{41}{subsubsection.2.3.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.4}Le mécanisme d'allocation}{41}{subsubsection.2.3.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.3.5}Le mécanisme de participation aux bénéfices}{41}{subsubsection.2.3.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.3.6}Les indicateurs de sortie}{43}{subsubsection.2.3.3.6}%
+\contentsline {subsubsection}{\numberline {2.3.3.7}Implémentation}{43}{subsubsection.2.3.3.7}%
+\contentsline {chapter}{\numberline {3}Détermination des paramètres du modèle et analyse des résultats}{44}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Choix des données historiques}{45}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Scénario témoin calibré par moindres carrés ordinaires}{46}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Calibrage des paramètres par moindres carrés ordinaires}{47}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}{47}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Estimation des paramètres des mouvements browniens géométriques}{47}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}Matrice de corrélation}{48}{subsubsection.3.2.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.1.4}Paramètres estimés}{48}{subsubsection.3.2.1.4}%
+\contentsline {subsubsection}{\numberline {3.2.1.5}Projection des scénarios}{49}{subsubsection.3.2.1.5}%
+\contentsline {subsection}{\numberline {3.2.2}Résultats du modèle ALM par scénario de calibrage MCO}{51}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Présentation du portefeuille initial}{51}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}Taux de rendement des actifs (TRA)}{52}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}Comparaison entre le TRA et le taux servi}{54}{subsubsection.3.2.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.2.4}Rachats}{55}{subsubsection.3.2.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.2.5}Marges}{56}{subsubsection.3.2.2.5}%
+\contentsline {section}{\numberline {3.3}Scénario témoin paramétré selon des avis d'experts}{58}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Calibrage des paramètres par avis d'experts}{59}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Analyse des résultats du scénario paramétré selon les avis d'experts}{59}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Comparaison des deux scénarios témoins et limites du modèle}{59}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Impact des scénarios de taux choqués sur le bilan de l'assureur}{61}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Construction des scénarios choqués}{62}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Modification de la volatilité}{63}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Modification du niveau de long terme}{63}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Modification de la vitesse de retour à la moyenne}{63}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Analyse des résultats}{63}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{65}{chapter.5}%
+\contentsline {chapter}{Annexes}{66}{chapter*.8}%
+\contentsline {chapter}{Bibliographie}{67}{chapter*.8}%

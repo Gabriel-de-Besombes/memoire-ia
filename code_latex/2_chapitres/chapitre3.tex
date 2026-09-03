@@ -21,7 +21,7 @@ Les séries historiques retenues pour le calibrage et les projections du GSE son
 \end{itemize}
 
 
-\section{Détermination des paramètres du modèle}
+\section{Scénario témoin calibré par moindres carrés ordinaires}
 
 La mise en œuvre du GSE monde réel requiert de fixer, pour chacune des variables modélisées, les paramètres qui gouvernent leur dynamique stochastique. Deux scénarios témoins sont construits à cet effet. Le premier repose sur un calibrage purement statistique, obtenu par estimation des paramètres à partir des séries historiques présentées en section~3.1, à l'aide de la méthode des moindres carrés ordinaires (MCO). Le second s'en écarte volontairement : plutôt que de refléter la moyenne des observations passées, il fixe certains paramètres à dire d'expert, de manière à représenter un environnement de taux cohérent avec les objectifs de politique monétaire affichés par la Banque Centrale Européenne. La comparaison de ces deux scénarios témoins permet d'apprécier dans quelle mesure un calibrage purement historique peut diverger d'une trajectoire jugée cohérente avec le cadre macroéconomique actuel. C'est à partir de ces deux paramétrages de référence que le chapitre suivant construira des scénarios choqués, en faisant varier volatilités, niveaux de long terme et vitesses de retour à la moyenne.
 
@@ -189,7 +189,7 @@ Le run étant en run-off, les marges d'acquisition sont nulles sur l'ensemble de
 
 On observe sur la figure \ref{fig:solde_financier_mco} une baisse progressive et quasi continue du solde financier sur la quasi-totalité de l'horizon, avant un rebond brutal en toute dernière année. Cette décroissance suit directement celle de la PM : le portefeuille étant fermé, l'actif sous gestion diminue chaque année, ce qui réduit d'autant les produits financiers générés et, par ricochet, le solde financier qui en découle.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{images/solde_financier_mco.png}
     \caption{Projection du solde financier sur 40 ans}
@@ -198,7 +198,7 @@ On observe sur la figure \ref{fig:solde_financier_mco} une baisse progressive et
 
 En année 1 (figure \ref{fig:compo_solde_financier_annee_1_mco}), le solde financier se compose presque exclusivement de deux postes de sens opposé : les produits financiers (2 869 684 €), dont l'essentiel est reversé aux assurés sous forme de PB (-2 154 563 €). Les intérêts techniques (-10 947 €) et les variations de PPE et de RC restent marginaux à ce stade. Le solde financier net qui en résulte (702 886 €) représente ainsi la part des produits financiers conservée par l'assureur après distribution de la participation aux bénéfices, soit environ un quart des produits financiers de l'année.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{images/compo_solde_financier_annee_1_mco.png}
     \caption{Composition du solde financier en année 1}
@@ -207,7 +207,7 @@ En année 1 (figure \ref{fig:compo_solde_financier_annee_1_mco}), le solde finan
 
 En année 40 (figure \ref{fig:compo_solde_financier_annee_40_mco}), la structure est très différente. Les produits financiers récurrents (642 629 €) et la PB qui en découle (-660 379 €) sont mécaniquement plus faibles, à l'image de la PM résiduelle en fin de portefeuille. Mais le solde financier de cette dernière année est en réalité dominé par les ajustements de fin de projection (+1 101 934 €) : la réserve de capitalisation restante, les plus-values latentes sur les obligations, actions et immobilier encore en portefeuille, ainsi qu'une fraction de la PPE non distribuée, sont intégralement reconnues en résultat lors de la liquidation du portefeuille. C'est cet effet ponctuel, sans lien avec la rentabilité récurrente du contrat, qui explique le rebond observé en toute fin de la figure \ref{fig:solde_financier_mco} : il traduit une convention de clôture de la projection, et non une amélioration de la performance financière du portefeuille.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{images/compo_solde_financier_annee_40_mco.png}
     \caption{Composition du solde financier en année 40}
@@ -216,34 +216,35 @@ En année 40 (figure \ref{fig:compo_solde_financier_annee_40_mco}), la structure
 
 Les différents indicateurs analysés dans cette section racontent en réalité la même histoire sous plusieurs angles. Le portefeuille étant fermé (run-off, sans new business ni cotisation), la PM se réduit continûment. Cela tire mécaniquement à la baisse les rachats, les produits financiers et donc la marge financière. Par-dessus cette tendance structurelle, le mécanisme de pilotage de la PB introduit un décalage temporel : le taux servi reste en retrait du TRA tant que la PPE se constitue, ce qui alimente en retour des rachats conjoncturels plus élevés en début de projection, avant que la reprise progressive de la PPE n'inverse la tendance en fin d'horizon. La dernière année de projection doit enfin être interprétée avec prudence, c'est l'année de liquidation du portefeuille.
 
-\subsection{Calibrage selon les objectifs de la Banque Centrale Européenne}
+\section{Scénario témoin paramétré selon des avis d'experts}
 
 Le calibrage par MCO présenté ci-dessus reflète la moyenne des dynamiques observées sur la période 2004-2025. Or cette période inclut une phase prolongée de taux bas, voire négatifs, qui n'est pas nécessairement représentative de l'environnement de taux que la BCE cherche à ancrer durablement à travers sa politique monétaire. Le second scénario témoin vise ainsi à corriger ce biais potentiel, en fixant à dire d'expert les paramètres jugés les plus sensibles à cet écueil, sur la base des objectifs et anticipations communiqués par la BCE, plutôt que de la seule moyenne historique.
 
-\medskip
+\subsection{Calibrage des paramètres par avis d'experts}
+
 \noindent\textit{[Paramètres à compléter : préciser ici lesquels, parmi $\kappa$, $\theta$ et $\sigma$, sont fixés à dire d'expert pour chaque variable (taux et inflation), ainsi que les valeurs retenues et leur justification au regard de la communication de la BCE.]}
 
 \begin{table}[H]
 \centering
-\caption{Paramètres du GSE calibrés selon les objectifs de la BCE}
+\caption{Paramètres du GSE calibrés selon les objectifs dits d'experts}
 \label{tab:parametres_gse_bce}
 \begin{tabular}{llccc}
 \hline
 \textbf{Variable} & \textbf{Modèle} & $\hat{\kappa}$ \textit{ou} $\hat{\mu}$ & $\hat{\theta}$ & $\hat{\sigma}$ \\
 \hline
-Taux 10 ans (France)   & Vasicek & \ldots & \ldots & \ldots \\
-Spread 1/10 ans   & Vasicek & \ldots & \ldots & \ldots \\
-Taux 30 ans (France)   & Vasicek & \ldots & \ldots & \ldots \\
-Inflation (France)     & Ornstein-Uhlenbeck & \ldots & \ldots & \ldots \\
-Actions (STOXX 600 NR) & GBM & \ldots & — & \ldots \\
-Immobilier (IEIF EZ)   & GBM & \ldots & — & \ldots \\
+Taux 10 ans (France)   & Vasicek & 0,146 & \textcolor[HTML]{A100FF}{0,03} & 0,00737 \\
+Spread 1/10 ans   & Vasicek & 0,336 & 0,0107 & 0,00699 \\
+Taux 30 ans (France)   & Vasicek & 0,176 & \textcolor[HTML]{A100FF}{0,035} & 0,00737 \\
+Inflation (France)     & Ornstein-Uhlenbeck & 0,198 & \textcolor[HTML]{A100FF}{0,02} & 0,0123 \\
+Actions (STOXX 600 NR) & GBM & 0,0776 & — & 0,139 \\
+Immobilier (IEIF EZ)   & GBM & 0,0657 & — & 0,200 \\
 \hline
 \end{tabular}
 \end{table}
 
-\section{Analyse des résultats des scénarios témoins}
+\subsection{Analyse des résultats du scénario paramétré selon les avis d'experts}
 
 \textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM ; taux de rendement de l'actif, taux servi, marge financière, niveau de PPE, taux de rachat ; obtenues sous le scénario témoin MCO et sous le scénario témoin BCE.]}
 
-\section{Conclusions et limites de l'étude}
-\label{sec:limites}
+\section{Comparaison des deux scénarios témoins et limites du modèle}
+\label{sec:limites_runs_temoins}
