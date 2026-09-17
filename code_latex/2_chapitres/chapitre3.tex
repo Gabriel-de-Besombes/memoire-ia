@@ -101,6 +101,15 @@ Cette figure illustre avec la moyenne projetée (en orange), la politique monét
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\textwidth]{images/long_rate_MCO.png}
+    \caption{Projection du taux long sur 5 ans (MCO)}
+    \label{fig:long_rate_MCO}
+\end{figure}
+
+Le graphique (figure \ref{fig:long_rate_MCO}) montre la projection du taux long (10 ans) sur 5 ans, avec la moyenne projetée (en orange). On observe que la moyenne projetée diminue rapidemment. Cela est cohérent avec le calibrage par MCO, qui a été influencé par la période de taux bas. Cependant, cela crée aussi une forte rupture avec la tendance actuelle. On se demandera par la suite si ce calibrage est pertinent pour être utilisé comme témoin, ou si un calibrage par expert serait plus approprié pour refléter les objectifs de politique monétaire de la BCE.
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=\textwidth]{images/actions_stoxx600NR_MCO.png}
     \caption{Projection du prix du STOXX 600 NR sur 5 ans (MCO)}
     \label{fig:actions_stoxx600NR_MCO}
@@ -131,7 +140,7 @@ La PPE de 2,8 M€ place le fonds dans une position intermédiaire : elle est lo
 
 Le taux de rendement des actifs (TRA) agrège l'ensemble des revenus financiers du portefeuille que sont les coupons obligataires, les dividendes et les revenus locatifs capitalisés ainsi que les plus-values réalisées. Cet ensemble est rapporté à la valeur nette comptable de l'actif. C'est le TRA qui alimente le mécanisme de participation aux bénéfices décrit en section~\ref{sec:structure_alm} : il constitue donc la variable de transmission centrale entre la performance du portefeuille et le taux servi aux assurés. La figure~\ref{fig:TRA_MCO} représente la distribution du TRA sur les 40 années de projection sous le calibrage MCO, à travers les quantiles P5, P25, P75 et P95 ainsi que la moyenne.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{images/TRA_MCO.png}
     \caption{Distribution du TRA sur 40 ans}
@@ -151,7 +160,7 @@ La distribution présente une asymétrie positive marquée à long terme : le P9
 
 On s'attend à avoir un taux servi moyen inférieur au TRA moyen. En effet, le TRA mesure ce que l'actif rapporte et le taux servi mesure ce qui en est effectivement restitué à l'assuré après marge de l'assureur, frais et politique de lissage. La figure \ref{fig:tra_vs_tx_servi_mco} compare les distributions du TRA et du taux servi sur l'horizon de projection.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{images/tra_vs_tx_servi_mco.png}
     \caption{Comparaison entre le TRA et le taux servi sur 40 ans}
@@ -160,7 +169,7 @@ On s'attend à avoir un taux servi moyen inférieur au TRA moyen. En effet, le T
 
 On remarque que notre attente est vérifiée sur les 15 / 20 premières années, avec un taux servi moyen inférieur au TRA moyen. Les deux courbes suivent globalement une trajectoire similaire. Cependant, à partir de l'an 20, le taux servi moyen ammorce une hausse plus rapide que le TRA moyen, jusqu'à dépasser ce dernier vers 33 ans. On peut expliquer cette hausse progressive du taux servi par l'effet de la PPE, qui doit être reprise des millésimes anciens. On a aussi le phénomène de plafond de la PPE, qui ne peut pas dépasser 10\% de la PM. La PM diminue chaque année car les sorties dépassent les entrées. En effet, on ne considère pas de flux entrant dans le portefeuille (pas de New Business ni de cotisation) et les flux sortants sont les prestations de rachats et de décès. Ainsi, comme le montre la figure \ref{fig:PPE_MCO}, la PPE est reprise progressivement et massivement à partir de l'an 20, ce qui permet d'augmenter le taux servi.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{images/variations_PPE_MCO.png}
     \caption{Flux moyens de dotation et reprise de PPE}
@@ -176,7 +185,7 @@ Le montant des rachats reste élevé sur les 5-6 premières années avant de dim
 
 Le plateau initial (figure \ref{fig:prestations_rachat_euro_mco}), lui, s'explique par la composante conjoncturelle du rachat : au taux de rachat structurel s'ajoute un ajustement dynamique fonction de l'écart entre le taux servi de l'année précédente et le TME, qui joue le rôle de taux concurrent. Quand l'assureur sert moins que le marché, les assurés rachètent davantage ; quand il sert plus, les rachats diminuent. Or on a montré que le taux servi reste en retrait du TRA (et donc du TME) sur les premières années, le temps que le mécanisme de lissage rattrape son retard : cet écart défavorable alimente des rachats conjoncturels supplémentaires, ce qui maintient les montants rachetés à un niveau élevé avant que l'effet de base, la décroissance continue de la PM, ne devienne dominant à partir de l'année 6-7.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{images/prestations_rachat_euro_mco.png}
     \caption{Projection des prestations de rachats sur 40 ans, partie EURO}
@@ -222,29 +231,91 @@ Le calibrage par MCO présenté ci-dessus reflète la moyenne des dynamiques obs
 
 \subsection{Calibrage des paramètres par avis d'experts}
 
-\noindent\textit{[Paramètres à compléter : préciser ici lesquels, parmi $\kappa$, $\theta$ et $\sigma$, sont fixés à dire d'expert pour chaque variable (taux et inflation), ainsi que les valeurs retenues et leur justification au regard de la communication de la BCE.]}
+Le tableau~\ref{tab:parametres_gse_experts} présente les paramètres du GSE calibrés selon une approche dite « à dire d'expert », en écho au tableau~\ref{tab:parametres_gse_MCO} qui reportait les estimations obtenues par la méthode des moindres carrés ordinaires (MCO) sur la période 2004-2025.
+Cette calibration alternative vise à corriger les biais liés à la composition de l'échantillon historique et à ancrer certains paramètres sur des références macro-financières structurelles, telles que discutées ci-après pour chacune des variables concernées. Par souci de lisibilité, les valeurs modifiées par rapport à la calibration MCO sont indiquées en violet ; les autres sont conservées à l'identique.
 
 \begin{table}[H]
 \centering
 \caption{Paramètres du GSE calibrés selon les objectifs dits d'experts}
-\label{tab:parametres_gse_bce}
+\label{tab:parametres_gse_experts}
 \begin{tabular}{llccc}
 \hline
 \textbf{Variable} & \textbf{Modèle} & $\hat{\kappa}$ \textit{ou} $\hat{\mu}$ & $\hat{\theta}$ & $\hat{\sigma}$ \\
 \hline
-Taux 10 ans (France)   & Vasicek & 0,146 & \textcolor[HTML]{A100FF}{0,03} & 0,00737 \\
-Spread 1/10 ans   & Vasicek & 0,336 & 0,0107 & 0,00699 \\
-Taux 30 ans (France)   & Vasicek & 0,176 & \textcolor[HTML]{A100FF}{0,035} & 0,00737 \\
-Inflation (France)     & Ornstein-Uhlenbeck & 0,198 & \textcolor[HTML]{A100FF}{0,02} & 0,0123 \\
+Taux 10 ans (France)   & Vasicek & \textcolor[HTML]{A100FF}{0,1} & \textcolor[HTML]{A100FF}{0,03} & 0,00737 \\
+Spread 1/10 ans   & Vasicek & 0,336 & 0,0107 & 0,006986 \\
+Taux 30 ans (France)   & Vasicek & \textcolor[HTML]{A100FF}{0,05} & \textcolor[HTML]{A100FF}{0,035} & 0,00737 \\
+Inflation (France)     & Ornstein-Uhlenbeck & \textcolor[HTML]{A100FF}{0,3} & \textcolor[HTML]{A100FF}{0,02} & 0,0123 \\
 Actions (STOXX 600 NR) & GBM & 0,0776 & — & 0,139 \\
 Immobilier (IEIF EZ)   & GBM & 0,0657 & — & 0,200 \\
 \hline
 \end{tabular}
 \end{table}
 
+Cette calibration s'écarte volontairement des estimations obtenues par moindres carrés ordinaires sur trois variables : le taux 10 ans, le taux 30 ans et l'inflation françaises. Le spread 1/10 ans, quant à lui, est conservé à l'identique.
+
+Pour le taux 10 ans, le niveau de long terme est relevé de 2,02\,\% (MCO) à 3,0\,\% (expert), tout en réduisant la vitesse de retour de 0,146 à 0,1, soit une demi-vie portée de 4,7 à 6,9 ans. Cette double correction traduit l'hypothèse que l'échantillon 2004-2025 sous-estime le niveau d'équilibre de long terme en raison du poids disproportionné de la période de taux bas. Le niveau retenu de 3,0\,\% correspond à une évaluation du taux d'intérêt naturel nominal de la zone euro auquel s'ajoute la prime de risque souveraine française. C'est un niveau de long terme donc on espère que le taux 10 ans retrouvera ce niveau dans les années à venir. Le ralentissement corrélatif de $\kappa$ reflète l'idée qu'un changement de régime structurel, et non une simple fluctuation conjoncturelle autour de l'ancienne moyenne, met davantage de temps à se résorber.
+
+Le taux 30 ans appelle une correction plus marquée encore, et constitue le cas le plus instructif de cette calibration. L'estimation MCO produit un résultat contre-intuitif : $\hat{\kappa}_{30\text{ans}}$ (0,176) est supérieur à $\hat{\kappa}_{10\text{ans}}$ (0,146), c'est-à-dire que le taux 30 ans reviendrait plus rapidement vers sa moyenne que le taux 10 ans. Ce résultat contredit la théorie de la structure par terme des taux d'intérêt, selon laquelle les maturités longues incorporent des anticipations lointaines et une prime de terme dont la dynamique est nécessairement plus lente que celle des maturités intermédiaires, un résultat également confirmé empiriquement par la littérature --- biblio --- sur la décomposition niveau/pente/courbure de la courbe des taux, où le facteur de niveau, qui domine les maturités longues, s'avère systématiquement le plus persistant. Le paramétrage impose donc $\kappa_{30\text{ans}} = 0{,}05 < \kappa_{10\text{ans}} = 0{,}1$, rétablissant l'ordre théoriquement attendu entre les deux maturités, et relève le niveau de long terme à 3,5\,\%, cohérent avec une prime de terme structurelle de 40 à 50 points de base au-dessus du 10 ans ??? .
+
+Pour l'inflation, le niveau de long terme est abaissé de 2,23\,\% (MCO) à 2,0\,\% (expert), en s'appuyant sur la cible d'inflation à moyen terme explicitement fixée par la BCE depuis la revue stratégique de 2021 --- biblio ---. La moyenne MCO est en effet mécaniquement tirée vers le haut par le choc inflationniste de 2021-2023, un épisode considéré ici comme transitoire plutôt que représentatif d'un nouveau régime d'équilibre. $\kappa$ est relevé en parallèle de 0,198 à 0,3, soit une demi-vie ramenée de 3,5 à 2,3 ans, afin de traduire l'ancrage des anticipations d'inflation permis par la crédibilité de la banque centrale : un écart par rapport à la cible doit, par construction du mandat de la BCE, se résorber plus rapidement qu'une simple moyenne historique ne le suggère.
+
+Un dernier point mérite d'être souligné : la cohérence croisée entre ces calibrations. Le spread 1/10 ans ayant été maintenu à l'identique ($\theta = 0{,}0107$), toute modification du niveau de long terme du taux 10 ans se répercute mécaniquement, via l'identité taux 1 an = taux 10 ans $-$ spread, sur le niveau implicite du taux à 1 an. Sous la calibration MCO, ce taux 1 an implicite s'établit à $2{,}02\,\% - 1{,}07\,\% = 0{,}95\,\%$, un niveau qui paraît aujourd'hui trop bas au regard du contexte de sortie des politiques monétaires ultra-accommodantes. Sous la calibration d'expert, il devient $3{,}0\,\% - 1{,}07\,\% = 1{,}93\,\%$, un niveau qui se situe dans la fourchette des estimations les plus récentes du taux d'intérêt naturel nominal de la zone euro (1,75\,\%-2,25\,\%). Cette cohérence, bien que non recherchée de façon délibérée au moment de fixer chaque paramètre isolément, valide a posteriori la calibration retenue. 
+
 \subsection{Analyse des résultats du scénario paramétré selon les avis d'experts}
 
-\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM ; taux de rendement de l'actif, taux servi, marge financière, niveau de PPE, taux de rachat ; obtenues sous le scénario témoin MCO et sous le scénario témoin BCE.]}
+Sous ce paramètrage, le GSE génère 1\,000 trajectoires de marché ancrées sur des niveaux de long terme de taux plus élevés et des retours à la moyenne moins rapides. Les indicateurs ALM présentés ci-dessous reflètent les distributions de ces simulations sur un horizon de 40 ans.
+
+\subsubsection{Le taux de rendement des actifs et le taux servi}
+
+Le TRA moyen progresse de façon régulière et quasi monotone sur l'ensemble de l'horizon, passant d'environ 4,1\% à 5,4\%, sans rupture marquée de tendance (figure \ref{fig:tra_vs_tx_servi_experts}). Le taux servi moyen, lui, démarre nettement en retrait (3,1\%) et reste quasiment stable jusqu'à l'année 7-8, avant d'amorcer une hausse progressive qui s'accélère en fin de période, jusqu'à dépasser le TRA aux alentours de l'année 34 et finir au-dessus de lui (6,0\% contre 5,4\% en année 40).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/tra_vs_tx_servi_experts.png}
+    \caption{Comparaison entre le TRA et le taux servi sur 40 ans}
+    \label{fig:tra_vs_tx_servi_experts}
+\end{figure}
+
+Cette dynamique se lit directement dans les flux de PPE (figure \ref{fig:variations_PPE_experts}). Les toutes premières années (1 à 4) affichent de légères reprises nettes, la PPE initiale servant à combler un écart ponctuel entre contractuel et cible. À partir de l'année 5 et jusqu'à l'année 17 environ, la tendance s'inverse : les dotations deviennent positives et significatives, avec un pic autour de l'année 12 ; cette phase correspond exactement au moment où le taux servi reste plat pendant que le TRA continue de grimper. L'écart croissant entre le contractuel (indexé sur le TRA) et la cible qui est, elle, lissée est capté et mis en réserve plutôt que distribué. Cela explique le plafonnement du taux servi sur cette période.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/variations_PPE_experts.png}
+    \caption{Evolution des flux de la PPE sur 40 ans}
+    \label{fig:variations_PPE_experts}
+\end{figure}
+
+À partir de l'année 18-19, le mouvement s'inverse durablement : les flux redeviennent négatifs et l'ampleur des reprises augmente progressivement jusqu'en fin de projection (au-delà de -100 000 € par an à partir de l'année 30). C'est cette reprise massive et prolongée de la PPE constituée pendant la phase de dotation qui alimente la hausse continue du taux servi observée en seconde moitié d'horizon, jusqu'à lui permettre de dépasser durablement le TRA. Le stock accumulé pendant les années de constitution devient ainsi suffisamment important pour financer une revalorisation supérieure au rendement courant des actifs sur une longue période, plutôt que de se limiter à un simple rattrapage ponctuel.
+
+
+
+\subsubsection{Les rachats}
+
+Les prestations de rachat décroissent progressivement jusqu'à devenir marginal en fin d'horizon. Cette décroissance de fond s'explique toujours par le run-off du portefeuille : sans new business ni cotisation, la PM se réduit chaque année, et le rachat structurel diminue mécaniquement avec elle.
+
+On observe toutefois, sur la figure \ref{fig:prestations_rachat_euro_experts}, un plateau initial qui se stabilise aux alentours de 3 M€ sur les 8 premières années. Cela colle avec ce qu'on a observé sur le TRA et le taux servi de ce scénario : le taux servi reste en retrait par rapport au TRA pendant une phase de constitution de la PPE qui dure ici plus longtemps que d'habitude. Or le rachat conjoncturel réagit précisément à cet écart entre le taux servi et le taux de marché. En effet, tant que l'assureur sert moins que ce que le marché offre, les assurés sont incités à racheter davantage. Le plateau élevé des rachats reflète donc directement la durée de cette phase où le taux servi peine à suivre le TRA, avant que la baisse structurelle de la PM ne prenne le relais et n'entraîne la décroissance continue observée jusqu'en fin de projection.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/prestations_rachat_euro_experts.png}
+    \caption{Evolution des prestations de rachats sur 40 ans}
+    \label{fig:prestations_rachat_euro_experts}
+\end{figure}
+
+\subsubsection{La marge financière}
+
+Le solde financier décroît progressivement sur la quasi-totalité de l'horizon, porté par la baisse continue de la PM (portefeuille en run-off, sans new business ni cotisation) qui réduit d'année en année les produits financiers disponibles et donc la marge que l'assureur en retire. Le rebond brutal observé en toute dernière année (\ref{fig:solde_financier_experts}) n'est pas un signal de performance : il correspond aux ajustements de liquidation de fin de projection (reprise intégrale de la réserve de capitalisation, reconnaissance des plus-values latentes sur les actifs restants et d'une fraction de la PPE non distribuée), qui gonflent artificiellement le résultat de cette ultime année sans lien avec la rentabilité récurrente du contrat.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/solde_financier_experts.png}
+    \caption{Evolution du solde financier sur 40 ans}
+    \label{fig:solde_financier_experts}
+\end{figure}
+
+
+Au terme de cette analyse, les trois indicateurs racontent une cohérence interne : un TRA soutenu par un paramétrage de long terme élevé maintient un solde financier positif et stable en début de projection, mais cette même performance nourrit progressivement le taux servi via la PPE, ce qui finit par réduire la marge financière et par alimenter des rachats conjoncturels en phase de montée. La dynamique de run-off reste le facteur structurant dominant : les rachats font décroitre de manière continue la PM, ce qui réduit mécaniquement les produits financiers et donc la marge financière. 
 
 \section{Comparaison des deux scénarios témoins et limites du modèle}
 \label{sec:limites_runs_temoins}
