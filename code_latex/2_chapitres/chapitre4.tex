@@ -4,23 +4,148 @@
 Le chapitre précédent a permis de construire le scénario témoin à partir des deux paramétrages de référence, l'un calibré par moindres carrés ordinaires sur les données historiques, ??? l'autre fixé à dire d'expert selon les objectifs de politique monétaire de la Banque Centrale Européenne ???. Ces deux paramétrages de référence servent à présent de point de départ à la construction de scénarios choqués, obtenus en faisant varier certains paramètres du GSE de manière contrôlée, afin d'observer les conséquences de ces modifications sur le bilan du fonds en euros projeté par le modèle ALM.
 
 \section{Construction des scénarios choqués}
+\label{sec:construction_scenarios_choques}
 
-L'objectif est d'explorer la sensibilité des résultats du modèle ALM à des modifications ciblées de ces paramètres, afin de mesurer l'impact d'environnements de taux différents sur le bilan du fonds en euros. Trois types de modifications sont envisagés.
+L'objectif est d'explorer la sensibilité des résultats du modèle ALM à des modifications ciblées de ces paramètres, afin de mesurer l'impact d'environnements de taux différents sur le bilan du fonds en euros. Trois types de modifications sont envisagés : une modification de la volatilité des taux, une modification du niveau de long terme et une modification de la vitesse de retour à la moyenne. Ce sont les trois paramètres du modèle de Vasicek qui sont choisis pour être testés.
 
-\subsection{Modification de la volatilité}
+\subsubsection*{Des taux directeurs aux paramètres du modèle de taux}
 
-Une hausse de la volatilité des taux traduit un environnement d'incertitude accrue sur l'évolution future des taux d'intérêt. Elle se manifeste par un élargissement de l'éventail des scénarios simulés et par une augmentation de la dispersion des indicateurs de sortie du modèle ALM — taux de rendement de l'actif, taux servi, niveau de PPE. L'analyse de sensibilité à ce paramètre permet d'évaluer la robustesse du fonds face à des régimes de forte instabilité des taux.
+Le taux 10 ans modélisé n'est pas directement piloté par la Banque centrale européenne, mais en dépend via les anticipations de marché : selon la théorie des anticipations de la structure par terme, un taux long s'interprète comme une moyenne des taux courts anticipés sur l'horizon considéré, augmentée d'une prime de terme. L'incertitude sur la trajectoire future des taux directeurs se transmet ainsi à chacun des trois paramètres du modèle, mais selon des canaux distincts :
+
+\begin{itemize}
+    \item $\theta$, le niveau vers lequel les taux convergent à long terme, est directement lié au niveau anticipé du taux directeur d'équilibre, c'est-à-dire au taux neutre ($r^*$) augmenté de la cible d'inflation et d'une prime de terme. L'incertitude sur la normalisation durable de la politique monétaire est donc, au premier chef, une incertitude sur $\theta$.
+    \item $\kappa$, la vitesse de retour à la moyenne, reflète plus indirectement la crédibilité et la réactivité de la politique monétaire : un $\kappa$ faible traduit un régime qui persiste longtemps avant d'être corrigé (à l'image des huit années de taux directeurs négatifs observées entre juin 2014 et juillet 2022) tandis qu'un $\kappa$ élevé correspondrait à une normalisation rapide.
+    \item $\sigma$, la volatilité, reflète l'incertitude sur le calendrier et l'ampleur des décisions de politique monétaire, en particulier les surprises de marché lors des réunions de la Banque centrale européenne.
+\end{itemize}
+
+Cette hiérarchie des canaux de transmission justifie un traitement différencié de l'amplitude des chocs selon les paramètres, détaillé dans chacune des sous-parties suivantes.
+
+\subsubsection*{Détermination de l'amplitude des chocs}
+
+Plutôt que de recourir à une variation arbitraire des paramètres telle qu'un choc de $\pm 20\,\%$, l'amplitude des chocs est ici déduite de la précision statistique de l'estimateur, à travers la théorie asymptotique du maximum de vraisemblance. La construction des scénarios choqués suit une approche dite \textit{One At A Time} : chacun des paramètres $\kappa$, $\theta$ et $\sigma$ est modifié individuellement, toutes choses égales par ailleurs, de sorte que chaque scénario choqué n'affecte qu'un seul paramètre à la fois par rapport au scénario témoin.
+
+
+À l'optimum, la matrice hessienne de la log-vraisemblance mesure la courbure de cette fonction autour des valeurs calibrées $(\hat{\kappa}, \hat{\theta}, \hat{\sigma})$ : une courbure marquée traduit une estimation précise, tandis qu'une courbure faible traduit une incertitude élevée sur le paramètre correspondant. Formellement, $\mathbf{H}(\boldsymbol{\pi})$ est la matrice des dérivées secondes de la log-vraisemblance pondérée $\mathcal{L}$ :
+\[
+    \mathbf{H}(\boldsymbol{\pi}) = \begin{pmatrix}
+        \dfrac{\partial^2 \mathcal{L}}{\partial \kappa^2} & \dfrac{\partial^2 \mathcal{L}}{\partial \kappa \partial \theta} & \dfrac{\partial^2 \mathcal{L}}{\partial \kappa \partial \sigma} \\[10pt]
+        \dfrac{\partial^2 \mathcal{L}}{\partial \theta \partial \kappa} & \dfrac{\partial^2 \mathcal{L}}{\partial \theta^2} & \dfrac{\partial^2 \mathcal{L}}{\partial \theta \partial \sigma} \\[10pt]
+        \dfrac{\partial^2 \mathcal{L}}{\partial \sigma \partial \kappa} & \dfrac{\partial^2 \mathcal{L}}{\partial \sigma \partial \theta} & \dfrac{\partial^2 \mathcal{L}}{\partial \sigma^2}
+    \end{pmatrix},
+\]
+où $\mathcal{L}(\kappa, \theta, \sigma) = \sum_t w_t\,\ell_t(\kappa, \theta, \sigma)$, avec $\ell_t$ la log-densité gaussienne de la transition $t$ :
+\[
+    \varphi_t = e^{-\kappa\Delta t}, \qquad m_t = r_t\,\varphi_t + \theta(1-\varphi_t), \qquad v_t = \frac{\sigma^2(1-\varphi_t^2)}{2\kappa},
+\]
+\[
+    \ell_t = -\frac{1}{2}\log(2\pi v_t) - \frac{(r_{t+1} - m_t)^2}{2v_t}.
+\]
+La non-linéarité de $\ell_t$ en $\kappa$, via le terme $e^{-\kappa\Delta t}$ qui apparaît simultanément dans $\varphi_t$, dans $m_t$ et au numérateur et au dénominateur de $v_t$, rend le calcul analytique des éléments de $\mathbf{H}$ particulièrement laborieux. Pour comprendre l'origine de cette dépendance, il convient de revenir sur la solution exacte du modèle.
+
+Le facteur $e^{-\kappa\Delta t}$ découle directement de la résolution de l'équation différentielle stochastique de Vasicek. Le changement de variable $X_t = r_t - \theta$, qui représente l'écart du taux à son niveau d'équilibre, ramène le modèle à la forme d'un processus d'Ornstein-Uhlenbeck centré :
+\[
+    dX_t = -\kappa X_t\,dt + \sigma\,dW_t.
+\]
+Cette équation se résout par la méthode du facteur intégrant. En multipliant les deux membres par $e^{\kappa t}$ et en appliquant la formule d'Itô au produit $e^{\kappa t}X_t$, les termes en $\kappa X_t$ s'annulent :
+\[
+    d(e^{\kappa t}X_t) = \sigma\,e^{\kappa t}\,dW_t.
+\]
+L'intégration entre $t$ et $t + \Delta t$, puis le retour à la variable d'origine $r_t = X_t + \theta$, donne la solution explicite :
+\[
+    r_{t+\Delta t} = r_t\,e^{-\kappa\Delta t} + \theta\bigl(1 - e^{-\kappa\Delta t}\bigr) + \sigma\,e^{-\kappa(t+\Delta t)}\int_t^{t+\Delta t} e^{\kappa s}\,dW_s.
+\]
+Le dernier terme est une intégrale stochastique d'espérance nulle ; il détermine la variance de la transition, que l'isométrie d'Itô permet de calculer :
+\begin{align*}
+    \mathrm{Var}[r_{t+\Delta t} \mid r_t]
+    &= \sigma^2\,e^{-2\kappa(t+\Delta t)}\int_t^{t+\Delta t} e^{2\kappa s}\,ds
+    = \frac{\sigma^2\bigl(1 - e^{-2\kappa\Delta t}\bigr)}{2\kappa}.
+\end{align*}
+Le facteur $e^{-\kappa\Delta t}$ apparaît ainsi dans les deux moments pour une raison commune : il quantifie la dissipation exponentielle, à taux $\kappa$, qu'il s'agisse de l'écart initial $(r_t - \theta)$ porté par la moyenne, ou des chocs accumulés sur $[t, t+\Delta t]$ portés par la variance.
+
+Cette dépendance non linéaire rend la différenciation analytique de $\mathbf{H}$ peu praticable : calculer $\partial^2\ell_t/\partial\kappa^2$ requiert de dériver deux fois une expression qui empile une exponentielle, un produit et un quotient, et les dérivées croisées $\partial^2\ell_t/\partial\kappa\partial\theta$, $\partial^2\ell_t/\partial\kappa\partial\sigma$ imposent une lourdeur équivalente. Conformément à la pratique usuelle en économétrie, la hessienne est donc estimée numériquement par différences finies centrées, selon la formule symétrique à quatre points :
+\[
+    \frac{\partial^2 \mathcal{L}}{\partial \pi_i \partial \pi_j}\bigg|_{\hat{\boldsymbol{\pi}}} \approx \frac{\mathcal{L}(\hat{\boldsymbol{\pi}} + h_i \mathbf{e}_i + h_j \mathbf{e}_j) - \mathcal{L}(\hat{\boldsymbol{\pi}} + h_i \mathbf{e}_i - h_j \mathbf{e}_j) - \mathcal{L}(\hat{\boldsymbol{\pi}} - h_i \mathbf{e}_i + h_j \mathbf{e}_j) + \mathcal{L}(\hat{\boldsymbol{\pi}} - h_i \mathbf{e}_i - h_j \mathbf{e}_j)}{4 h_i h_j},
+\]
+où $\mathbf{e}_i$ désigne le vecteur unitaire dans la direction de $\pi_i$ et $h_i$ un pas de perturbation proportionnel à l'ordre de grandeur du paramètre, afin qu'un même pas relatif s'applique aussi bien à $\kappa$ (de l'ordre de l'unité) qu'à $\sigma$ (de l'ordre du centième). Pour chaque couple $(\pi_i, \pi_j)$, cette formule requiert quatre évaluations de $\mathcal{L}$ en des points voisins de l'optimum. La matrice hessienne complète, symétrique par construction, est obtenue en répétant cette opération pour les six paires distinctes de paramètres : trois termes diagonaux et trois termes croisés.
+
+En notant $\mathbf{H}(\hat{\boldsymbol{\pi}})$ la hessienne de la log-vraisemblance pondérée \textit{négative} évaluée à l'optimum, soit la matrice d'information observée de Fisher, la théorie asymptotique du maximum de vraisemblance garantit que son inverse converge vers la matrice de variance-covariance des estimateurs :
+\[
+    \boldsymbol{\Sigma} \approx \mathbf{H}(\hat{\boldsymbol{\pi}})^{-1}.
+\]
+Les racines carrées des termes diagonaux de $\boldsymbol{\Sigma}$ fournissent les erreurs-types $\mathrm{SE}(\hat{\kappa})$, $\mathrm{SE}(\hat{\theta})$ et $\mathrm{SE}(\hat{\sigma})$. L'amplitude de chaque choc est fixée à $\pm 1{,}96$ erreur-type, correspondant à un intervalle de confiance asymptotique à 95\,\% :
+\[
+    \hat{\pi}_i \pm 1{,}96 \times \mathrm{SE}(\hat{\pi}_i), \qquad \pi_i \in \{\kappa, \theta, \sigma\}.
+\]
+Les bornes inférieure et supérieure de cet intervalle définissent respectivement le choc bas et le choc haut du paramètre $\pi_i$, produisant au total six scénarios choqués auxquels s'ajoute le scénario témoin.
+
+Cette approche présente l'avantage d'isoler la contribution propre de chaque paramètre : en ne modifiant qu'un paramètre à la fois, tout écart observé sur les indicateurs de sortie peut être attribué sans ambiguïté au paramètre modifié. Elle repose cependant sur une hypothèse simplificatrice : les trois paramètres sont traités comme indépendants, alors qu'ils sont en réalité corrélés dans l'estimation. En effet, la matrice de corrélation des estimateurs, déduite des termes hors-diagonale de $\boldsymbol{\Sigma}$, permet de quantifier cette dépendance (cf.\ tableau~\ref{tab:correlation_estimateurs}). Les résultats doivent donc être interprétés comme des sensibilités unitaires, et non comme une description exhaustive de l'espace de risque paramétrique.
+
+Pour $\theta$ spécifiquement, l'amplitude statistique peut en outre être mise en regard d'une source d'incertitude structurelle indépendante : les estimations récentes du taux neutre ($r^*$) pour la zone euro le situent dans une fourchette de $0{,}2\,\%$ à $0{,}8\,\%$ selon les méthodes retenues, ce qui permet de vérifier la cohérence entre l'incertitude statistique et l'incertitude macroéconomique reconnue par la littérature. Pour $\kappa$ et $\sigma$, en l'absence d'un consensus équivalent, seule l'approche statistique est retenue.
+
 
 \subsection{Modification du niveau de long terme}
 
-Le paramètre $\theta$ représente le niveau vers lequel les taux convergent à long terme. Le modifier revient à simuler des environnements structurellement différents : un $\theta$ élevé correspond à un scénario de normalisation durable des taux, tandis qu'un $\theta$ faible traduit une persistance des taux bas. Cet axe de sensibilité est particulièrement pertinent au regard de l'incertitude actuelle sur le niveau d'équilibre des taux en zone euro, que les scénarios témoins présentés au chapitre précédent ne permettent pas de trancher avec certitude.
+Le paramètre $\theta$ représente le niveau vers lequel les taux convergent à long terme. Le modifier revient à simuler des environnements structurellement différents : un $\theta$ élevé correspond à un scénario de normalisation durable des taux, tandis qu'un $\theta$ faible traduit une persistance des taux bas. Cet axe de sensibilité est particulièrement pertinent au regard de l'incertitude actuelle sur le niveau d'équilibre des taux en zone euro, que les scénarios témoins présentés au chapitre précédent ne permettent pas de trancher avec certitude — une incertitude que partage d'ailleurs la littérature macroéconomique sur le taux neutre ($r^*$), dont les estimations récentes pour la zone euro s'échelonnent entre $0{,}2\,\%$ et $0{,}8\,\%$.
+
+\paragraph{Résultats du paramétrage}
+
+\begin{table}[H]
+    \centering
+    \caption{Valeurs de $\theta$ retenues pour les scénarios choqués}
+    \label{tab:scenarios_theta}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Scénario} & \textbf{$\theta$} & \textbf{Écart au témoin} \\
+        \hline
+        $\theta$ bas  & {[\ldots]} & {[\ldots]} \\
+        Témoin        & {[\ldots]} & ---        \\
+        $\theta$ haut & {[\ldots]} & {[\ldots]} \\
+        \hline
+    \end{tabular}
+\end{table}
 
 \subsection{Modification de la vitesse de retour à la moyenne}
 
-Le paramètre $\kappa$ contrôle la rapidité avec laquelle les taux reviennent vers $\theta$ après un choc. Un $\kappa$ faible génère des scénarios avec une persistance élevée des chocs — les taux peuvent s'éloigner durablement de leur niveau d'équilibre — tandis qu'un $\kappa$ élevé produit des trajectoires plus stables et rapidement rappelées vers la moyenne. Faire varier ce paramètre permet de tester l'impact de la durée des cycles de taux sur la situation bilancielle du fonds.
+Le paramètre $\kappa$ contrôle la rapidité avec laquelle les taux reviennent vers $\theta$ après un choc. Un $\kappa$ faible génère des scénarios avec une persistance élevée des chocs ; les taux peuvent s'éloigner durablement de leur niveau d'équilibre — reflétant par exemple une politique monétaire qui tarde à corriger un régime de taux bas, comme observé entre 2014 et 2022 — tandis qu'un $\kappa$ élevé produit des trajectoires plus stables et rapidement rappelées vers la moyenne, à l'image d'une normalisation monétaire rapide et crédible. Faire varier ce paramètre permet de tester l'impact de la durée des cycles de taux sur la situation bilancielle du fonds.
 
-Ces scénarios choqués sont construits en modifiant manuellement les paramètres du GSE à partir de chacun des deux scénarios témoins, les autres paramètres étant maintenus à leur valeur de référence. Pour chaque scénario, le GSE simule un millier de trajectoires, qui alimentent le modèle ALM et produisent la distribution des indicateurs de sortie.
+\paragraph{Résultats du paramétrage}
+
+\begin{table}[H]
+    \centering
+    \caption{Valeurs de $\kappa$ retenues pour les scénarios choqués}
+    \label{tab:scenarios_kappa}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Scénario} & \textbf{$\kappa$} & \textbf{Écart au témoin} \\
+        \hline
+        $\kappa$ bas  & {[\ldots]} & {[\ldots]} \\
+        Témoin        & {[\ldots]} & ---        \\
+        $\kappa$ haut & {[\ldots]} & {[\ldots]} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Modification de la volatilité}
+
+Une hausse de la volatilité des taux traduit un environnement d'incertitude accrue sur l'évolution future des taux d'intérêt — en particulier une incertitude sur le calendrier et l'ampleur des décisions de la Banque centrale européenne, susceptibles de générer des surprises de marché lors des réunions de politique monétaire. Elle se manifeste par un élargissement de l'éventail des scénarios simulés et par une augmentation de la dispersion des indicateurs de sortie du modèle ALM que sont le taux de rendement de l'actif, le taux servi et le niveau de PPE. L'analyse de sensibilité à ce paramètre permet d'évaluer la robustesse du fonds face à des régimes de forte instabilité des taux.
+
+\paragraph{Résultats du paramétrage}
+
+\begin{table}[H]
+    \centering
+    \caption{Valeurs de $\sigma$ retenues pour les scénarios choqués}
+    \label{tab:scenarios_sigma}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Scénario} & \textbf{$\sigma$} & \textbf{Écart au témoin} \\
+        \hline
+        $\sigma$ bas  & {[\ldots]} & {[\ldots]} \\
+        Témoin        & {[\ldots]} & ---        \\
+        $\sigma$ haut & {[\ldots]} & {[\ldots]} \\
+        \hline
+    \end{tabular}
+\end{table}
 
 \section{Analyse des résultats}
 
-\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM entre le scénario témoin et chacun des scénarios choqués ($\sigma$, $\theta$, $\kappa$), pour les deux paramétrages de référence (MCO et BCE).]}
+\textit{[Section à compléter : comparaison des distributions des indicateurs de sortie du modèle ALM entre le scénario témoin et chacun des scénarios choqués ($\sigma$, $\theta$, $\kappa$).]}

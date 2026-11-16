@@ -1,4 +1,4 @@
-\chapter{Présentation des modèles}
+\chapter{Présentation des modèles de projection}
 \label{chap:presentation_des_modeles}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9,7 +9,7 @@
 % Modèles de structure par terme
 % Modèles de taux stochastiques multi-facteurs
 
-Les taux d'intérêt occupent une place centrale dans ce mémoire : ce sont eux qui exposent l'assureur au risque de taux, et c'est leur évolution future que le GSE et le modèle ALM présentés dans les sections suivantes doivent simuler. Avant de décrire ces outils, il convient donc de dresser un panorama des principaux modèles de taux disponibles dans la littérature, afin de comprendre leurs hypothèses, leurs atouts et leurs limites respectifs, et d'identifier lequel est le plus adapté à une modélisation en monde réel.
+Les taux d'intérêt occupent une place centrale dans ce mémoire : ce sont eux qui exposent l'assureur au risque de taux, et c'est leur évolution future que le GSE présenté dans les sections suivantes doit simuler. Avant de décrire cet outil, il convient donc de dresser un panorama des principaux modèles de taux disponibles dans la littérature, afin de comprendre leurs hypothèses, leurs atouts et leurs limites respectifs, et d'identifier lequel est le plus adapté à une modélisation basée sur des données réelles.
 
 Contrairement aux actions, les taux ne sont pas décrits par une seule variable observable, mais par une courbe des taux dépendant de l'échéance. Cette spécificité a conduit au développement de plusieurs familles de modèles, parmi lesquelles on retrouve les modèles de taux court, les modèles multifactoriels et le modèle de Heath-Jarrow-Morton (HJM).
 
@@ -37,7 +37,9 @@ Cependant, leur principale limite tient au fait  qu'un seul facteur est souvent 
 
 Les modèles monofactoriels sont souvent très vite limités lorsque l'on s'intéresse à des produits de taux faisant intervenir plusieurs maturités. En effet, les variations de taux zéro-coupon de différentes maturités ne sont pas parfaitement corrélées et la corrélation diminue très fortement plus les maturités sont éloignées. 
 
-Afin de pallier cette limite, les premiers modèles multifactoriels ont proposé d'ajouter un taux long terme $l(t)$ au modèle de taux court. Ce type de modèle bifactoriel a été développé notamment par Brennan et Schwartz (1982) et par Schaefer et Schwartz (1984). Cependant, ces modèles on été abandonnés pour plusieurs raisons. Tout d'abord, ils ne permettent pas d'obtenir d'évaluation simple des obligations zéro-coupon, sauf au prix d'approximations analytiques. De plus, ils sont en contradiction avec un résultat de 1996, montrant qu'en l'absence d'opportunité d'arbitrage, le taux long terme ne peut pas diminuer.
+Afin de pallier cette limite, les premiers modèles multifactoriels ont proposé d'ajouter un taux long terme $l(t)$ au modèle de taux court. Ce type de modèle bifactoriel a été développé notamment par Brennan et Schwartz (1982) et par Schaefer et Schwartz (1984). Cependant, ces modèles on été abandonnés pour plusieurs raisons. Tout d'abord, ils ne permettent pas d'obtenir d'évaluation simple des obligations zéro-coupon, sauf au prix d'approximations analytiques.
+
+De plus, et de façon plus fondamentale, ces modèles sont en contradiction avec un résultat théorique majeur établi par Dybvig, Ingersoll et Ross (1996) \cite{theoreme_dir}, connu depuis sous le nom de théorème DIR. Les auteurs démontrent que, dans un marché sans friction et sans opportunité d'arbitrage, le taux zéro-coupon asymptotique ne peut jamais baisser, et il en va de même pour le taux forward long. Seul le taux long par-coupon conserve la possibilité de varier à la hausse comme à la baisse, en raison des mouvements de taux forward à courte maturité qui l'affectent.
 
 Ainsi, les modèles factoriels utilisés aujourd'hui ont plutôt recours à des dynamiques de taux court à plusieurs facteurs stochastiques. Le modèle le plus utilisé dans cette catégorie est le modèle gaussien à deux facteurs présenté par Brigo et Mercurio (2005). Il est aussi couramment appelé G2++. 
 On suppose que sous la mesure risque neutre, le taux court $r_t$ s'écrit :
@@ -85,17 +87,17 @@ Ces trois familles de modèles ont été développées principalement dans un ca
 
 Dans le cadre de Solvabilité II, les assureurs sont tenus d'évaluer leurs engagements, notamment au travers du calcul du \textit{Best Estimate}, qui repose sur la projection des flux futurs puis sur leur actualisation à partir de la courbe des taux sans risque. En assurance vie, cet exercice est particulièrement complexe, dans la mesure où les contrats comportent fréquemment des garanties financières ainsi que des options implicites dont la valeur dépend étroitement des conditions de marché. Or, cette valeur ne peut généralement pas être observée directement. Dans ce contexte, le \textbf{Générateur de Scénarios Économiques} (GSE) constitue un outil indispensable, puisqu'il permet de simuler de manière cohérente l'évolution future des principales variables financières, telles que les taux d'intérêt, les actions, les spreads de crédit ou encore l'inflation.
 
-De manière opérationnelle, le GSE produit un grand nombre de scénarios économiques futurs, qui alimentent ensuite le modèle actif-passif (\textit{Asset-Liability Management}, ALM) utilisé par l'assureur afin de projeter les flux de trésorerie associés aux contrats. L'agrégation des résultats issus de l'ensemble de ces scénarios permet alors d'obtenir une estimation de la valeur moyenne des engagements. Le GSE occupe ainsi une place centrale, à la fois pour satisfaire les exigences prudentielles et pour appréhender de manière réaliste la valorisation des passifs en assurance vie.
+De manière opérationnelle, le GSE produit un grand nombre de scénarios économiques futurs, qui alimentent ensuite le modèle actif-passif (\textit{Asset-Liability Management}, ALM) utilisé par l'assureur afin de projeter les flux de trésorerie associés aux contrats. L'agrégation des résultats issus de l'ensemble de ces scénarios permet alors d'obtenir une estimation de la valeur moyenne des engagements. Le GSE occupe ainsi une place centrale, à la fois pour satisfaire les exigences prudentielles et pour appréhender la valorisation des passifs en assurance vie.
 
 Plus généralement, un Générateur de Scénarios Économiques peut être défini comme un dispositif de modélisation stochastique destiné à représenter l'évolution conjointe des principaux facteurs financiers et macroéconomiques. Il ne s'agit pas d'un modèle unique, mais d'un ensemble structuré de modèles articulés entre eux afin de produire un large éventail de trajectoires futures cohérentes. En pratique, trois grandes composantes sont généralement mobilisées : un modèle de taux d'intérêt, un modèle de rendement des actifs (action et immobilier) et un modèle d'inflation. En assurance vie, le recours à un GSE est d'autant plus important que la valeur des engagements dépend fortement de variables de marché de long terme, ainsi que de garanties optionnelles particulièrement sensibles à leur évolution.
 
-\subsection{Les deux familles de GSE : risque neutre et monde réel}
+\subsection{Les deux GSE principaux : risque neutre et monde réel}
 
-Un Générateur de Scénarios Économiques peut être construit sous deux mesures de probabilité distinctes, selon l'usage auquel il est destiné : le GSE risque neutre, orienté vers la valorisation, et le GSE monde réel, orienté vers la projection économique et la mesure des risques. Nous présentons successivement ces deux approches avant d'en souligner les principales différences.
+Un Générateur de Scénarios Économiques peut être construit sous deux mesures de probabilité distinctes, selon l'usage auquel il est destiné : le GSE risque neutre, orienté vers la valorisation et la mesure des risques, et le GSE monde réel, orienté vers les projections économiques. Nous présentons successivement ces deux approches avant d'en souligner les principales différences.
 
 \subsubsection{Le GSE risque neutre}
 
-Le GSE risque neutre est défini sous une mesure de probabilité dite risque neutre, généralement notée $Q$. Son objectif n'est pas de représenter le scénario futur le plus vraisemblable d'un point de vue économique, mais de permettre la valorisation correcte de flux contingents, c'est-à-dire de flux futurs dont le montant, la date de versement ou l'existence même dépendent de la réalisation d'événements incertains. En assurance vie, ces flux peuvent par exemple dépendre de l'évolution des marchés financiers, des taux d'intérêt, du comportement des assurés ou encore de l'exercice de certaines options contractuelles. Dans ce cadre, les primes de risque sont neutralisées : les prix actualisés des actifs doivent être compatibles avec une hypothèse d'absence d'arbitrage, ce qui autorise la valorisation de produits complexes par le calcul d'une espérance actualisée. Sous cette mesure, le rendement espéré de l'ensemble des actifs est égal au taux sans risque.
+Le GSE risque neutre est défini sous une mesure de probabilité dite risque neutre, généralement notée $Q$. Son objectif n'est pas de représenter le scénario futur le plus vraisemblable d'un point de vue économique, mais de permettre une valorisation cohérente avec les prix observables sur le marché (\textit{market consistent}), c'est-à-dire de flux futurs dont le montant, la date de versement ou l'existence même dépendent de la réalisation d'événements incertains. En assurance vie, ces flux peuvent par exemple dépendre de l'évolution des marchés financiers, des taux d'intérêt, du comportement des assurés ou encore de l'exercice de certaines options contractuelles. Dans ce cadre, les primes de risque sont neutralisées : les prix actualisés des actifs doivent être compatibles avec une hypothèse d'absence d'arbitrage, ce qui autorise la valorisation de produits complexes par le calcul d'une espérance actualisée. Sous cette mesure, le rendement espéré de l'ensemble des actifs est égal au taux sans risque.
 
 En pratique, un GSE risque neutre est calibré à partir des données observées sur les marchés financiers, telles que la courbe des taux sans risque, les prix ou les volatilités implicites de swaptions, de caps, de floors ou encore d'options sur actions. Le calibrage vise à reproduire aussi fidèlement que possible les prix d'instruments liquides, afin de garantir une valorisation cohérente avec le marché (\textit{market consistent}) pour des engagements non cotés, comme les garanties intégrées aux contrats d'assurance vie. C'est dans cette perspective que ce type de GSE est mobilisé pour le calcul du \textit{Best Estimate}.
 
@@ -103,7 +105,7 @@ Un point méthodologique doit toutefois être souligné : un scénario généré
 
 \subsubsection{Le GSE monde réel}
 
-Le GSE monde réel est construit sous la mesure de probabilité historique, généralement notée $P$. Contrairement au GSE risque neutre, son objectif n'est pas de valoriser des flux en cohérence avec les prix de marché, mais de représenter de manière plausible l'évolution future de l'environnement économique et financier. Il s'inscrit donc dans une logique de prévision économique et de mesure des risques. Dans ce cadre, l'enjeu est de produire des trajectoires qui reflètent au mieux les dynamiques susceptibles d'être observées à long terme, en tenant compte des caractéristiques empiriques des différentes variables modélisées.
+Le GSE monde réel est construit sous la mesure de probabilité historique, généralement notée $P$. Contrairement au GSE risque neutre, son objectif n'est pas de valoriser des flux en cohérence avec les prix de marché, mais de représenter de manière plausible l'évolution future de l'environnement économique et financier. Il s'inscrit donc dans une logique de prévision économique. Dans ce cadre, l'enjeu est de produire des trajectoires qui reflètent au mieux les dynamiques susceptibles d'être observées à long terme, en tenant compte des caractéristiques empiriques des différentes variables modélisées.
 
 La construction d'un GSE monde réel vise ainsi à reproduire un certain nombre de propriétés statistiques et économiques observées dans les données : niveau moyen des rendements, structure des volatilités, dépendances entre classes d'actifs, phénomènes de retour à la moyenne, asymétrie des distributions, épaisseur des queues ou encore effets de cycle. Elle peut également intégrer des hypothèses prospectives de long terme, par exemple sur la croissance, l'inflation, les taux d'intérêt ou les primes de risque. Le calibrage repose dès lors principalement sur des séries historiques, complétées, le cas échéant, par des hypothèses d'experts. À la différence du cadre risque neutre, il ne cherche donc pas prioritairement à reproduire les prix observés des instruments dérivés ni les volatilités implicites de marché.
 
@@ -115,33 +117,50 @@ Sur le plan méthodologique, le GSE monde réel doit avant tout produire des sc�
 
 La différence fondamentale entre un GSE en monde réel et un GSE en risque neutre ne tient pas d'abord à la forme des trajectoires simulées, mais à la mesure de probabilité retenue, et donc à la manière dont les états futurs sont pondérés. Autrement dit, ce ne sont pas nécessairement les scénarios eux-mêmes qui diffèrent le plus, mais la probabilité qui leur est associée. Sous la mesure risque neutre, certains scénarios défavorables reçoivent un poids plus important, car les prix de marché reflètent l'aversion au risque des investisseurs. À l'inverse, sous la mesure monde réel, les probabilités cherchent à traduire la fréquence attendue ou la vraisemblance économique des événements.
 
-Ces différences peuvent être synthétisées ainsi :
-\begin{itemize}
-    \item \textbf{Finalité :} le GSE en risque neutre est utilisé à des fins de valorisation, tandis que le GSE en monde réel sert à la projection économique et à l'évaluation des risques.
-    \item \textbf{Mesure de probabilité :} le cadre risque neutre repose sur la mesure $Q$, cohérente avec les prix observés sur les marchés ; le cadre monde réel repose sur la mesure $P$, fondée sur une interprétation historique ou économique des probabilités.
-    \item \textbf{Calibrage :} un GSE en risque neutre est calibré à partir des prix de marché et des volatilités implicites, alors qu'un GSE en monde réel s'appuie principalement sur les séries historiques et les relations économiques observées.
-    \item \textbf{Contraintes de modélisation :} le risque neutre doit respecter la cohérence de marché, l'absence d'opportunités d'arbitrage et les propriétés de martingalité ; le monde réel vise avant tout à reproduire des dynamiques plausibles du point de vue économique.
-    \item \textbf{Nature des sorties :} un GSE en risque neutre peut générer des trajectoires peu intuitives au regard de l'expérience historique, mais pertinentes pour la valorisation ; un GSE en monde réel doit au contraire produire des scénarios crédibles pour l'analyse prospective.
-    \item \textbf{Usages en assurance vie :} le GSE en risque neutre est mobilisé pour le calcul du Best Estimate, de la TVOG et pour la valorisation des garanties, tandis que le GSE en monde réel est davantage utilisé dans le cadre de l'ORSA, de l'ALM et des projections de solvabilité à long terme.
-\end{itemize}
+Ces différences sont synthétisées dans le tableau \ref{tab:comparaison_gse} ci-dessous.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.17\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+        \rowcolor{accenture}
+        \textcolor{white}{\textbf{Critère}} & \textcolor{white}{\textbf{GSE risque neutre}} & \textcolor{white}{\textbf{GSE monde réel}} \\
+        \toprule
+        \textbf{Finalité} & Valorisation \textit{market consistent} des engagements. & Projection économique et évaluation des risques. \\
+        \rowcolor{coulCash}
+        \textbf{Mesure de probabilité} & Mesure $Q$, cohérente avec les prix observés sur les marchés. & Mesure $P$, fondée sur une interprétation historique ou économique des probabilités. \\
+        \textbf{Calibrage} & Prix de marché et volatilités implicites des instruments liquides. & Séries historiques et relations économiques observées. \\
+        \rowcolor{coulCash}
+        \textbf{Contraintes de modélisation} & Cohérence de marché, absence d'arbitrage et martingalité. & Reproduction de dynamiques plausibles du point de vue économique. \\
+        \textbf{Nature des sorties} & Trajectoires parfois peu intuitives au regard de l'histoire, mais pertinentes pour la valorisation. & Scénarios crédibles, adaptés à l'analyse prospective. \\
+        \rowcolor{coulCash}
+        \textbf{Usages en assurance vie} & Best Estimate, TVOG et valorisation des garanties. & ORSA, ALM et projections de solvabilité à long terme. \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Principales différences entre un GSE en risque neutre et un GSE en monde réel}
+    \label{tab:comparaison_gse}
+\end{table}
 
 En pratique actuarielle, les deux approches sont souvent complémentaires. Dans certains dispositifs detype nested simulations, on simule d'abord l'économie future sous monde réel pour projeter la situation de l'assureur à un horizon donné ; puis, à chaque noeud de projection, on valorise les passifs complexes sous risque neutre. Cette articulation est classique pour l'analyse du risque de portefeuilles d'assurance vie comportant des garanties optionnelles, car elle permet de concilier une vision économique prospective et une valorisation market consistent des engagements.
 
-\subsection{Le choix d'un GSE en monde réel}
+\subsection{Présentation et construction du GSE développé dans ce mémoire}
+
+\subsubsection{Le choix d'un GSE en monde réel}
 
 Au regard de cette comparaison, c'est le cadre du GSE monde réel qui est retenu dans la suite de ce mémoire. Ce choix découle directement de la nature de la problématique étudiée. L'objectif n'est en effet pas de valoriser des garanties optionnelles en cohérence avec les prix de marché à une date donnée, ce qui relèverait du cadre risque neutre, mais d'analyser la distribution des trajectoires futures des taux d'intérêt et leur incidence sur la situation de l'assureur à long terme. Or, c'est précisément la mesure historique $P$ qui permet de produire des scénarios crédibles d'un point de vue économique et donc d'apprécier la vraisemblance des évolutions simulées.
 
 Un GSE monde réel offre ainsi une représentation réaliste des dynamiques de taux observées historiquement (retour à la moyenne, persistance des régimes de taux bas ou élevés, ampleur des variations), conditions indispensables pour que les scénarios générés puissent servir de support fiable à l'analyse du risque de taux.
 
-\subsection{Le processus d'Ornstein-Uhlenbeck et le modèle de Vasicek}
+\subsubsection{Le processus d'Ornstein-Uhlenbeck et le modèle de Vasicek}
 
 Avant de présenter le générateur effectivement développé, il convient de détailler les modèles sur lesquels il s'appuie pour représenter les taux d'intérêt. Le générateur retenu repose en effet principalement sur le processus d'Ornstein-Uhlenbeck et sur le modèle de Vasicek, qui en constitue l'application aux taux d'intérêt. Ces deux objets sont étroitement liés et il convient d'en préciser les fondements ainsi que les différences.
 
-\subsubsection{Le processus d'Ornstein-Uhlenbeck}
+\paragraph{Le processus d'Ornstein-Uhlenbeck}
 
 Le processus d'Ornstein-Uhlenbeck, introduit en 1930 par Leonard Ornstein et George Uhlenbeck pour décrire la vitesse d'une particule soumise à un mouvement brownien, est un processus stochastique gaussien caractérisé par un retour à la moyenne. Sa dynamique est décrite par l'équation différentielle stochastique suivante :
 \begin{equation}
     dX_t = \kappa(\theta - X_t)\,dt + \sigma\,dW_t
+    \label{eq:ou_sde}
 \end{equation}
 où :
 \begin{itemize}
@@ -156,12 +175,16 @@ Le terme de dérive $\kappa(\theta - X_t)$ traduit le mécanisme de rappel : lor
 Cette équation admet une solution explicite :
 \begin{equation}
     X_t = X_0\,e^{-\kappa t} + \theta\left(1 - e^{-\kappa t}\right) + \sigma \int_0^t e^{-\kappa(t-s)}\,dW_s
+    \label{eq:ou_solution}
 \end{equation}
 À partir de cette expression, on déduit l'espérance et la variance conditionnelles :
 \begin{equation}
     \mathbb{E}[X_t \mid X_0] = \theta + (X_0 - \theta)\,e^{-\kappa t}, \qquad
     \mathrm{Var}(X_t \mid X_0) = \frac{\sigma^2}{2\kappa}\left(1 - e^{-2\kappa t}\right)
+    \label{eq:ou_moments}
 \end{equation}
+Les démonstrations de la solution explicite (\ref{eq:ou_solution}) et des moments conditionnels (\ref{eq:ou_moments}) sont détaillées en annexes~\ref{ann:ou_solution} et~\ref{ann:ou_moments}.
+
 Lorsque $t \to \infty$, le processus converge vers une distribution stationnaire gaussienne $\mathcal{N}\!\left(\theta, \frac{\sigma^2}{2\kappa}\right)$, indépendante de la condition initiale. On peut également caractériser la vitesse de convergence par la \textit{demi-vie} $\ln(2)/\kappa$, qui correspond au temps nécessaire pour que l'écart à la moyenne de long terme soit réduit de moitié, ce qui offre une lecture concrète du paramètre $\kappa$.
 
 \begin{figure}[H]
@@ -173,7 +196,7 @@ Lorsque $t \to \infty$, le processus converge vers une distribution stationnaire
 
 La figure \ref{fig:processus_ou} illustre ce mécanisme de retour à la moyenne. Quelle que soit leur valeur de départ, au-dessus ou en dessous de $\theta$, toutes les trajectoires sont rappelées vers le niveau de long terme (en pointillés) autour duquel elles finissent par osciller sous l'effet des chocs aléatoires. Aucune ne s'en écarte durablement, ce qui traduit visuellement la convergence vers la distribution stationnaire.
 
-\subsubsection{Du processus d'Ornstein-Uhlenbeck au modèle de Vasicek}
+\paragraph{Du processus d'Ornstein-Uhlenbeck au modèle de Vasicek}
 
 En 1977, Oldřich Vašíček a proposé d'appliquer ce processus à la modélisation du taux d'intérêt court $r_t$. Le modèle de Vasicek reprend ainsi exactement la dynamique d'un processus d'Ornstein-Uhlenbeck :
 \begin{equation}
@@ -190,26 +213,27 @@ Sur le plan strictement mathématique, le modèle de Vasicek \textit{est} un pro
 L'apport propre du modèle de Vasicek réside ainsi dans le passage du taux court à l'ensemble de la courbe des taux. Le modèle appartient en effet à la famille des modèles affines, pour lesquels le prix d'une obligation zéro-coupon de maturité $T$ s'écrit sous forme exponentielle-affine :
 \begin{equation}
     P(t,T) = A(t,T)\,e^{-B(t,T)\,r_t}, \qquad \text{avec} \quad B(t,T) = \frac{1 - e^{-\kappa(T-t)}}{\kappa}
+    \label{eq:vasicek_zc}
 \end{equation}
-Cette propriété, qui n'a de sens que dans un contexte financier, constitue la véritable spécificité du modèle de Vasicek par rapport au processus d'Ornstein-Uhlenbeck dont il découle.
+Cette propriété, qui n'a de sens que dans un contexte financier, constitue la véritable spécificité du modèle de Vasicek par rapport au processus d'Ornstein-Uhlenbeck dont il découle. La démonstration de cette forme exponentielle-affine, et en particulier de l'expression de $B(t,T)$, est détaillée en annexe~\ref{ann:vasicek_zc}.
 
-\subsubsection{Les avantages du modèle de Vasicek}
+\paragraph{Les avantages du modèle de Vasicek}
 
 Le modèle de Vasicek présente plusieurs atouts qui expliquent pourquoi nous l'avons choisi dans ce cadre monde réel. 
 Son premier avantage tient à l'interprétabilité de ses paramètres : chacun des trois paramètres possède une signification économique claire et directement lisible, $\theta$ étant le niveau de taux de long terme, $\kappa$ mesurant la rapidité du retour vers ce niveau et $\sigma$ quantifiant la volatilité. Ce sont avec ces trois paramètres que l'on peut ajuster le modèle pour reproduire les caractéristiques observées sur les marchés, et notamment on peut les modifier pour mesurer l'incertitude sur l'évolution future des taux.
 Le modèle repose en outre sur un mécanisme de retour à la moyenne économiquement réaliste, les taux d'intérêt ne dérivant pas indéfiniment mais tendant à osciller autour d'un niveau d'équilibre piloté notamment par la politique monétaire. 
 Le modèle se distingue également par sa tractabilité analytique : son caractère affine permet d'obtenir des formules fermées pour les prix des obligations zéro-coupon et de nombreux produits dérivés de taux, ce qui réduit considérablement le coût des calculs. Sa simplicité de calibrage et de simulation constitue un atout supplémentaire, le caractère gaussien du processus rendant l'estimation des paramètres aisée tandis que la distribution explicite des états futurs simplifie la simulation. Enfin, sa parcimonie, puisqu'il ne repose que sur trois paramètres, limite le risque de surajustement aux données historiques.
 
-\subsubsection{Les limites du modèle de Vasicek}
+\paragraph{Les limites du modèle de Vasicek}
 
 Le modèle présente toutefois des limites qu'il convient de garder à l'esprit. La plus connue est la possibilité de taux négatifs : le caractère gaussien du processus autorise des valeurs négatives avec une probabilité non nulle. Longtemps considérée comme un défaut majeur, cette propriété est devenue moins problématique, voire un avantage, dans le contexte de taux négatifs observé en zone euro après 2014, là où des modèles comme le modèle de Cox-Ingersoll-Ross interdisent par construction les taux négatifs. 
 Le modèle suppose par ailleurs une volatilité constante, $\sigma$ ne dépendant pas du niveau du taux (homoscédasticité), alors que sur les marchés la volatilité tend généralement à varier avec le niveau des taux. Son caractère monofactoriel constitue une autre limite : reposant sur un unique facteur, il ne peut reproduire fidèlement l'ensemble des déformations de la courbe des taux (niveau, pente, courbure), les mouvements des différentes maturités y étant parfaitement corrélés. S'ajoute un ajustement imparfait à la courbe initiale, le retour vers un niveau de long terme constant ne permettant pas de reproduire exactement la structure par terme observée à la date initiale, limite que des extensions comme le modèle de Hull-White corrigent en rendant les paramètres dépendants du temps. Enfin, les queues de distribution fines de la loi normale sous-jacente attribuent une faible probabilité aux variations extrêmes, ce qui peut conduire à sous-estimer l'ampleur des chocs de taux les plus sévères.
 
 Dans le cadre de ce mémoire, ces limites sont jugées acceptables au regard des avantages du modèle. L'interprétabilité des paramètres et la possibilité de représenter un environnement de taux négatifs, comme celui observé récemment, en font un choix particulièrement adapté à une modélisation monde réel des taux d'intérêt.
 
-\subsection{Le modèle de Black \& Scholes pour les actions et l'immobilier}
+\subsubsection{Le modèle de Black \& Scholes pour les actions et l'immobilier}
 
-\subsubsection{Spécification du modèle}
+\paragraph{Spécification du modèle}
 
 Dans ce GSE monde réel, les rendements des actifs actions et immobiliers sont modélisés par un mouvement brownien géométrique (MBG) sous la mesure historique $P$, conformément à la spécification de Black et Scholes (1973) :
 \begin{equation}
@@ -218,48 +242,97 @@ Dans ce GSE monde réel, les rendements des actifs actions et immobiliers sont m
 où $S_t$ désigne le niveau de l'indice (actions ou immobilier), $\mu$ le rendement moyen annualisé incluant la prime de risque historique de l'actif, $\sigma$ la volatilité instantanée annualisée et $W_t$ un mouvement brownien standard. La solution analytique de cette équation différentielle stochastique est log-normale :
 \begin{equation}
     S_{t+dt} = S_t \cdot \exp\!\left[\left(\mu - \tfrac{1}{2}\sigma^2\right)dt + \sigma\sqrt{dt}\;Z_t\right], \qquad Z_t \sim \mathcal{N}(0,1)
+    \label{eq:bs_solution}
 \end{equation}
 Cette forme exacte, et non une approximation d'Euler, est directement implémentée dans le simulateur, ce qui garantit l'absence de biais numérique de discrétisation quel que soit le pas de projection retenu.
 
-\subsubsection{Calibrage}
+\paragraph{Calibrage}
 
-Les paramètres $\mu$ et $\sigma$ sont estimés par MCO sur les log-rendements historiques $r_t = \ln(S_t/S_{t-1})$, dont la loi théorique sous MBG est $r_t \sim \mathcal{N}\!\left((\mu - \tfrac{1}{2}\sigma^2)\,dt,\;\sigma^2\,dt\right)$. La moyenne empirique $\hat{c}$ et l'écart-type empirique $\hat{s}$ des log-rendements permettent de retrouver les paramètres continus annualisés par inversion :
+Les paramètres $\mu$ et $\sigma$ sont estimés par MCO sur les log-rendements historiques $r_t = \ln(S_t/S_{t-1})$, dont la loi théorique sous MBG est $r_t \sim \mathcal{N}\!\left((\mu - \tfrac{1}{2}\sigma^2)\,dt,\;\sigma^2\,dt\right)$.
+
+\paragraph{Principe de l'inversion}
+Cette relation découle directement de la solution exacte (\ref{eq:bs_solution}) : en prenant le logarithme de part et d'autre, le terme stochastique $\sigma\sqrt{dt}\,Z_t$ devient gaussien centré de variance $\sigma^2\,dt$, tandis que le terme déterministe $(\mu - \tfrac{1}{2}\sigma^2)\,dt$ constitue la moyenne de la distribution. La moyenne empirique $\hat{c}$ et l'écart-type empirique $\hat{s}$ des log-rendements observés sont donc des estimateurs directs, respectivement, de $(\mu - \tfrac{1}{2}\sigma^2)\,dt$ et de $\sigma\sqrt{dt}$. On en déduit par inversion les paramètres continus annualisés :
 \begin{equation}
     \hat{\sigma} = \frac{\hat{s}}{\sqrt{dt}}, \qquad \hat{\mu} = \frac{\hat{c}}{dt} + \frac{1}{2}\hat{\sigma}^2
+    \label{eq:bs_calibrage}
 \end{equation}
+
+\paragraph{Remarques pratiques sur l'estimation}
+Plusieurs précautions accompagnent la mise en œuvre de ce calibrage :
+\begin{itemize}
+    \item le pas $dt$ doit être exprimé dans la même unité de temps que l'annualisation visée : pour des données quotidiennes, $dt = 1/252$ (nombre de jours de bourse par an) ; pour des données mensuelles, $dt = 1/12$ ;
+    \item l'écart-type empirique $\hat{s}$ est calculé avec l'estimateur non biaisé usuel $\hat{s}^2 = \frac{1}{n-1}\sum_{i=1}^n (r_i - \hat{c})^2$, afin de limiter le biais d'estimation sur de petits échantillons ;
+    \item la correction en $+\tfrac{1}{2}\hat{\sigma}^2$ dans l'estimation de $\mu$ est fréquemment omise à tort dans les implémentations naïves, qui annualisent directement $\hat{c}/dt$ : cette omission conduit à sous-estimer systématiquement le rendement moyen réel de l'actif, l'écart devenant significatif dès que $\sigma$ dépasse quelques points de pourcentage, ce qui est le cas pour les actions et l'immobilier ;
+    \item cette approche suppose implicitement que les log-rendements successifs sont indépendants et identiquement distribués, hypothèse mise à mal en présence d'autocorrélation ou de clusters de volatilité.
+\end{itemize}
+
 Ce calibrage en univers réel se distingue fondamentalement de l'approche risque neutre, où la dérive serait imposée égale au taux sans risque par construction de non-arbitrage : ici $\mu$ reflète la prime de risque historiquement observée sur la classe d'actifs, condition nécessaire pour produire des scénarios économiques réalistes destinés au pilotage ALM et non à la valorisation de marché. La dépendance entre actions, immobilier et les autres facteurs du GSE est introduite par une décomposition de Cholesky appliquée aux chocs gaussiens corrélés $Z_t$, estimée sur les innovations historiques de chaque facteur.
 
-\subsubsection{Avantages et limites}
+\paragraph{Avantages et limites}
 
 Le modèle présente plusieurs atouts. Sa parcimonie, deux paramètres seulement, limite le risque de surparamétrisation et facilite l'interprétation actuarielle. La solution analytique exacte évite toute accumulation d'erreur numérique, même à des pas de temps annuels. La log-normalité garantit par construction la positivité de $S_t$ à tout horizon. Et l'estimation par MCO sur les log-rendements est directe, stable numériquement et ne requiert pas d'algorithme d'optimisation itératif.
 
 Ces avantages s'accompagnent de limites théoriques à garder à l'esprit. L'hypothèse de log-normalité des rendements est régulièrement mise en défaut par les données de marché, qui présentent des queues épaisses et une asymétrie négative que la loi normale sous-estime structurellement. La volatilité constante ne capture aucun phénomène de \textit{volatility clustering} (alternance de régimes calmes et de régimes de forte turbulence, documentée par les modèles GARCH). L'indépendance temporelle des chocs exclut par construction toute autocorrélation ou retour à la moyenne à moyen terme, parfois observé sur l'immobilier. Enfin, en l'absence de borne sur les trajectoires simulées, des valeurs extrêmes non bornées peuvent apparaître sur un grand nombre de simulations. Ces limites sont jugées acceptables dans le cadre d'une modélisation monde réel destinée à l'analyse de sensibilité.
 
-\subsection{Le GSE monde réel développé}
+\subsubsection{Le GSE monde réel développé}
 
 Sur la base des modèles qui viennent d'être présentés, nous avons développé, dans le cadre de ce mémoire, un Générateur de Scénarios Économiques fonctionnant sous la mesure historique $P$. Cet outil prend en entrée un unique fichier de données historiques (inflation, taux et indices d'actifs), puis projette un grand nombre de trajectoires économiques cohérentes sur un horizon de long terme, par défaut quarante ans. Sa structure est modulaire : chaque variable financière est représentée par un modèle dédié, et les différentes sources d'aléa sont reliées entre elles par une matrice de corrélation. Les paragraphes suivants en décrivent les principales composantes.
 
-\subsubsection{Les variables modélisées et leurs dynamiques}
+\paragraph{Les variables modélisées et leurs dynamiques}
 
-Le générateur repose sur trois familles de modèles, choisies pour leur simplicité et leur cohérence avec une approche monde réel :
+Le générateur repose sur trois familles de variables, dont les dynamiques ont été choisies pour leur simplicité et leur cohérence avec une approche en univers réel :
 
 \begin{itemize}
     \item \textbf{L'inflation} est modélisée par un processus d'Ornstein-Uhlenbeck, à retour à la moyenne, ce qui traduit la tendance de l'inflation à revenir vers un niveau de long terme.
-    \item \textbf{Les taux d'intérêt} reposent sur une modélisation en deux composantes. Le taux long et le spread entre taux long et taux court sont chacun décrits par un processus de Vasicek. Le taux court est ensuite reconstruit par différence, selon la relation $r_t = l_t - s_t$, où $l_t$ désigne le taux long et $s_t$ le spread. Un taux très long (30 ans) est par ailleurs modélisé directement par un processus de Vasicek, afin de disposer de plusieurs points d'ancrage le long de la courbe des taux.
-    \item \textbf{Les actions et l'immobilier} sont modélisés par un mouvement brownien géométrique, conformément au cadre de Black \& Scholes, leurs rendements étant supposés log-normaux.
+    \item \textbf{Les taux d'intérêt} reposent sur une modélisation multi-facteurs : trois facteurs, tous régis par la même dynamique d'Ornstein-Uhlenbeck (c'est-à-dire un processus de Vasicek au sens de l'équation (\ref{eq:ou_sde})), sont estimés sur l'historique avec leur propre triplet $(\kappa, \theta, \sigma)$. Le taux court n'est pas modélisé pour lui-même : il est reconstruit par différence selon la relation $r_t = l_t - s_t$, où $l_t$ désigne le taux long et $s_t$ le spread. La mise en œuvre détaillée (estimation, simulation, corrélation) est présentée en section~\ref{sec:calibrage_monde_reel}.
+    \item \textbf{Les actions et l'immobilier} sont modélisés par un mouvement brownien géométrique, conformément au cadre de Black \& Scholes : leurs rendements logarithmiques sont supposés gaussiens, si bien que les niveaux suivent une loi log-normale.
 \end{itemize}
 
-Le choix de reconstruire le taux court à partir du taux long et du spread, plutôt que de le modéliser directement, permet de garantir une structure par terme cohérente et d'éviter les croisements aberrants entre maturités.
+Le choix de reconstruire le taux court à partir du taux long et du spread, plutôt que de le modéliser directement, assure par construction la cohérence entre ces deux maturités : le spread simulé en étant exactement la différence, aucun croisement entre taux court et taux long n'est possible. Cette garantie ne s'étend toutefois pas au taux très long, simulé de façon autonome : il peut ponctuellement passer sous le taux 10 ans, cas que le générateur détecte et signale afin d'alerter sur une éventuelle incohérence de la courbe ultra-longue. Le recours à plusieurs facteurs, enfin, permet de reproduire les déformations de la courbe (niveau, pente, bout long) qu'une modélisation mono-facteur ne saurait capturer.
 
-\subsubsection{Le calibrage en monde réel}
+\paragraph{Utilisation du modèle dans le générateur développé}
+\label{sec:calibrage_monde_reel}
 
-Conformément à la logique monde réel, l'ensemble des paramètres est estimé à partir des séries historiques fournies en entrée. Pour les processus de type Vasicek, l'estimation s'appuie sur une régression par moindres carrés ordinaires (MCO) de la forme autorégressive discrétisée, dont on déduit la vitesse de retour à la moyenne, le niveau de long terme et la volatilité. Pour les modèles de Black \& Scholes, la dérive et la volatilité sont estimées à partir des log-rendements observés. Les corrélations entre variables sont quant à elles estimées sur les innovations (résidus) des différents modèles, puis assemblées dans une matrice de corrélation rendue définie positive avant d'être utilisée pour générer des chocs corrélés. L'outil laisse également la possibilité de remplacer l'estimation automatique par une saisie manuelle des paramètres de retour à la moyenne, de cible de long terme et de volatilité. Cette fonctionnalité va permettre d'apprécier l'impact de l'incertitude sur les paramètres et de tester la sensibilité des résultats à des hypothèses alternatives.
+Le générateur ne retient pas la formulation canonique mono-facteur du modèle de Vasicek, dans laquelle seul le taux court $r_t$ est modélisé et l'intégralité de la courbe est déduite par absence d'opportunité d'arbitrage. Il en adopte une lecture réduite et multi-facteurs, cohérente avec un cadre en univers réel : la dynamique d'Ornstein-Uhlenbeck est appliquée directement et séparément à plusieurs grandeurs observées — le taux long 10 ans, le spread taux long $-$ taux court, le taux très long 30 ans, ainsi que l'inflation. Le taux court n'est pas simulé pour lui-même : il est reconstruit à chaque pas par la relation $r_t = l_t - s_t$, où $l_t$ désigne le taux long et $s_t$ le spread simulés. Chaque facteur possède ainsi son propre triplet de paramètres $(\kappa, \theta, \sigma)$, et les chocs des différents facteurs sont corrélés au moyen d'une décomposition de Cholesky de la matrice de corrélation estimée sur les innovations historiques.
 
-\subsubsection{La simulation et les sorties produites}
+\paragraph{Estimation des paramètres}
+Les paramètres sont estimés par moindres carrés ordinaires (MCO) à partir des séries historiques. On s'appuie sur la discrétisation exacte du processus : sur un pas de temps historique $\Delta$, la solution explicite du processus de Vasicek prend la forme d'un AR(1)
+\begin{equation}
+    X_{t+\Delta} = \alpha + \beta\, X_t + \varepsilon_t,
+    \qquad
+    \varepsilon_t \sim \mathcal{N}\!\left(0,\ \sigma^2\,\frac{1-e^{-2\kappa\Delta}}{2\kappa}\right),
+\end{equation}
+de coefficients $\beta = e^{-\kappa\Delta}$ et $\alpha = \theta\,(1-\beta)$. La régression de $X_{t+\Delta}$ sur $X_t$ fournit $\hat{\alpha}$ et $\hat{\beta}$, dont on déduit les paramètres continus :
+\begin{equation}
+    \hat{\kappa} = -\frac{\ln\hat{\beta}}{\Delta},
+    \qquad
+    \hat{\theta} = \frac{\hat{\alpha}}{1-\hat{\beta}},
+    \qquad
+    \hat{\sigma} = s_{\hat{\varepsilon}}\,\sqrt{\frac{2\hat{\kappa}}{1-e^{-2\hat{\kappa}\Delta}}},
+\end{equation}
+où $s_{\hat{\varepsilon}}$ est l'écart-type des résidus. Le coefficient $\hat{\beta}$ est contraint dans $(0,1)$ pour garantir la stationnarité. Le pas $\Delta$ est celui de l'historique (mensuel), distinct du pas de projection. Le générateur laisse par ailleurs la possibilité de substituer à cette estimation des valeurs de $(\kappa, \theta, \sigma)$ saisies manuellement, facteur par facteur, afin d'imposer un jeu de paramètres d'expert et d'apprécier l'impact de l'incertitude paramétrique.
+
+\paragraph{Du modèle à sa simulation : le rôle du schéma d'Euler-Maruyama}
+Il importe de distinguer le modèle de la méthode numérique employée pour l'exploiter. Le modèle de Vasicek est une équation différentielle stochastique : il décrit la loi d'évolution d'un taux avec le retour à la moyenne d'intensité $\kappa$ vers le niveau $\theta$, sous l'effet de chocs d'amplitude $\sigma$. Cette équation, formulée en temps continu, ne peut être simulée directement sur machine ; il faut la discrétiser. Le schéma d'Euler-Maruyama est l'outil de résolution qui permet d'en engendrer des trajectoires : il approche l'EDS en remplaçant les accroissements infinitésimaux $dt$ et $dW_t$ par des incréments finis $\Delta t$ et $\sqrt{\Delta t}\,Z_t$,
+\[
+    \underbrace{dX_t=\kappa(\theta-X_t)\,dt+\sigma\,dW_t}_{\text{modèle (Vasicek / OU)}}
+    \;\;\longrightarrow\;\;
+    \underbrace{X_{t+\Delta t}=X_t+\kappa(\theta-X_t)\,\Delta t+\sigma\sqrt{\Delta t}\,Z_t}_{\text{schéma numérique (Euler-Maruyama)}},
+    \quad Z_t\sim\mathcal{N}(0,1),
+\]
+les chocs $Z_t$ des différents facteurs étant corrélés par la décomposition de Cholesky. Les coefficients $\kappa$, $\theta$ et $\sigma$ proviennent intégralement du modèle de Vasicek ; le schéma se contente de les propager de pas en pas. La démonstration de la dérivation du schéma d'Euler-Maruyama pour le processus de Vasicek est détaillée en annexe~\ref{ann:euler_maruyama}.
+
+\paragraph{Biais de discrétisation et justification du choix d'Euler}
+La discrétisation exacte présentée ci-dessus restitue $(\kappa, \theta, \sigma)$ sans biais, quel que soit le pas d'observation. En simulation en revanche, le schéma d'Euler-Maruyama n'en est qu'une approximation : il linéarise le terme de rappel et remplace la variance conditionnelle exacte $\sigma^2\,(1-e^{-2\kappa\Delta t})/(2\kappa)$ par $\sigma^2\,\Delta t$. Ces deux expressions coïncident au premier ordre lorsque $\Delta t \to 0$ : le biais est négligeable pour un pas fin (mensuel), mais s'accroît pour un pas plus grossier (annuel). Ce choix se justifie néanmoins par un souci d'uniformité : le même moteur d'Euler traite indistinctement tous les facteurs — y compris les actifs en dynamique log-normale de Black \& Scholes, pour lesquels aucune solution exacte aussi simple n'existe —, et applique à chaque pas les chocs corrélés et les planchers optionnels sur les taux et l'inflation. La cohérence méthodologique est ainsi privilégiée au prix d'un biais maîtrisé.
+
+\paragraph{Reconstruction de la courbe des taux}
+C'est sur ce point que l'implémentation s'écarte le plus de la présentation théorique précédente. Le générateur n'utilise pas la formule affine de valorisation zéro-coupon : les paramètres estimés ne servent qu'à simuler la dynamique des taux, et la courbe zéro-coupon de maturités 1 à 40 ans est ensuite reconstruite par interpolation linéaire des taux simulés entre les trois points d'ancrage disponibles (court, 10 ans, 30 ans), avec extrapolation plate au-delà, le prix zéro-coupon étant alors obtenu par $P(t,t+\tau) = e^{-R(\tau)\,\tau}$. Autrement dit, le générateur exploite la dynamique de retour à la moyenne du modèle de Vasicek, mais non sa propriété affine de structure par terme. Ce choix, propre à un cadre en univers réel où l'on cherche à reproduire le comportement statistique historique des taux plutôt qu'à assurer une cohérence de valorisation sans arbitrage, permet d'obtenir directement une courbe cohérente avec la structure par terme simulée.
+
+\paragraph{La simulation et les sorties produites}
 
 À partir des paramètres estimés, le générateur simule par méthode de Monte-Carlo un grand nombre de trajectoires (par défaut un millier de scénarios), selon un pas de temps paramétrable (mensuel, semestriel ou annuel). Au-delà des trajectoires des variables d'état, l'outil produit la courbe des taux zéro-coupon pour les maturités de 1 à 40 ans, reconstruite par interpolation des taux simulés, ainsi que les déflateurs (facteurs d'actualisation stochastiques) nécessaires à l'évaluation des engagements. Il fournit enfin une série de diagnostics permettant d'apprécier la qualité de l'ajustement : tests de normalité des résidus, backtesting déterministe sur la période historique et représentations graphiques des trajectoires projetées.
 
-\subsubsection{L'interface de paramétrage}
+\paragraph{L'interface de paramétrage}
 
 L'ensemble de ces fonctionnalités est piloté au travers d'une interface web, qui permet à l'utilisateur de choisir le type de GSE, de charger le fichier de données historiques, de définir les paramètres de projection (nombre de simulations, pas de temps, horizon, graine aléatoire) et de spécifier les maturités des taux ainsi que le mode d'estimation des modèles. La figure \ref{fig:front_gse_monde_reel} présente cette interface de configuration.
 

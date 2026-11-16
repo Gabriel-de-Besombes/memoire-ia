@@ -1,3 +1,276 @@
 \chapter*{Annexes}
 \addcontentsline{toc}{chapter}{Annexes}
 
+% Numérotation des annexes en lettres (A, B, C...) : sections numérotées
+% pour que \ref{...} renvoie bien la lettre de l'annexe.
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{section}{0}
+
+\section{Solution explicite du processus d'Ornstein-Uhlenbeck}
+\label{ann:ou_solution}
+
+On part de l'équation différentielle stochastique du processus d'Ornstein-Uhlenbeck :
+\[
+    dX_t = \kappa(\theta - X_t)\,dt + \sigma\,dW_t.
+\]
+
+\subsection*{Étape 1 : Changement de variable pour éliminer le terme de rappel}
+
+On pose $Y_t = e^{\kappa t} X_t$. La formule d'Itô (ici la simple règle de dérivation d'un produit, car $e^{\kappa t}$ est déterministe) donne
+\[
+    dY_t = \kappa e^{\kappa t} X_t\,dt + e^{\kappa t}\,dX_t.
+\]
+En substituant l'expression de $dX_t$ :
+\[
+    dY_t = \kappa e^{\kappa t} X_t\,dt + e^{\kappa t}\bigl[\kappa(\theta - X_t)\,dt + \sigma\,dW_t\bigr]
+    = \kappa e^{\kappa t} X_t\,dt + \kappa\theta e^{\kappa t}\,dt - \kappa e^{\kappa t} X_t\,dt + \sigma e^{\kappa t}\,dW_t.
+\]
+Les deux termes en $\kappa e^{\kappa t} X_t\,dt$ s'annulent exactement et il reste :
+\[
+    dY_t = \kappa\theta e^{\kappa t}\,dt + \sigma e^{\kappa t}\,dW_t.
+\]
+
+\subsection*{Étape 2 : Intégration directe}
+
+On intègre entre $0$ et $t$ :
+\[
+    Y_t - Y_0 = \int_0^t \kappa\theta e^{\kappa s}\,ds + \int_0^t \sigma e^{\kappa s}\,dW_s.
+\]
+Le premier terme se calcule comme une intégrale ordinaire :
+\[
+    \int_0^t \kappa\theta e^{\kappa s}\,ds = \theta\bigl[e^{\kappa s}\bigr]_0^t = \theta(e^{\kappa t} - 1).
+\]
+Avec $Y_0 = e^{\kappa \cdot 0} X_0 = X_0$, il vient :
+\[
+    Y_t = X_0 + \theta(e^{\kappa t} - 1) + \sigma\int_0^t e^{\kappa s}\,dW_s.
+\]
+
+\subsection*{Étape 3 : Retour à la variable d'origine}
+
+On revient à $X_t = e^{-\kappa t} Y_t$ en multipliant toute l'expression par $e^{-\kappa t}$ :
+\[
+    X_t = X_0 e^{-\kappa t} + \theta(1 - e^{-\kappa t}) + \sigma\int_0^t e^{-\kappa t}e^{\kappa s}\,dW_s.
+\]
+En regroupant les exposants du dernier terme ($e^{-\kappa t}e^{\kappa s} = e^{-\kappa(t-s)}$), on obtient
+\[
+    X_t = X_0 e^{-\kappa t} + \theta(1 - e^{-\kappa t}) + \sigma\int_0^t e^{-\kappa(t-s)}\,dW_s,
+\]
+ce qui correspond exactement à l'équation (\ref{eq:ou_solution}). \hfill$\square$
+
+\section{Espérance et variance conditionnelles}
+\label{ann:ou_moments}
+
+On part de la solution explicite établie à l'annexe~\ref{ann:ou_solution}, en conditionnant par rapport à $X_0$ (supposé déterministe à l'instant initial) :
+\[
+    X_t = \underbrace{X_0 e^{-\kappa t} + \theta(1 - e^{-\kappa t})}_{\text{terme déterministe}}
+    + \underbrace{\sigma\int_0^t e^{-\kappa(t-s)}\,dW_s}_{\text{terme stochastique (intégrale de Wiener)}}.
+\]
+
+\subsection*{Espérance conditionnelle}
+
+L'intégrale stochastique $\int_0^t e^{-\kappa(t-s)}\,dW_s$ est une intégrale de Wiener, son intégrande étant une fonction déterministe du temps. Une propriété fondamentale des intégrales d'Itô par rapport à un mouvement brownien est que leur espérance est nulle :
+\[
+    \mathbb{E}\!\left[\int_0^t e^{-\kappa(t-s)}\,dW_s\ \Big|\ X_0\right] = 0.
+\]
+Ici, on a $e^{-\kappa(t-s)}$ qui est borné sur $[0,t]$, donc de carré intégrable. Ensuite, $W_t$ étant une martingale, toute intégrale stochastique par rapport à $W_t$ est elle-même une martingale partant de $0$, donc d'espérance nulle à tout instant. Il ne reste donc que le terme déterministe :
+\[
+    \mathbb{E}[X_t \mid X_0] = \theta + (X_0 - \theta)\,e^{-\kappa t},
+\]
+après réarrangement de $X_0 e^{-\kappa t} + \theta(1-e^{-\kappa t}) = \theta + (X_0-\theta)e^{-\kappa t}$.
+
+\subsection*{Variance conditionnelle}
+
+Le terme déterministe ne contribuant pas à la variance (il est connu conditionnellement à $X_0$), seule l'intégrale stochastique intervient :
+\[
+    \mathrm{Var}(X_t \mid X_0)
+    = \mathrm{Var}\!\left(\sigma\int_0^t e^{-\kappa(t-s)}\,dW_s\right)
+    = \sigma^2\,\mathbb{E}\!\left[\left(\int_0^t e^{-\kappa(t-s)}\,dW_s\right)^{\!2}\right].
+\]
+On applique l'isométrie d'Itô, qui énonce que, pour une fonction déterministe $f$ de carré intégrable,
+\[
+    \mathbb{E}\!\left[\left(\int_0^t f(s)\,dW_s\right)^{\!2}\right] = \int_0^t f(s)^2\,ds.
+\]
+Avec $f(s) = e^{-\kappa(t-s)}$ :
+\[
+    \mathrm{Var}(X_t \mid X_0) = \sigma^2 \int_0^t e^{-2\kappa(t-s)}\,ds.
+\]
+Le changement de variable $u = t-s$ (d'où $du = -ds$, $u = t$ pour $s = 0$ et $u = 0$ pour $s = t$) donne
+\[
+    \int_0^t e^{-2\kappa(t-s)}\,ds = \int_0^t e^{-2\kappa u}\,du
+    = \left[-\frac{1}{2\kappa}e^{-2\kappa u}\right]_0^t = \frac{1}{2\kappa}\bigl(1 - e^{-2\kappa t}\bigr).
+\]
+On obtient finalement
+\[
+    \mathrm{Var}(X_t \mid X_0) = \frac{\sigma^2}{2\kappa}\bigl(1 - e^{-2\kappa t}\bigr),
+\]
+ce qui correspond exactement à l'équation (\ref{eq:ou_moments}). \hfill$\square$
+
+\section{Forme exponentielle-affine du prix zéro-coupon dans le modèle de Vasicek}
+\label{ann:vasicek_zc}
+
+Il s'agit de démontrer que le prix d'une obligation zéro-coupon dans le modèle de Vasicek admet la forme exponentielle-affine $P(t,T) = A(t,T)\,e^{-B(t,T)\,r_t}$, avec $B(t,T) = \dfrac{1-e^{-\kappa(T-t)}}{\kappa}$.
+
+\subsection*{Étape 1 : L'équation aux dérivées partielles de valorisation}
+
+Sous la mesure risque-neutre, le prix d'une obligation zéro-coupon s'écrit comme une espérance actualisée :
+\[
+    P(t,T) = \mathbb{E}^{\mathbb{Q}}\!\left[\exp\!\left(-\int_t^T r_s\,ds\right) \,\Big|\, r_t\right].
+\]
+Par le théorème de Feynman-Kac, cette espérance conditionnelle, vue comme fonction $P(t,r_t)$, est solution de l'EDP suivante qui est obtenue en appliquant le lemme d'Itô à $P(t,r_t)$ et en annulant le terme de dérive, condition de non-arbitrage sous $\mathbb{Q}$ :
+\[
+    \frac{\partial P}{\partial t} + \kappa(\theta - r)\frac{\partial P}{\partial r} + \frac{\sigma^2}{2}\frac{\partial^2 P}{\partial r^2} - rP = 0,
+\]
+avec la condition terminale $P(T,T) = 1$ (l'obligation vaut son nominal à maturité).
+
+\subsection*{Étape 2 : L'hypothèse affine (ansatz)}
+
+On postule une solution de la forme
+\[
+    P(t,T) = A(t,T)\,e^{-B(t,T)\,r_t},
+\]
+avec les conditions terminales $A(T,T) = 1$ et $B(T,T) = 0$ (pour que $P(T,T)=1$). Les dérivées partielles nécessaires sont :
+\[
+    \frac{\partial P}{\partial t} = P\!\left(\frac{\partial_t A}{A} - r\,\partial_t B\right),
+    \qquad \frac{\partial P}{\partial r} = -B\,P,
+    \qquad \frac{\partial^2 P}{\partial r^2} = B^2\,P.
+\]
+En substituant dans l'EDP et en divisant par $P$ (jamais nul), il vient
+\[
+    \frac{\partial_t A}{A} - r\,\partial_t B - \kappa(\theta-r)B + \frac{\sigma^2}{2}B^2 - r = 0.
+\]
+
+\subsection*{Étape 3 : Séparation en un système d'équations différentielles ordinaires}
+
+Cette égalité doit être vraie pour toute valeur de $r$. En regroupant séparément les termes en $r$ et les termes constants, on obtient deux équations indépendantes :
+\begin{align}
+    &\text{Coefficient de } r : & -\partial_t B + \kappa B - 1 &= 0
+    \quad\Longleftrightarrow\quad \partial_t B = \kappa B - 1, \tag{i}\\[4pt]
+    &\text{Terme constant :} & \partial_t A &= A\!\left(\kappa\theta B - \frac{\sigma^2}{2}B^2\right). \tag{ii}
+\end{align}
+L'EDP est ainsi transformée en un système d'EDO, structure caractéristique des modèles affines.
+
+\subsection*{Étape 4 : Résolution de l'équation (i) pour $B$}
+
+On pose $\tau = T-t$ (temps jusqu'à maturité) et $b(\tau) = B(t,T)$. Comme $\partial_t = -\partial_\tau$, l'équation (i) devient
+\[
+    -\frac{db}{d\tau} = \kappa b - 1
+    \quad\Longleftrightarrow\quad \frac{db}{d\tau} + \kappa b = 1,
+\]
+EDO linéaire du premier ordre à coefficients constants. Sa solution générale est la somme d'une solution particulière constante $b_p = \dfrac{1}{\kappa}$ (qui vérifie $\kappa b_p = 1$) et d'une solution homogène $b_h(\tau) = Ce^{-\kappa\tau}$, soit $b(\tau) = \dfrac{1}{\kappa} + Ce^{-\kappa\tau}$. La condition initiale $b(0) = B(T,T) = 0$ impose
+\[
+    0 = \frac{1}{\kappa} + C \quad\Longrightarrow\quad C = -\frac{1}{\kappa},
+\]
+d'où
+\[
+    \boxed{\,B(t,T) = b(\tau) = \frac{1-e^{-\kappa\tau}}{\kappa} = \frac{1-e^{-\kappa(T-t)}}{\kappa}\,}
+\]
+ce qui est exactement la formule de l'équation (\ref{eq:vasicek_zc}). \hfill$\square$
+
+\subsection*{Étape 5 : Résolution de l'équation (ii) pour $A$}
+
+On pose $a(\tau) = \ln A(t,T)$, avec $a(0)=0$. Avec $\partial_t = -\partial_\tau$, l'équation (ii) devient
+\[
+    \frac{da}{d\tau} = \frac{\sigma^2}{2}b(\tau)^2 - \kappa\theta\,b(\tau).
+\]
+En intégrant entre $0$ et $\tau$ :
+\[
+    a(\tau) = \frac{\sigma^2}{2}\int_0^\tau b(u)^2\,du - \kappa\theta\int_0^\tau b(u)\,du.
+\]
+À l'aide de $b(u) = \dfrac{1-e^{-\kappa u}}{\kappa}$ et de $\int_0^\tau e^{-\kappa u}\,du = b(\tau)$, on calcule
+\[
+    \int_0^\tau b(u)\,du = \frac{\tau - b(\tau)}{\kappa},
+    \qquad
+    \int_0^\tau b(u)^2\,du = \frac{\tau - b(\tau)}{\kappa^2} - \frac{b(\tau)^2}{2\kappa}.
+\]
+En substituant, on obtient après simplification
+\[
+    a(\tau) = \left(\theta - \frac{\sigma^2}{2\kappa^2}\right)\bigl(b(\tau) - \tau\bigr) - \frac{\sigma^2}{4\kappa}b(\tau)^2,
+\]
+soit finalement
+\[
+    A(t,T) = \exp\!\left[\left(\theta - \frac{\sigma^2}{2\kappa^2}\right)\bigl(B(t,T)-(T-t)\bigr) - \frac{\sigma^2}{4\kappa}B(t,T)^2\right].
+\]
+
+\subsection*{Conclusion}
+
+Le système d'EDO affine admet bien une solution explicite, ce qui confirme que $P(t,T) = A(t,T)\,e^{-B(t,T)\,r_t}$ est la solution de l'EDP de valorisation, avec $B(t,T)$ donné par la formule (\ref{eq:vasicek_zc}) et $A(t,T)$ explicité ci-dessus. C'est précisément cette propriété qui caractérise la famille des modèles affines et constitue l'apport pratique majeur du modèle de Vasicek par rapport au processus d'Ornstein-Uhlenbeck pris isolément.
+
+\section{Dérivation du schéma d'Euler-Maruyama pour le processus de Vasicek}
+\label{ann:euler_maruyama}
+
+\subsection*{Cadre et hypothèses}
+
+On se place sur un espace de probabilité filtré $\bigl(\Omega,\mathcal{F},(\mathcal{F}_t)_{t\ge 0},\mathbb{P}\bigr)$ satisfaisant les conditions habituelles (filtration complète et continue à droite), et l'on note $(W_t)_{t\ge 0}$ un $(\mathcal{F}_t)$-mouvement brownien standard réel. On considère le processus de Vasicek, solution de l'équation différentielle stochastique
+\begin{equation}
+    dX_t = b(X_t)\,dt + \sigma\,dW_t, \qquad X_0 \in L^2(\Omega,\mathcal{F}_0,\mathbb{P}),
+    \tag{A.1}
+\end{equation}
+où le coefficient de dérive $b:\mathbb{R}\to\mathbb{R}$ et le coefficient de diffusion sont donnés par
+\[
+    b(x) = \kappa\,(\theta - x), \qquad \sigma > 0\ \text{constant}, \qquad (\kappa,\theta) \in \mathbb{R}_+^* \times \mathbb{R}.
+\]
+Le coefficient $b$ étant affine, il est globalement lipschitzien et à croissance linéaire :
+\[
+    |b(x) - b(y)| = \kappa\,|x - y|, \qquad |b(x)| \le \kappa|\theta| + \kappa|x|, \qquad \forall\,(x,y) \in \mathbb{R}^2,
+\]
+et $\sigma$ constant vérifie trivialement ces mêmes conditions. Par le théorème d'existence et d'unicité des solutions fortes d'EDS (théorème d'Itô), l'équation (A.1) admet donc une unique solution forte $(X_t)_{t\ge 0}$, adaptée à $(\mathcal{F}_t)$, à trajectoires continues et de carré intégrable, vérifiant $\mathbb{E}\bigl[\sup_{t\le T}|X_t|^2\bigr] < \infty$ pour tout horizon $T > 0$.
+
+\subsection*{Discrétisation}
+
+Soit $T > 0$ un horizon fixé. On subdivise $[0,T]$ selon une grille uniforme
+\[
+    t_n = n\,\Delta t, \qquad n = 0, 1, \dots, N, \qquad \Delta t = \frac{T}{N},
+\]
+et l'on note $\Delta W_n := W_{t_{n+1}} - W_{t_n}$ les accroissements browniens associés.
+
+\medskip
+\noindent\textbf{Définition (schéma d'Euler-Maruyama).}
+Le schéma d'Euler-Maruyama associé à (A.1) définit la suite $(\widehat{X}_n)_{0\le n\le N}$ par la récurrence
+\begin{equation}
+    \widehat{X}_0 = X_0, \qquad
+    \widehat{X}_{n+1} = \widehat{X}_n + b(\widehat{X}_n)\,\Delta t + \sigma\,\Delta W_n,
+    \tag{A.2}
+\end{equation}
+soit, en explicitant $b$,
+\begin{equation}
+    \widehat{X}_{n+1} = \widehat{X}_n + \kappa\,(\theta - \widehat{X}_n)\,\Delta t + \sigma\sqrt{\Delta t}\,Z_n,
+    \qquad (Z_n)_n\ \text{i.i.d.}\ \mathcal{N}(0,1).
+    \tag{A.3}
+\end{equation}
+
+\subsection*{Justification du schéma}
+
+\noindent\textbf{Proposition.} \textit{La récurrence} (A.2)--(A.3) \textit{résulte de la troncature au premier ordre de la représentation intégrale exacte de la solution de} (A.1) \textit{sur chaque intervalle} $[t_n, t_{n+1}]$, \textit{la composante de diffusion étant, elle, reproduite exactement.}
+
+\medskip
+\noindent\textit{Démonstration.}
+La solution forte de (A.1) vérifie, par définition, la forme intégrale (au sens d'Itô) sur tout intervalle $[t_n, t_{n+1}]$ :
+\begin{equation}
+    X_{t_{n+1}} = X_{t_n} + \int_{t_n}^{t_{n+1}} b(X_s)\,ds + \int_{t_n}^{t_{n+1}} \sigma\,dW_s.
+    \tag{A.4}
+\end{equation}
+Cette identité est exacte ; on en approche séparément les deux intégrales.
+
+\medskip
+\noindent\textit{(i) Composante de dérive.} On approxime l'intégrale de Riemann $\int_{t_n}^{t_{n+1}} b(X_s)\,ds$ par la règle du rectangle à gauche, c'est-à-dire en gelant l'intégrande à sa valeur $\mathcal{F}_{t_n}$-mesurable en $t_n$ :
+\[
+    \int_{t_n}^{t_{n+1}} b(X_s)\,ds = b(X_{t_n})\,\Delta t + R_n, \qquad
+    R_n = \int_{t_n}^{t_{n+1}} \bigl(b(X_s) - b(X_{t_n})\bigr)\,ds.
+\]
+Le caractère lipschitzien de $b$ et la continuité $L^2$ de $s \mapsto X_s$ (avec $\mathbb{E}|X_s - X_{t_n}|^2 \le C\,(s - t_n)$) fournissent le contrôle du résidu
+\[
+    \bigl(\mathbb{E}\,|R_n|^2\bigr)^{1/2}
+    \le \kappa \int_{t_n}^{t_{n+1}} \bigl(\mathbb{E}\,|X_s - X_{t_n}|^2\bigr)^{1/2} ds
+    = \mathcal{O}\!\bigl(\Delta t^{3/2}\bigr),
+\]
+de sorte que le résidu de dérive est négligeable devant le terme principal $b(X_{t_n})\Delta t$.
+
+\medskip
+\noindent\textit{(ii) Composante de diffusion.} Le coefficient $\sigma$ étant constant, l'intégrale stochastique se calcule sans approximation :
+\[
+    \int_{t_n}^{t_{n+1}} \sigma\,dW_s = \sigma\,(W_{t_{n+1}} - W_{t_n}) = \sigma\,\Delta W_n.
+\]
+Par les propriétés du mouvement brownien, $\Delta W_n \sim \mathcal{N}(0,\Delta t)$, indépendant de $\mathcal{F}_{t_n}$ ; la propriété d'auto-similarité de la loi normale, $\mathcal{N}(0,\Delta t) \overset{d}{=} \sqrt{\Delta t}\,\mathcal{N}(0,1)$, autorise l'écriture $\Delta W_n = \sqrt{\Delta t}\,Z_n$ avec $Z_n \sim \mathcal{N}(0,1)$.
+
+\medskip
+En reportant (i) et (ii) dans (A.4) et en substituant l'itéré numérique $\widehat{X}_n$ à la valeur exacte $X_{t_n}$, on obtient précisément la récurrence (A.2), puis (A.3) après explicitation de $b$. \hfill$\square$

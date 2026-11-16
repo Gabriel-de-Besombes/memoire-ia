@@ -29,7 +29,7 @@ La mise en œuvre du GSE monde réel requiert de fixer, pour chacune des variabl
 
 \subsubsection{Estimation des paramètres des processus de Vasicek et d'Ornstein-Uhlenbeck}
 
-Pour les variables modélisées par un processus de Vasicek ou d'Ornstein-Uhlenbeck — taux long, spread de taux, taux très long et inflation —, l'estimation repose sur la forme discrétisée du processus. En posant un pas de temps $\Delta t = 1$ an, la solution exacte de l'équation différentielle stochastique implique que le processus suit une régression autorégressive d'ordre 1 :
+Pour les variables modélisées par un processus de Vasicek ou d'Ornstein-Uhlenbeck (les taux, le spread de taux et l'inflation), l'estimation repose sur la forme discrétisée du processus. En posant un pas de temps $\Delta t = 1$ an, la solution exacte de l'équation différentielle stochastique implique que le processus suit une régression autorégressive d'ordre 1 :
 \begin{equation}
     X_{t+1} = a + b \, X_t + \varepsilon_t, \qquad \varepsilon_t \sim \mathcal{N}(0, s^2)
 \end{equation}
@@ -43,7 +43,7 @@ où $\hat{\kappa}$ est la vitesse de retour à la moyenne, $\hat{\theta}$ le niv
 
 \subsubsection{Estimation des paramètres des mouvements browniens géométriques}
 
-Pour les variables modélisées par un mouvement brownien géométrique — actions et immobilier —, l'estimation repose sur les log-rendements annuels observés. Si $S_t$ désigne la valeur de l'indice à la date $t$, le log-rendement est défini par $y_t = \ln(S_t / S_{t-1})$. Sous l'hypothèse d'un mouvement brownien géométrique, ces log-rendements sont i.i.d. selon une loi normale de moyenne $\mu - \sigma^2/2$ et d'écart type $\sigma$. La dérive $\mu$ et la volatilité $\sigma$ sont estimées par :
+Pour les variables modélisées par un mouvement brownien géométrique (les actions et l'immobilier), l'estimation repose sur les log-rendements annuels observés. Si $S_t$ désigne la valeur de l'indice à la date $t$, le log-rendement est défini par $y_t = \ln(S_t / S_{t-1})$. Sous l'hypothèse d'un mouvement brownien géométrique, ces log-rendements sont i.i.d. selon une loi normale de moyenne $\mu - \sigma^2/2$ et d'écart type $\sigma$. La dérive $\mu$ et la volatilité $\sigma$ sont estimées par :
 \begin{equation}
     \hat{\sigma} = \text{std}(y_t), \qquad \hat{\mu} = \bar{y} + \frac{\hat{\sigma}^2}{2}
 \end{equation}
